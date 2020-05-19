@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Hitchhiker Kosova</string>
+
+    <!-- placeholders -->
+    <string name="phEmail">Email</string>
+    <string name="phPassword">Password</string>
+    <string name="phName">Name</string>
+    <string name="phSurname">Surname</string>
+    <string name="phPhoneNumber">Phone Number</string>
+    <string name="phConfirmPassword">Confirm Password</string>
+
+    <!-- buttons text-->
+    <string name="btnLogInTxt">Log In</string>
+    <string name="btnSignUpTxt">Sign Up</string>
+
+    <!-- onClick function -->
+    <string name="btnLogInFunc">btnLogInFunc</string>
+    <string name="tvRegisterFunc">tvRegisterFunc</string>
+    <string name="btnSignUpFunc">btnSignUpFunc</string>
+
+    <!-- Text Views -->
+    <string name="tvRegister">Don\'t have an account?</string>
+
+    <!-- Text -->
+    <string name="emptyName">Please enter name</string>
+    <string name="emptySurname">Please enter surname</string>
+    <string name="emptyPhoneNumber">Please enter phone number</string>
+    <string name="validPhoneNumber">Please enter valid phone number</string>
+    <string name="validEmail">Please enter valid email</string>
+    <string name="emptyEmail">Please enter email</string>
+    <string name="shortPassword">Password must contain at least 6 characters</string>
+    <string name="emptyPassword">Please enter password</string>
+    <string name="confirmPassword">Password doesn\'t match</string>
+
+
+</resources>

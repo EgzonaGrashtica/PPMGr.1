@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "251127894246",
+    "firebase_url": "https://hitchhiker-kosova.firebaseio.com",
+    "project_id": "hitchhiker-kosova",
+    "storage_bucket": "hitchhiker-kosova.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251127894246:android:7280d165e4f5a0bd51ab27",
+        "android_client_info": {
+          "package_name": "com.fiek.hitchhikerkosova"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251127894246-s3b4tjl6vnvogtm285r4f2ipfqek7rf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fiek.hitchhikerkosova",
+            "certificate_hash": "1cf5a9704d2769c5ce7474e0e2c608663bac0ec4"
+          }
+        },
+        {
+          "client_id": "251127894246-vhf90doek7r06d09fo4m48c1fg37rve2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fiek.hitchhikerkosova",
+            "certificate_hash": "69ef779af02d9b6d86d2cf0d50fd918169198dc9"
+          }
+        },
+        {
+          "client_id": "251127894246-q2q9v4o533q3ef1i6iato1k9a0ut8fvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACUzvpxbCA0-sZZGS7i96tadi_nAwrbtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251127894246-q2q9v4o533q3ef1i6iato1k9a0ut8fvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
