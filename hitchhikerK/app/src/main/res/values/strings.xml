@@ -32,5 +32,8 @@
     <string name="emptyPassword">Please enter password</string>
     <string name="confirmPassword">Password doesn\'t match</string>
 
+    <!-- Content Descriptions-->
+    <string name="loginPhotoCD">"Hitchhiker Kosova" Logo</string>
+
 
 </resources>

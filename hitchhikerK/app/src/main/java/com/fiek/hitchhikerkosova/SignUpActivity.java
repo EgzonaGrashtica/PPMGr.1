@@ -25,14 +25,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText etName;
     EditText etSurname;
-    EditText etPhoneNumber;
     EditText etEmail;
     EditText etPassword;
     EditText etConfirmPassword;
 
     String name;
     String surname;
-    String phoneNumber;
     String email;
     String password;
     String confirmPassword;
@@ -45,18 +43,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         etName=(EditText) findViewById(R.id.etName);
         etSurname=(EditText) findViewById(R.id.etSurname);
-        etPhoneNumber=(EditText) findViewById(R.id.etPhoneNumber);
         etEmail=(EditText) findViewById(R.id.etEmail);
         etPassword=(EditText) findViewById(R.id.etPassword);
         etConfirmPassword=(EditText) findViewById(R.id.etConfirmPassword);
 
         mAuth = FirebaseAuth.getInstance();
     }
-    public void btnSingUpFunc(View v){
+    public void btnSignUpFunc(View v){
 
         name= etName.getText().toString().trim();
         surname= etName.getText().toString().trim();
-        phoneNumber= etPhoneNumber.getText().toString().trim();
         email= etEmail.getText().toString().trim();
         password= etPassword.getText().toString().trim();
         confirmPassword= etConfirmPassword.getText().toString().trim();
@@ -91,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 etName.getText().clear();
                                 etSurname.getText().clear();
-                                etPhoneNumber.getText().clear();
                                 etEmail.getText().clear();
                                 etPassword.getText().clear();
                                 etConfirmPassword.getText().clear();
@@ -117,7 +112,8 @@ public class SignUpActivity extends AppCompatActivity {
             return false;
         }
 
-        if(TextUtils.isEmpty(phoneNumber)){
+        //Na duhet kur te bojna me postu
+       /* if(TextUtils.isEmpty(phoneNumber)){
             etPhoneNumber.setError(getString(R.string.emptyPhoneNumber));
             etPhoneNumber.requestFocus();
             return false;
@@ -127,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
             etPhoneNumber.setError(getString(R.string.validPhoneNumber));
             etPhoneNumber.requestFocus();
             return false;
-        }
+        }*/
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError(getString(R.string.validEmail));

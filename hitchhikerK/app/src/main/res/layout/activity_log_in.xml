@@ -4,30 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     tools:context=".LogInActivity">
 
     <EditText
         android:id="@+id/etEmail"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="327dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="42dp"
+        android:background="@drawable/et_style"
+        android:backgroundTint="@color/cardview_light_background"
+        android:cursorVisible="false"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/phEmail"
         android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="114dp"
+        android:clickable="true"
+        android:onClick="@string/tvRegisterFunc"
+        android:text="@string/tvRegister"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="327dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/et_style"
+        android:backgroundTint="@color/cardview_light_background"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="@string/phPassword"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
         android:id="@+id/btnLogIn"
-        android:layout_width="327dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="42dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/et_style"
+        android:backgroundTint="?attr/colorButtonNormal"
         android:onClick="@string/btnLogInFunc"
         android:text="@string/btnLogInTxt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,35 +82,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
-    <TextView
-        android:id="@+id/tvRegister"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="114dp"
-        android:clickable="true"
-        android:onClick="@string/tvRegisterFunc"
-        android:text="TextView"
-        android:textSize="18sp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="56dp"
+        android:contentDescription="@string/loginPhotoCD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
-        tools:text="@string/tvRegister" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="327dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="42dp"
-        android:ems="10"
-        android:hint="@string/phPassword"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_photo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
