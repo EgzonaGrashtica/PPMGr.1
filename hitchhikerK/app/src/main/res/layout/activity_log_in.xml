@@ -13,7 +13,7 @@
         android:layout_width="327dp"
         android:layout_height="50dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
@@ -25,7 +25,6 @@
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -70,15 +69,14 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/et_style"
-        android:backgroundTint="?attr/colorButtonNormal"
+        android:layout_marginEnd="106dp"
+        android:background="@drawable/button"
         android:onClick="@string/btnLogInFunc"
         android:text="@string/btnLogInTxt"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
