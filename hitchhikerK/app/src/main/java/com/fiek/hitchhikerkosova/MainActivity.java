@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         drawerToggle.setHomeAsUpIndicator(R.drawable.ic_hamburger);
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle("Toolbar title");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -104,6 +107,21 @@ public class MainActivity extends AppCompatActivity {
          setTitle(menuItem.getTitle());
         // Mbyllja e menus
         mDrawer.closeDrawers();
+    }
+
+    // Funksioni i butonit per te shtuar Postime
+    public void btnNewPostFunc(View v){
+        fragmentClass = AddPostFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
+        for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
+            nvDrawer.getMenu().getItem(i).setChecked(false);
+        }
     }
 
 
