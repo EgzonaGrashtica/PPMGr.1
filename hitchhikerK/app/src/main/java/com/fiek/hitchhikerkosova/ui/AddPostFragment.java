@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.ui;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -13,9 +13,20 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.fiek.hitchhikerkosova.PostModel;
+import com.fiek.hitchhikerkosova.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
@@ -33,6 +44,11 @@ public class AddPostFragment extends Fragment {
     TimePickerDialog picker;
     EditText etSelectTime;
     EditText etSelectDate;
+    Button btnAddPostFunc;
+    Spinner spFrom,spTo,spFreeSeats;
+    EditText etPrice, etPhoneNumber,etExtraInfo;
+    DatabaseReference mDatabase;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,6 +84,7 @@ public class AddPostFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
     }
 
     @Override
@@ -82,10 +99,35 @@ public class AddPostFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.tvAddPostTitle));
+
+        spFrom=getActivity().findViewById(R.id.spFrom);
+        spTo=getActivity().findViewById(R.id.spTo);
         etSelectTime=getActivity().findViewById(R.id.etSelectTime);
         etSelectDate=getActivity().findViewById(R.id.etSelectDate);
+        etPrice=getActivity().findViewById(R.id.etPrice);
+        spFreeSeats=getActivity().findViewById(R.id.spFreeSeats);
+        etPhoneNumber=getActivity().findViewById(R.id.etPhoneNumber);
+        etExtraInfo=getActivity().findViewById(R.id.etExtraInfo);
+        btnAddPostFunc=getActivity().findViewById(R.id.btnAddPost);
+
         etSelectTime.setInputType(InputType.TYPE_NULL);
         etSelectDate.setInputType(InputType.TYPE_NULL);
+
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        btnAddPostFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewPostToDatabase(spFrom.getSelectedItem().toString(),
+                        spTo.getSelectedItem().toString(),
+                        etSelectTime.getText().toString(),
+                        etSelectDate.getText().toString(),
+                        Double.parseDouble(etPrice.getText().toString()),
+                        Integer.valueOf(spFreeSeats.getSelectedItem().toString()),
+                        etPhoneNumber.getText().toString(),
+                        etExtraInfo.getText().toString());
+            }
+        });
+
 
         //Listener per selectimin e ores permes klases TimePickerDialog
         etSelectTime.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +187,23 @@ public class AddPostFragment extends Fragment {
         });
 
     }
+    private void addNewPostToDatabase(String from,String to,String departureTime,String date,double price,
+                                      int freeSeats,String phoneNumber,String extraInfo){
+        PostModel postModel=new PostModel(from,to,departureTime,date,price,freeSeats,phoneNumber,extraInfo);
+        mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
 
 }

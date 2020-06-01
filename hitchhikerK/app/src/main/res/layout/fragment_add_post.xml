@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPostFragment">
+    tools:context=".ui.AddPostFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/edExtraInfo"
+            android:id="@+id/etExtraInfo"
             android:layout_width="161dp"
             android:layout_height="40dp"
             android:layout_marginTop="28dp"
@@ -35,17 +35,19 @@
 
         <Button
             android:id="@+id/btnAddPost"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="161dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="162dp"
+            android:background="@drawable/et_style1"
             android:onClick="@string/btnAddPostFunc"
             android:text="@string/btnAddPostTxt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edPhoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
 
         <TextView
             android:id="@+id/tvFrom"
@@ -152,10 +154,10 @@
             android:layout_marginTop="28dp"
             android:text="@string/tvPhoneNumber"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/etPrice" />
 
         <EditText
-            android:id="@+id/edPrice"
+            android:id="@+id/etPrice"
             android:layout_width="158dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"
@@ -190,7 +192,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spTo" />
 
         <EditText
-            android:id="@+id/edPhoneNumber"
+            android:id="@+id/etPhoneNumber"
             android:layout_width="160dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"

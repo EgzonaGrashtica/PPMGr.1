@@ -8,12 +8,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 
+import com.fiek.hitchhikerkosova.ui.AddPostFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
     Class fragmentClass;
     FragmentManager fragmentManager;
+    private FirebaseAuth mAuth;
 
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
 
         //E nderrojm ActionBar me ToolBar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -65,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("Toolbar title");
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser ==null){
+            startActivity(new Intent(MainActivity.this, LogInActivity.class));
+            finish();
+
+        }
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
