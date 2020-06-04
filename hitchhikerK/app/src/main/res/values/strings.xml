@@ -2,95 +2,94 @@
     <string name="app_name">Hitchhiker Kosova</string>
 
     <!-- placeholders -->
-        <!-- PH for signup/login-->
-        <string name="phEmail">Email</string>
-        <string name="phPassword">Password</string>
-        <string name="phName">Name</string>
-        <string name="phSurname">Surname</string>
-        <string name="phPhoneNumber">Phone Number</string>
-        <string name="phConfirmPassword">Confirm Password</string>
-        <!-- AddPost-->
-        <string name="phSelectTime">Select Time</string>
-        <string name="phPrice">Price for person</string>
-        <string name="phDate">Select Date </string>
+    <!-- PH for signup/login-->
+    <string name="phEmail">Email</string>
+    <string name="phPassword">Password</string>
+    <string name="phName">Name</string>
+    <string name="phSurname">Surname</string>
+    <string name="phPhoneNumber">Phone Number</string>
+    <string name="phConfirmPassword">Confirm Password</string>
+    <!-- AddPost-->
+    <string name="phSelectTime">Select Time</string>
+    <string name="phPrice">Price for person</string>
+    <string name="phDate">Select Date </string>
 
     <!-- buttons text-->
-        <!-- Signup/Login-->
-        <string name="btnLogInTxt">Log In</string>
-        <string name="btnSignUpTxt">Sign Up</string>
-        <string name="btnAddPostTxt">Post</string>
+    <!-- Signup/Login-->
+    <string name="btnLogInTxt">Log In</string>
+    <string name="btnSignUpTxt">Sign Up</string>
+    <string name="btnAddPostTxt">Post</string>
 
     <!-- onClick function -->
-        <!-- Signup/Login-->
-        <string name="btnLogInFunc">btnLogInFunc</string>
-        <string name="tvRegisterFunc">tvRegisterFunc</string>
-        <string name="btnSignUpFunc">btnSignUpFunc</string>
-        <!-- AddPost-->
-        <string name="btnNewPostFunc">btnNewPostFunc</string>
-        <string name="btnAddPostFunc">btnAddPostFunc</string>
-        <string name="etSelectTimeFunc">etSelectTimeFunc</string>
+    <!-- Signup/Login-->
+    <string name="btnLogInFunc">btnLogInFunc</string>
+    <string name="tvRegisterFunc">tvRegisterFunc</string>
+    <string name="btnSignUpFunc">btnSignUpFunc</string>
+    <!-- AddPost-->
+    <string name="btnNewPostFunc">btnNewPostFunc</string>
+    <string name="btnAddPostFunc">btnAddPostFunc</string>
+    <string name="etSelectTimeFunc">etSelectTimeFunc</string>
 
     <!-- Text Views -->
-        <!--Signup-->
-        <string name="tvRegister">Don\'t have an account?</string>
-        <!-- AddPost-->
-        <string name="tvAddPostTitle">Create a new trip.</string>
-        <string name="tvFrom">From</string>
-        <string name="tvTo">To</string>
-        <string name="tvDepartureTime">Departure Time</string>
-        <string name="tvFreeSeats">Free Seats</string>
-        <string name="tvPrice">Price</string>
-        <string name="tvDate">Date</string>
-        <string name="tvPhoneNumber">Phone Number</string>
-        <string name="tvExtraInfo">Extra Info</string>
+    <!--Signup-->
+    <string name="tvRegister">Don\'t have an account?</string>
+    <!-- AddPost / MainPostsFragment -->
+    <string name="tvAddPostTitle">Create a new trip.</string>
+    <string name="tvFrom">From</string>
+    <string name="tvTo">To</string>
+    <string name="tvDepartureTime">Departure Time</string>
+    <string name="tvFreeSeats">Free Seats</string>
+    <string name="tvPrice">Price</string>
+    <string name="tvDate">Date</string>
+    <string name="tvPhoneNumber">Phone Number</string>
+    <string name="tvExtraInfo">Extra Info</string>
 
     <!--Spinner Arrays-->
-        <!-- AddPost-->
-        <string-array name="arrayCities">
-            <item>Prishtina</item>
-            <item>Prizreni</item>
-            <item>Ferizaj</item>
-            <item>Pejë</item>
-            <item>Gjakovë</item>
-            <item>Gjilan</item>
-            <item>Mitrovicë</item>
-        </string-array>
-        <string-array name="arrayFreeSeats">
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
-            <item>4</item>
-            <item>5</item>
-            <item>6</item>
-            <item>7</item>
-            <item>8</item>
-            <item>9</item>
-        </string-array>
-        <!-- Spinner Default-->
-        <string name="spDefault">Choose..</string>
+    <!-- AddPost-->
+    <string-array name="arrayCities">
+        <item>Prishtina</item>
+        <item>Prizreni</item>
+        <item>Ferizaj</item>
+        <item>Pejë</item>
+        <item>Gjakovë</item>
+        <item>Gjilan</item>
+        <item>Mitrovicë</item>
+    </string-array>
+    <string-array name="arrayFreeSeats">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <!-- Spinner Default-->
+    <string name="spDefault">Choose..</string>
 
     <!-- Text -->
-        <!-- Validation for signup/login -->
-        <string name="emptyName">Please enter name</string>
-        <string name="emptySurname">Please enter surname</string>
-        <string name="emptyPhoneNumber">Please enter phone number</string>
-        <string name="validPhoneNumber">Please enter valid phone number</string>
-        <string name="validEmail">Please enter valid email</string>
-        <string name="emptyEmail">Please enter email</string>
-        <string name="shortPassword">Password must contain at least 6 characters</string>
-        <string name="emptyPassword">Please enter password</string>
-        <string name="confirmPassword">Password doesn\'t match</string>
+    <!-- Validation for signup/login -->
+    <string name="emptyName">Please enter name</string>
+    <string name="emptySurname">Please enter surname</string>
+    <string name="emptyPhoneNumber">Please enter phone number</string>
+    <string name="validPhoneNumber">Please enter valid phone number</string>
+    <string name="validEmail">Please enter valid email</string>
+    <string name="emptyEmail">Please enter email</string>
+    <string name="shortPassword">Password must contain at least 6 characters</string>
+    <string name="emptyPassword">Please enter password</string>
+    <string name="confirmPassword">Password doesn\'t match</string>
 
     <!-- Content Descriptions-->
-        <!--Login-->
-        <string name="loginPhotoCD">"Hitchhiker Kosova" Logo</string>
-        <!-- AddPost-->
-        <string name="newPostCD">Button for adding a post</string>
+    <!--Login-->
+    <string name="loginPhotoCD">"Hitchhiker Kosova" Logo</string>
+    <!-- AddPost-->
+    <string name="newPostCD">Button for adding a post</string>
 
     <!-- Hamburger Menu-->
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

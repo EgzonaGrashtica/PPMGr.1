@@ -25,6 +25,8 @@ import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,11 +50,13 @@ public class AddPostFragment extends Fragment {
     Spinner spFrom,spTo,spFreeSeats;
     EditText etPrice, etPhoneNumber,etExtraInfo;
     DatabaseReference mDatabase;
-
+    private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public AddPostFragment() {
         // Required empty public constructor
@@ -99,6 +103,8 @@ public class AddPostFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.tvAddPostTitle));
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         spFrom=getActivity().findViewById(R.id.spFrom);
         spTo=getActivity().findViewById(R.id.spTo);
@@ -189,7 +195,7 @@ public class AddPostFragment extends Fragment {
     }
     private void addNewPostToDatabase(String from,String to,String departureTime,String date,double price,
                                       int freeSeats,String phoneNumber,String extraInfo){
-        PostModel postModel=new PostModel(from,to,departureTime,date,price,freeSeats,phoneNumber,extraInfo);
+        PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,departureTime,date,price,freeSeats,phoneNumber,extraInfo);
         mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

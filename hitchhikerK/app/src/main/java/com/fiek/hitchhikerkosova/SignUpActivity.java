@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void btnSignUpFunc(View v){
 
         name= etName.getText().toString().trim();
-        surname= etName.getText().toString().trim();
+        surname= etSurname.getText().toString().trim();
         email= etEmail.getText().toString().trim();
         password= etPassword.getText().toString().trim();
         confirmPassword= etConfirmPassword.getText().toString().trim();

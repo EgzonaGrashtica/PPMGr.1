@@ -2,6 +2,8 @@ package com.fiek.hitchhikerkosova;
 
 public class PostModel {
     String id;
+    String ownerId;
+    String ownerName;
     String from;
     String to;
     String departureTime;
@@ -11,7 +13,9 @@ public class PostModel {
     String phoneNumber;
     String extraInfo;
 
-    public PostModel(String from, String to, String departureTime, String date, double price, int freeSeats, String phoneNumber, String extraInfo) {
+    public PostModel(String ownerId,String ownerName,String from, String to, String departureTime, String date, double price, int freeSeats, String phoneNumber, String extraInfo) {
+        this.ownerId=ownerId;
+        this.ownerName=ownerName;
         this.from = from;
         this.to = to;
         this.departureTime = departureTime;
@@ -23,6 +27,22 @@ public class PostModel {
     }
 
     public PostModel() {
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public String getId() {
