@@ -6,8 +6,6 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
     tools:context=".MainActivity">
     <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,16 +24,16 @@ android:layout_height="match_parent"
 
             <!-- The main content view where fragments are loaded -->
             <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/fContent"
                 android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:defaultNavHost="true"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </LinearLayout>
 
@@ -48,6 +46,26 @@ android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@android:color/white"
             app:menu="@menu/drawer_view"
-        app:headerLayout="@layout/nav_header"/>
+            app:headerLayout="@layout/nav_header">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/logout_icon"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:text="@string/tvLogOut"></TextView>
+
+
+            </LinearLayout>
+
+        </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

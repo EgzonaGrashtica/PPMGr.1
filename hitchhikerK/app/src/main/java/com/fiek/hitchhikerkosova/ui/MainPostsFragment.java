@@ -7,13 +7,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fiek.hitchhikerkosova.LogInActivity;
+import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.adapters.PostsAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,8 +40,12 @@ public class MainPostsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private DatabaseReference mDatabase;
+
     RecyclerView recyclerView;
     PostsAdapter postsAdapter;
+    SwipeRefreshLayout refreshLayout;
     public MainPostsFragment() {
         // Required empty public constructor
     }
@@ -61,6 +75,51 @@ public class MainPostsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        postsAdapter=new PostsAdapter(getContext());
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Posts");
+
+        mDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                PostModel postModel=dataSnapshot.getValue(PostModel.class);
+                postModel.setId(dataSnapshot.getKey());
+                postsAdapter.dataSource.add(postModel);
+                Log.i("xona","Erdh");
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                postsAdapter.notifyDataSetChanged();
+                Log.i("xona","Qitu");
+                refreshLayout.setRefreshing(false);
+            }
+        }, 3000);
+
+
     }
 
     @Override
@@ -73,12 +132,21 @@ public class MainPostsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=getActivity().findViewById(R.id.recyclerView);
 
-        postsAdapter=new PostsAdapter(getContext());
+        recyclerView=getActivity().findViewById(R.id.recyclerView);
         recyclerView.setAdapter(postsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        refreshLayout=getActivity().findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
+                postsAdapter.notifyDataSetChanged();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+        refreshLayout.setRefreshing(true);
     }
 }
