@@ -2,12 +2,14 @@ package com.fiek.hitchhikerkosova.ui;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.fiek.hitchhikerkosova.LogInActivity;
+import com.fiek.hitchhikerkosova.MainActivity;
 import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +47,10 @@ public class AddPostFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    Class fragmentClass;
+    FragmentManager fragmentManager;
+    Fragment fragment = null;
+
     TimePickerDialog picker;
     EditText etSelectTime;
     EditText etSelectDate;
@@ -200,6 +208,15 @@ public class AddPostFragment extends Fragment {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
+
+                fragmentClass = MainPostsFragment.class;
+                try {
+                    fragment = (Fragment) fragmentClass.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

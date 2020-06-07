@@ -93,12 +93,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     public class PostsViewHolder extends RecyclerView.ViewHolder {
         TextView tvRowName,tvRowFrom,tvRowTo,tvRowDepartureTime,tvRowDate;
-        LinearLayout postRow;
+        ConstraintLayout postRow;
         /*TextView tvRowPrice,tvRowFreeSeats,tvRowPhoneNumber,tvRowExtraInfo;*/
         public PostsViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            postRow=(LinearLayout)itemView.findViewById(R.id.postRow);
+            postRow=(ConstraintLayout) itemView.findViewById(R.id.postRow);
             tvRowName=itemView.findViewById(R.id.tvRowName);
             tvRowFrom=itemView.findViewById(R.id.tvRowFrom);
             tvRowTo=itemView.findViewById(R.id.tvRowTo);

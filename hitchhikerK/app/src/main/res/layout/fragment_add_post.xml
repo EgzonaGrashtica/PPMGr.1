@@ -41,7 +41,7 @@
             android:layout_marginStart="161dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="162dp"
-            android:background="@drawable/et_style1"
+            android:background="@drawable/button"
             android:onClick="@string/btnAddPostFunc"
             android:text="@string/btnAddPostTxt"
             app:layout_constraintEnd_toEndOf="parent"

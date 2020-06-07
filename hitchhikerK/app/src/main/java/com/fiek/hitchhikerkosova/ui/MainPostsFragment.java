@@ -135,7 +135,10 @@ public class MainPostsFragment extends Fragment {
 
         recyclerView=getActivity().findViewById(R.id.recyclerView);
         recyclerView.setAdapter(postsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         refreshLayout=getActivity().findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

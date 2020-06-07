@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Class fragmentClass;
     FragmentManager fragmentManager;
     private FirebaseAuth mAuth;
-    TextView tvLogout;
+    TextView tvLogout,tvHeaderName,tvHeaderEmail;
+    FirebaseUser currentUser;
 
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         // Listeneri per me ndegju kur firebaseAuth e ndrron gjendjen(behet logout)
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -99,17 +102,25 @@ public class MainActivity extends AppCompatActivity {
                tvLogOutFunc();
             }
         });
+
+        View headerLayout=nvDrawer.getHeaderView(0);
+
+        tvHeaderName=(TextView) headerLayout.findViewById(R.id.tvHeaderName);
+        tvHeaderEmail=(TextView) headerLayout.findViewById(R.id.tvHeaderEmail);
+
+        currentUser = mAuth.getCurrentUser();
+
     }
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser ==null){
             startActivity(new Intent(MainActivity.this, LogInActivity.class));
             finish();
-
         }
+        tvHeaderName.setText(currentUser.getDisplayName());
+        tvHeaderEmail.setText(currentUser.getEmail());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
