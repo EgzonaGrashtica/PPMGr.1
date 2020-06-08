@@ -21,7 +21,8 @@
             android:inputType="textMultiLine"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvExtraInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExtraInfo"
+            android:imeOptions="actionDone"/>
 
         <TextView
             android:id="@+id/tvExtraInfo"
@@ -112,7 +113,8 @@
             android:inputType="textPersonName"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDepartureTime" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDepartureTime"
+            android:imeOptions="actionNext"/>
 
         <Spinner
             android:id="@+id/spFreeSeats"
@@ -166,7 +168,8 @@
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPrice"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/etSelectDate"
@@ -179,7 +182,8 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDate"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:imeOptions="actionNext"/>
 
         <TextView
             android:id="@+id/tvDate"
@@ -201,7 +205,8 @@
             android:inputType="phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:imeOptions="actionNext"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

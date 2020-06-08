@@ -12,8 +12,11 @@ public class PostModel {
     int freeSeats;
     String phoneNumber;
     String extraInfo;
+    long timePosted;
 
-    public PostModel(String ownerId,String ownerName,String from, String to, String departureTime, String date, double price, int freeSeats, String phoneNumber, String extraInfo) {
+    public PostModel(String ownerId,String ownerName,String from, String to, String departureTime,
+                     String date, double price, int freeSeats, String phoneNumber, String extraInfo,
+                     long timePosted) {
         this.ownerId=ownerId;
         this.ownerName=ownerName;
         this.from = from;
@@ -24,6 +27,7 @@ public class PostModel {
         this.freeSeats = freeSeats;
         this.phoneNumber = phoneNumber;
         this.extraInfo = extraInfo;
+        this.timePosted=timePosted;
     }
 
     public PostModel() {
@@ -115,5 +119,13 @@ public class PostModel {
 
     public void setExtraInfo(String extraInfo) {
         this.extraInfo = extraInfo;
+    }
+
+    public long getTimePosted() {
+        return timePosted;
+    }
+
+    public void setTimePosted(long timePosted) {
+        this.timePosted = timePosted;
     }
 }

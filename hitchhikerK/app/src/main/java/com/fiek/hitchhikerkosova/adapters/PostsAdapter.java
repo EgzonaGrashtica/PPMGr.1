@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,21 @@ import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
     public List<PostModel> dataSource = new ArrayList<PostModel>();
     Context context;
+    Dialog postDialog;
+    DateUtils dateUtils=new DateUtils();
+    Date currentDate=new Date();
+
     public PostsAdapter(Context ct) {
         context=ct;
     }
-    Dialog postDialog;
+
 
     @NonNull
     @Override
@@ -79,6 +85,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         holder.tvRowTo.setText(dataSource.get(position).getTo());
         holder.tvRowDepartureTime.setText(dataSource.get(position).getDepartureTime());
         holder.tvRowDate.setText(dataSource.get(position).getDate());
+        CharSequence timeAgo=dateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
+                currentDate.getTime(),DateUtils.MINUTE_IN_MILLIS,DateUtils.FORMAT_ABBREV_RELATIVE);
+        holder.tvTimeOfPost.setText(timeAgo);
+
         /*
         holder.tvRowPrice.setText(Double.toString(dataSource.get(position).getPrice()));
         holder.tvRowFreeSeats.setText(Integer.toString(dataSource.get(position).getFreeSeats()));
@@ -92,7 +102,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     }
 
     public class PostsViewHolder extends RecyclerView.ViewHolder {
-        TextView tvRowName,tvRowFrom,tvRowTo,tvRowDepartureTime,tvRowDate;
+        TextView tvRowName,tvRowFrom,tvRowTo,tvRowDepartureTime,tvRowDate,tvTimeOfPost;
         ConstraintLayout postRow;
         /*TextView tvRowPrice,tvRowFreeSeats,tvRowPhoneNumber,tvRowExtraInfo;*/
         public PostsViewHolder(@NonNull View itemView) {
@@ -104,6 +114,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             tvRowTo=itemView.findViewById(R.id.tvRowTo);
             tvRowDepartureTime=itemView.findViewById(R.id.tvRowDepartureTime);
             tvRowDate=itemView.findViewById(R.id.tvRowDate);
+            tvTimeOfPost=itemView.findViewById(R.id.tvTimeOfPost);
+
             /*
             tvRowPrice=itemView.findViewById(R.id.tvRowPrice);
             tvRowFreeSeats=itemView.findViewById(R.id.tvRowFreeSeats);

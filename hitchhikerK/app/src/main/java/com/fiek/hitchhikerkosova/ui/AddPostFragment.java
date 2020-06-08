@@ -35,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -60,6 +61,7 @@ public class AddPostFragment extends Fragment {
     DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    Date date=new Date();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,7 +97,6 @@ public class AddPostFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
 
     }
 
@@ -138,7 +139,8 @@ public class AddPostFragment extends Fragment {
                         Double.parseDouble(etPrice.getText().toString()),
                         Integer.valueOf(spFreeSeats.getSelectedItem().toString()),
                         etPhoneNumber.getText().toString(),
-                        etExtraInfo.getText().toString());
+                        etExtraInfo.getText().toString(),
+                        date.getTime());
             }
         });
 
@@ -200,10 +202,12 @@ public class AddPostFragment extends Fragment {
             }
         });
 
+
     }
     private void addNewPostToDatabase(String from,String to,String departureTime,String date,double price,
-                                      int freeSeats,String phoneNumber,String extraInfo){
-        PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,departureTime,date,price,freeSeats,phoneNumber,extraInfo);
+                                      int freeSeats,String phoneNumber,String extraInfo,long currentTime){
+        PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,
+                departureTime,date,price,freeSeats,phoneNumber,extraInfo,currentTime);
         mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

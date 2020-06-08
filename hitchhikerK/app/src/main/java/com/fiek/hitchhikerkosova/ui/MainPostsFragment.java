@@ -135,7 +135,7 @@ public class MainPostsFragment extends Fragment {
 
         recyclerView=getActivity().findViewById(R.id.recyclerView);
         recyclerView.setAdapter(postsAdapter);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -145,7 +145,13 @@ public class MainPostsFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                postsAdapter.notifyDataSetChanged();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        postsAdapter.notifyDataSetChanged();
+                    }
+                });
+
                 refreshLayout.setRefreshing(false);
             }
         });
