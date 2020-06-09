@@ -21,6 +21,8 @@
         <string name="btnAddPostTxt">Post</string>
         <!--MainActivity-->
         <string name="btnCancel">Cancel</string>
+        <!--MainPostsFragment-->
+        <string name="btnReserve">Reserve</string>
 
 
     <!-- onClick function -->
@@ -99,6 +101,9 @@
     <!-- Hamburger Menu-->
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <!-- item -->
+    <string name="rides">Rides</string>
+    <string name="reserved">Reserved</string>
 
 
 

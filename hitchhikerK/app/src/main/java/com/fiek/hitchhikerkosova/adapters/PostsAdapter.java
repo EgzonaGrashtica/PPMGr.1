@@ -1,22 +1,32 @@
 package com.fiek.hitchhikerkosova.adapters;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fiek.hitchhikerkosova.Db.Database;
+import com.fiek.hitchhikerkosova.Db.RideModel;
 import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,10 +38,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     Context context;
     Dialog postDialog;
     DateUtils dateUtils=new DateUtils();
-    Date currentDate=new Date();
+    Date currentDate;
+    String timeAgo;
+    String checkFragment;
+    private DatabaseReference mDatabase;
 
-    public PostsAdapter(Context ct) {
+
+    public PostsAdapter(Context ct, String checkFragment) {
         context=ct;
+        this.checkFragment=checkFragment;
     }
 
 
@@ -48,8 +63,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         postDialog.setContentView(R.layout.dialog_ride);
         postDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-
-
         postsViewHolder.postRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 TextView tvDialogFreeSeats=postDialog.findViewById(R.id.tvDialogFreeSeats);
                 TextView tvDialogPhoneNumber=postDialog.findViewById(R.id.tvDialogPhoneNumber);
                 TextView tvDialogExtraInfo=postDialog.findViewById(R.id.tvDialogExtraInfo);
+                Button btnReserve=postDialog.findViewById(R.id.btnReserve);
 
                 tvDialogName.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName());
                 tvDialogFrom.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getFrom());
@@ -72,6 +86,27 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
                 tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
                 tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+                if(checkFragment.equals("MainPostsFragment")){
+                    btnReserve.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            saveToDatabase(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerId(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTo(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDate(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPrice(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted());
+                            postDialog.cancel();
+                        }
+                    });
+                }
                 postDialog.show();
             }
         });
@@ -85,26 +120,67 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         holder.tvRowTo.setText(dataSource.get(position).getTo());
         holder.tvRowDepartureTime.setText(dataSource.get(position).getDepartureTime());
         holder.tvRowDate.setText(dataSource.get(position).getDate());
-        CharSequence timeAgo=dateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
-                currentDate.getTime(),DateUtils.MINUTE_IN_MILLIS,DateUtils.FORMAT_ABBREV_RELATIVE);
-        holder.tvTimeOfPost.setText(timeAgo);
-
-        /*
-        holder.tvRowPrice.setText(Double.toString(dataSource.get(position).getPrice()));
-        holder.tvRowFreeSeats.setText(Integer.toString(dataSource.get(position).getFreeSeats()));
-        holder.tvRowPhoneNumber.setText(dataSource.get(position).getPhoneNumber());
-        holder.tvRowExtraInfo.setText(dataSource.get(position).getExtraInfo());*/
+        holder.tvTimeOfPost.setText(getTimeAgo(position));
     }
 
     @Override
     public int getItemCount() {
         return dataSource.size();
     }
+    private String getTimeAgo(int position){
+        currentDate=new Date();
+        timeAgo=String.valueOf(dateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
+                currentDate.getTime(),DateUtils.MINUTE_IN_MILLIS,DateUtils.FORMAT_ABBREV_RELATIVE));
+        return timeAgo;
+    }
+    private void saveToDatabase(String id,String ownerId,String ownerName,String from,String to,String departureTime,String date,
+                                double price,int freeSeats,String phoneNumber,String extraInfo,long timePosted){
+        ContentValues cv=new ContentValues();
+        cv.put(RideModel.Id,id);
+        cv.put(RideModel.OwnerID,ownerId);
+        cv.put(RideModel.OwnerName,ownerName);
+        cv.put(RideModel.FromWhere,from);
+        cv.put(RideModel.ToWhere,to);
+        cv.put(RideModel.DepartureTime,departureTime);
+        cv.put(RideModel.Date,date);
+        cv.put(RideModel.Price,price);
+        cv.put(RideModel.FreeSeats,freeSeats);
+        cv.put(RideModel.PhoneNumber,phoneNumber);
+        cv.put(RideModel.ExtraInfo,extraInfo);
+        cv.put(RideModel.TimePosted,timePosted);
+
+        SQLiteDatabase objDb=new Database(context).getWritableDatabase();
+        try{
+            long retValue=objDb.insert(Database.reservedTable,null,cv);
+            if(retValue>0){
+            saveToRealTimeDb(id, freeSeats);
+            }
+            else {
+                Toast.makeText(context,"U rezevua njehere",Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception ex){
+            Log.e("Exception",ex.getMessage());
+
+        }
+        finally {
+            objDb.close();
+        }
+    }
+    private void saveToRealTimeDb(String id,int freeSeats){
+        mDatabase=FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Posts").child(id).child("freeSeats").setValue(freeSeats-1).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context,"U rezervua",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     public class PostsViewHolder extends RecyclerView.ViewHolder {
         TextView tvRowName,tvRowFrom,tvRowTo,tvRowDepartureTime,tvRowDate,tvTimeOfPost;
         ConstraintLayout postRow;
-        /*TextView tvRowPrice,tvRowFreeSeats,tvRowPhoneNumber,tvRowExtraInfo;*/
+
         public PostsViewHolder(@NonNull View itemView) {
 
             super(itemView);
@@ -116,11 +192,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             tvRowDate=itemView.findViewById(R.id.tvRowDate);
             tvTimeOfPost=itemView.findViewById(R.id.tvTimeOfPost);
 
-            /*
-            tvRowPrice=itemView.findViewById(R.id.tvRowPrice);
-            tvRowFreeSeats=itemView.findViewById(R.id.tvRowFreeSeats);
-            tvRowPhoneNumber=itemView.findViewById(R.id.tvRowPhoneNumber);
-            tvRowExtraInfo=itemView.findViewById(R.id.tvRowExtraInfo);*/
         }
 
     }

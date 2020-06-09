@@ -3,10 +3,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_rides_fragment"
-            android:title="Rides" />
+            android:icon="@drawable/ic_direction_car_18pt_2x"
+            android:title="@string/rides" />
         <item
             android:id="@+id/nav_second_fragment"
-            android:title="Second" />
+            android:icon="@drawable/ic_bookmark_18pt_2x"
+            android:title="@string/reserved" />
         <item
             android:id="@+id/nav_third_fragment"
             android:title="Third" />

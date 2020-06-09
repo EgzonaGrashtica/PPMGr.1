@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.fiek.hitchhikerkosova.LogInActivity;
 import com.fiek.hitchhikerkosova.PostModel;
@@ -75,7 +76,7 @@ public class MainPostsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        postsAdapter=new PostsAdapter(getContext());
+        postsAdapter=new PostsAdapter(getContext(),"MainPostsFragment");
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Posts");
 
         mDatabase.addChildEventListener(new ChildEventListener() {
@@ -90,7 +91,14 @@ public class MainPostsFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                PostModel postModelChanged=dataSnapshot.getValue(PostModel.class);
+                postModelChanged.setId(dataSnapshot.getKey());
+                for(PostModel pm:postsAdapter.dataSource){
+                    if(pm.getId().equals(postModelChanged.getId())){
+                        pm.setFreeSeats(postModelChanged.getFreeSeats());
+                        postsAdapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
@@ -114,10 +122,11 @@ public class MainPostsFragment extends Fragment {
             @Override
             public void run() {
                 postsAdapter.notifyDataSetChanged();
-                Log.i("xona","Qitu");
                 refreshLayout.setRefreshing(false);
             }
         }, 3000);
+
+
 
 
     }
