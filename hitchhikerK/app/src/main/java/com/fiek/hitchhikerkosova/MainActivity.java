@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.fiek.hitchhikerkosova.ui.AddPostFragment;
 import com.fiek.hitchhikerkosova.ui.MainPostsFragment;
+import com.fiek.hitchhikerkosova.ui.ReservedRidesFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_rides_fragment:
                 fragmentClass = MainPostsFragment.class;
                 break;
-            case R.id.nav_second_fragment:
-                fragmentClass = TestFragment2.class;
+            case R.id.nav_reserved_fragment:
+                fragmentClass = ReservedRidesFragment.class;
                 break;
 
             default:

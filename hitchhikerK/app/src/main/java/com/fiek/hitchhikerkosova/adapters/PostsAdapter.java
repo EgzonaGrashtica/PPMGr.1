@@ -24,6 +24,8 @@ import com.fiek.hitchhikerkosova.Db.Database;
 import com.fiek.hitchhikerkosova.Db.RideModel;
 import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
+import com.fiek.hitchhikerkosova.ui.ReservedRidesFragment;
+import com.google.android.gms.common.util.Predicate;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,6 +44,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     String timeAgo;
     String checkFragment;
     private DatabaseReference mDatabase;
+    private final String DELETING_RESERVATION="DELETING_RESERVATION";
+    private final String MAKING_RESERVATION="MAKING_RESERVATION";
 
 
     public PostsAdapter(Context ct, String checkFragment) {
@@ -86,23 +90,39 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
                 tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
                 tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+
                 if(checkFragment.equals("MainPostsFragment")){
                     btnReserve.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()>0){
+                                saveToDatabase(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerId(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getTo(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getDate(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getPrice(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
+                                        dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted());
+                                postDialog.cancel();
+                            }else{
+                                Toast.makeText(context,"Nuk ka freeseats",Toast.LENGTH_SHORT).show();
+                            }
 
-                            saveToDatabase(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerId(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTo(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDate(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPrice(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
-                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted());
+                        }
+                    });
+                }else if(checkFragment.equals("ReservedRidesFragment")){
+                    btnReserve.setText(R.string.btnDeleteReserved);
+                    btnReserve.setBackgroundResource(R.color.colorAccent);
+                    btnReserve.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            deleteReservation(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats());
                             postDialog.cancel();
                         }
                     });
@@ -144,7 +164,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         cv.put(RideModel.DepartureTime,departureTime);
         cv.put(RideModel.Date,date);
         cv.put(RideModel.Price,price);
-        cv.put(RideModel.FreeSeats,freeSeats);
+        cv.put(RideModel.FreeSeats,freeSeats-1);
         cv.put(RideModel.PhoneNumber,phoneNumber);
         cv.put(RideModel.ExtraInfo,extraInfo);
         cv.put(RideModel.TimePosted,timePosted);
@@ -153,7 +173,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         try{
             long retValue=objDb.insert(Database.reservedTable,null,cv);
             if(retValue>0){
-            saveToRealTimeDb(id, freeSeats);
+            saveToRealTimeDb(id, freeSeats,MAKING_RESERVATION);
             }
             else {
                 Toast.makeText(context,"U rezevua njehere",Toast.LENGTH_SHORT).show();
@@ -166,14 +186,47 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             objDb.close();
         }
     }
-    private void saveToRealTimeDb(String id,int freeSeats){
+    private void saveToRealTimeDb(String id,int freeSeats,String action){
         mDatabase=FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Posts").child(id).child("freeSeats").setValue(freeSeats-1).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(context,"U rezervua",Toast.LENGTH_SHORT).show();
+        if(action.equals(MAKING_RESERVATION)){
+            mDatabase.child("Posts").child(id).child("freeSeats").setValue(freeSeats-1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(context,"U rezervua",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else if(action.equals(DELETING_RESERVATION)){
+            mDatabase.child("Posts").child(id).child("freeSeats").setValue(freeSeats+1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(context,"U fshi",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    private void deleteReservation(String id, int freeSeats){
+        SQLiteDatabase objDb=new Database(context).getWritableDatabase();
+        try{
+            int retValue = objDb.delete(Database.reservedTable,"ID = ?",new String[] {id});
+            if(retValue>0){
+                saveToRealTimeDb(id,freeSeats,DELETING_RESERVATION);
+                for(PostModel pm: dataSource){
+                    if(pm.getId().equals(id)){
+                        dataSource.remove(pm);
+                    }
+                }
+                notifyDataSetChanged();
+            }else{
+                Toast.makeText(context,"No rows affected",Toast.LENGTH_SHORT).show();
             }
-        });
+        }catch (Exception ex){
+            Log.e("Exception",ex.getMessage());
+        }finally {
+            objDb.close();
+        }
+
     }
 
 
