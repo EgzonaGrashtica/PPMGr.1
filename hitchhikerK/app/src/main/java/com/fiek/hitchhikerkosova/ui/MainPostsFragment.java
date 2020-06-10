@@ -84,6 +84,7 @@ public class MainPostsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         dbHelper = new DatabaseHelper(getContext());
         postsAdapter=new PostsAdapter(getContext(),"MainPostsFragment");
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Posts");
@@ -128,15 +129,6 @@ public class MainPostsFragment extends Fragment {
             }
 
         });
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                postsAdapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
-            }
-        }, 3000);
-
 
 
 
@@ -177,7 +169,16 @@ public class MainPostsFragment extends Fragment {
         });
 
         refreshLayout.setRefreshing(true);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                postsAdapter.notifyDataSetChanged();
+                refreshLayout.setRefreshing(false);
+            }
+        }, 3000);
     }
+
 
 
 }

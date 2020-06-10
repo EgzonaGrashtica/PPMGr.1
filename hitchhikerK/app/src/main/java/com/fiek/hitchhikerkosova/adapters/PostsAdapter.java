@@ -3,6 +3,7 @@ package com.fiek.hitchhikerkosova.adapters;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,13 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fiek.hitchhikerkosova.Db.Database;
 import com.fiek.hitchhikerkosova.Db.RideModel;
 import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
+import com.fiek.hitchhikerkosova.RoadMapFragment;
+import com.fiek.hitchhikerkosova.ui.AddPostFragment;
 import com.fiek.hitchhikerkosova.ui.ReservedRidesFragment;
 import com.google.android.gms.common.util.Predicate;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +49,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     Date currentDate;
     String timeAgo;
     String checkFragment;
+    Fragment fragment = null;
+    Class fragmentClass;
+    FragmentManager fragmentManager;
     private DatabaseReference mDatabase;
     private final String DELETING_RESERVATION="DELETING_RESERVATION";
     private final String MAKING_RESERVATION="MAKING_RESERVATION";
@@ -90,7 +99,22 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
                 tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
                 tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+                Button btnMap=postDialog.findViewById(R.id.btnMap);
+                btnMap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fragmentClass = RoadMapFragment.class;
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).addToBackStack(null).commit();
+                        postDialog.hide();
+                    }
 
+                });
                 if(checkFragment.equals("MainPostsFragment")){
                     btnReserve.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -117,7 +141,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                     });
                 }else if(checkFragment.equals("ReservedRidesFragment")){
                     btnReserve.setText(R.string.btnDeleteReserved);
-                    btnReserve.setBackgroundResource(R.color.colorAccent);
+                    btnReserve.setBackgroundTintList(context.getResources().getColorStateList(R.color.colorAccent));
                     btnReserve.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -222,7 +246,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 Toast.makeText(context,"No rows affected",Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex){
-            Log.e("Exception",ex.getMessage());
+            if(ex.getMessage()!=null){
+            Log.e("Exception",ex.getMessage());}
+
         }finally {
             objDb.close();
         }
