@@ -138,7 +138,9 @@ public class MainPostsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_main_posts, container, false);
+
     }
 
     @Override
@@ -177,8 +179,8 @@ public class MainPostsFragment extends Fragment {
                 refreshLayout.setRefreshing(false);
             }
         }, 3000);
+
+
     }
-
-
 
 }

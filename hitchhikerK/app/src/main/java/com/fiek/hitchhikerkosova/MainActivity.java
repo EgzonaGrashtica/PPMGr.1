@@ -1,5 +1,6 @@
 package com.fiek.hitchhikerkosova;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -10,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextView tvLogout,tvHeaderName,tvHeaderEmail;
     FirebaseUser currentUser;
-
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
 
@@ -196,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert1 = alert.create();
         alert1.show();
     }
+
+
 
 
 }

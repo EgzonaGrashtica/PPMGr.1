@@ -45,13 +45,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     public List<PostModel> dataSource = new ArrayList<PostModel>();
     Context context;
-    Dialog postDialog;
+    public Dialog postDialog;
     DateUtils dateUtils=new DateUtils();
     Date currentDate;
     String timeAgo;
     String checkFragment;
     Fragment fragment = null;
-    Class fragmentClass;
     FragmentManager fragmentManager;
     private DatabaseReference mDatabase;
     private final String DELETING_RESERVATION="DELETING_RESERVATION";
@@ -76,6 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         postDialog = new Dialog(context);
         postDialog.setContentView(R.layout.dialog_ride);
         postDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         postsViewHolder.postRow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,15 +111,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 btnMap.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragmentClass = RoadMapFragment.class;
                         try {
-                            fragment = (Fragment) fragmentClass.newInstance();
+                            fragment = (Fragment) RoadMapFragment.newInstance(dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
+                                                                            dataSource.get(postsViewHolder.getAdapterPosition()).getTo());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fContent, fragment).addToBackStack(null).commit();
                         postDialog.hide();
+
                     }
 
                 });
@@ -282,4 +283,5 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         }
 
     }
+
 }

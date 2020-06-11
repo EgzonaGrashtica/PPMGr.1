@@ -22,6 +22,7 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.fiek.hitchhikerkosova.ui.MainPostsFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -47,21 +49,28 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "from";
+    private static final String ARG_PARAM2 = "to";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String from;
+    private String to;
+
 
     GoogleMap googleMap;
     Location myLocation=null;
     Location destinationLocation=null;
-    protected LatLng from=new LatLng(42.6549, 21.1725);
-    protected LatLng to=new LatLng(42.2171, 20.7436);
-    //42.6549, 21.1725
+    private LatLng fromLatLng;
+    private LatLng toLatLng;
 
-    //42.2171, 20.7436
+    final static LatLng PRISHTINA_LATLNG=new LatLng(42.6629, 21.1655);
+    final static LatLng MITROVICA_LATLNG=new LatLng(42.8914, 20.8660);
+    final static LatLng PEJA_LATLNG=new LatLng(42.6593, 20.2887);
+    final static LatLng GJAKOVA_LATLNG=new LatLng(42.3844, 20.4285);
+    final static LatLng FERIZAJ_LATLNG=new LatLng(42.3697, 21.1563);
+    final static LatLng PRIZRENI_LATLNG=new LatLng(42.2171, 20.7436);
+    final static LatLng GJILANI_LATLNG=new LatLng(42.4635, 21.4694);
+
 
     private final static int LOCATION_REQUEST_CODE = 23;
     boolean locationPermission=false;
@@ -81,11 +90,11 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
      * @return A new instance of fragment RoadMapFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RoadMapFragment newInstance(String param1, String param2) {
+    public static RoadMapFragment newInstance(String from, String to) {
         RoadMapFragment fragment = new RoadMapFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, from);
+        args.putString(ARG_PARAM2, to);
         fragment.setArguments(args);
         return fragment;
     }
@@ -94,9 +103,56 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            from = getArguments().getString(ARG_PARAM1);
+            to = getArguments().getString(ARG_PARAM2);
         }
+        switch (from){
+            case "Prishtina":
+                fromLatLng=PRISHTINA_LATLNG;
+                break;
+            case "Prizreni":
+                fromLatLng=PRIZRENI_LATLNG;
+                break;
+            case "Ferizaj":
+                fromLatLng=FERIZAJ_LATLNG;
+                break;
+            case "Pejë":
+                fromLatLng=PEJA_LATLNG;
+                break;
+            case "Gjakovë":
+                fromLatLng=GJAKOVA_LATLNG;
+                break;
+            case "Gjilan":
+                fromLatLng=GJILANI_LATLNG;
+                break;
+            case "Mitrovicë":
+                fromLatLng=MITROVICA_LATLNG;
+                break;
+        }
+        switch (to){
+            case "Prishtina":
+                toLatLng=PRISHTINA_LATLNG;
+                break;
+            case "Prizreni":
+                toLatLng=PRIZRENI_LATLNG;
+                break;
+            case "Ferizaj":
+                toLatLng=FERIZAJ_LATLNG;
+                break;
+            case "Pejë":
+                toLatLng=PEJA_LATLNG;
+                break;
+            case "Gjakovë":
+                toLatLng=GJAKOVA_LATLNG;
+                break;
+            case "Gjilan":
+                toLatLng=GJILANI_LATLNG;
+                break;
+            case "Mitrovicë":
+                toLatLng=MITROVICA_LATLNG;
+                break;
+        }
+
 
     }
 
@@ -124,7 +180,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap=googleMap;
-        Findroutes(from,to);
+        Findroutes(fromLatLng,toLatLng);
 
     }
     private void requestPermision()
@@ -150,7 +206,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //if permission granted.
                     locationPermission=true;
-                    Findroutes(from,to);
+                    Findroutes(fromLatLng,toLatLng);
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
@@ -215,7 +271,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onRoutingFailure(RouteException e) {
         Toast.makeText(getContext(),"Finding Route Failed...",Toast.LENGTH_LONG).show();
-        Findroutes(from,to);
+        Findroutes(fromLatLng,toLatLng);
     }
 
     @Override
@@ -226,7 +282,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                from, 16f);
+                fromLatLng, 16f);
         googleMap.animateCamera(cameraUpdate);
         if(polylines!=null) {
             polylines.clear();
@@ -234,8 +290,6 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         PolylineOptions polyOptions = new PolylineOptions();
         LatLng polylineStartLatLng=null;
         LatLng polylineEndLatLng=null;
-        Log.i("ABC","HEKLOO");
-
 
         polylines = new ArrayList<>();
         //add route(s) to the map using polyline
@@ -249,7 +303,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
                 int k=polyline.getPoints().size();
                 polylineEndLatLng=polyline.getPoints().get(k-1);
                 polylines.add(polyline);
-            Log.i("RRuga","U vizatu");}
+                }
 
         }
 
@@ -258,6 +312,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         startMarker.position(polylineStartLatLng);
         startMarker.title("My Location");
         googleMap.addMarker(startMarker);
+
 
         //Add Marker on route ending position
         MarkerOptions endMarker = new MarkerOptions();
@@ -268,12 +323,16 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onRoutingCancelled() {
-        Findroutes(from,to);
+        Findroutes(fromLatLng,toLatLng);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Findroutes(from,to);
+        Findroutes(fromLatLng,toLatLng);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
