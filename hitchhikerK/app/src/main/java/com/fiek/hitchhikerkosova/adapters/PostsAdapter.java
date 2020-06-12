@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -100,6 +101,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
                 tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
                 tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+
                 ImageButton btnClose=postDialog.findViewById(R.id.btnClose);
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -107,6 +109,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                         postDialog.cancel();
                     }
                 });
+
                 Button btnMap=postDialog.findViewById(R.id.btnMap);
                 btnMap.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,7 +121,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                             e.printStackTrace();
                         }
                         fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).addToBackStack(null).commit();
+                        fragmentManager.beginTransaction().add(R.id.fContent, fragment).addToBackStack(null).commit();
                         postDialog.hide();
 
                     }
@@ -168,6 +171,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     @Override
     public void onBindViewHolder(@NonNull PostsViewHolder holder, int position) {
+
+        holder.postRow.setAnimation(AnimationUtils.loadAnimation(context,R.anim.item_animation_from_bottom));
         holder.tvRowName.setText(dataSource.get(position).getOwnerName());
         holder.tvRowFrom.setText(dataSource.get(position).getFrom());
         holder.tvRowTo.setText(dataSource.get(position).getTo());

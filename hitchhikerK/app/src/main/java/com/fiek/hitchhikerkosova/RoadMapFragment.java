@@ -1,6 +1,5 @@
 package com.fiek.hitchhikerkosova;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,10 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +19,7 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
-import com.fiek.hitchhikerkosova.ui.MainPostsFragment;
+import com.fiek.hitchhikerkosova.Map.MyClusterItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,10 +28,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.clustering.ClusterManager;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +53,8 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     private String from;
     private String to;
 
-
     GoogleMap googleMap;
+    ClusterManager clusterManager;
     Location myLocation=null;
     Location destinationLocation=null;
     private LatLng fromLatLng;
@@ -70,7 +67,6 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     final static LatLng FERIZAJ_LATLNG=new LatLng(42.3697, 21.1563);
     final static LatLng PRIZRENI_LATLNG=new LatLng(42.2171, 20.7436);
     final static LatLng GJILANI_LATLNG=new LatLng(42.4635, 21.4694);
-
 
     private final static int LOCATION_REQUEST_CODE = 23;
     boolean locationPermission=false;
@@ -152,8 +148,6 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
                 toLatLng=MITROVICA_LATLNG;
                 break;
         }
-
-
     }
 
     @Override
@@ -172,16 +166,12 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap=googleMap;
+        clusterManager=new ClusterManager<>(getActivity(),googleMap);
         Findroutes(fromLatLng,toLatLng);
-
     }
     private void requestPermision()
     {
@@ -247,7 +237,6 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
 
     }*/
 
-
     // function to find Routes.
     public void Findroutes(LatLng Start, LatLng End)
     {
@@ -256,13 +245,12 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         }
         else
         {
-
             Routing routing = new Routing.Builder()
                     .travelMode(AbstractRouting.TravelMode.DRIVING)
                     .withListener(this)
                     .alternativeRoutes(true)
                     .waypoints(Start, End)
-                    .key(getString(R.string.google_map_key)) //also define your api key here.
+                    .key(getString(R.string.google_map_key))
                     .build();
             routing.execute();
         }
@@ -295,30 +283,24 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         //add route(s) to the map using polyline
         for (int i = 0; i <route.size(); i++) {
                 if(i==shortestRouteIndex){
-                polyOptions.color(getResources().getColor(R.color.colorAccent));
-                polyOptions.width(7);
-                polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
-                Polyline polyline = googleMap.addPolyline(polyOptions);
-                polylineStartLatLng=polyline.getPoints().get(0);
-                int k=polyline.getPoints().size();
-                polylineEndLatLng=polyline.getPoints().get(k-1);
-                polylines.add(polyline);
+                    polyOptions.color(getResources().getColor(R.color.colorAccent));
+                    polyOptions.width(7);
+                    polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
+                    Polyline polyline = googleMap.addPolyline(polyOptions);
+                    polylineStartLatLng=polyline.getPoints().get(0);
+                    int k=polyline.getPoints().size();
+                    polylineEndLatLng=polyline.getPoints().get(k-1);
+                    polylines.add(polyline);
                 }
 
         }
-
         //Add Marker on route starting position
-        MarkerOptions startMarker = new MarkerOptions();
-        startMarker.position(polylineStartLatLng);
-        startMarker.title("My Location");
-        googleMap.addMarker(startMarker);
-
+        clusterManager.addItem(new MyClusterItem(polylineStartLatLng,from,""));
 
         //Add Marker on route ending position
-        MarkerOptions endMarker = new MarkerOptions();
-        endMarker.position(polylineEndLatLng);
-        endMarker.title("Destination");
-        googleMap.addMarker(endMarker);
+        clusterManager.addItem(new MyClusterItem(polylineEndLatLng,to,""));
+
+        clusterManager.cluster();
     }
 
     @Override
