@@ -108,6 +108,12 @@
     <string name="rides">Rides</string>
     <string name="reserved">Reserved</string>
 
+    <!--Checkboxes-->
+    <string name="rememberMeCheckBox">Remember me</string>
+
+    <!-- Constants-->
+    <string name="prefEmailKey">email</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

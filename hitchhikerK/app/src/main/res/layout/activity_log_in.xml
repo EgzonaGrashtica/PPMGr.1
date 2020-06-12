@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background2"
-    tools:context=".LogInActivity">
+    tools:context=".LogInActivity"
+    >
 
     <EditText
         android:id="@+id/etEmail"
@@ -28,21 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         android:imeOptions="actionNext"/>
-
-    <TextView
-        android:id="@+id/tvRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="114dp"
-        android:clickable="true"
-        android:onClick="@string/tvRegisterFunc"
-        android:text="@string/tvRegister"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -70,15 +56,32 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="106dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_state"
         android:onClick="@string/btnLogInFunc"
         android:text="@string/btnLogInTxt"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/chbRememberMe" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="114dp"
+        android:clickable="true"
+        android:onClick="@string/tvRegisterFunc"
+        android:text="@string/tvRegister"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -92,5 +95,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_photo" />
+
+    <CheckBox
+        android:id="@+id/chbRememberMe"
+        style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="6dp"
+        android:buttonTint="#000000"
+        android:checked="true"
+        android:text="@string/rememberMeCheckBox"
+        android:textColorLink="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

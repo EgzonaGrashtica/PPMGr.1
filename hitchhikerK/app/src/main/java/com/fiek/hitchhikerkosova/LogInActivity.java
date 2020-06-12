@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,9 @@ public class LogInActivity extends AppCompatActivity {
     EditText etPassword;
     String email;
     String password;
+    CheckBox chbRememberMe;
+    SharedPreferences sharedPreferences;
+    Button btnLogin;
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,6 +40,8 @@ public class LogInActivity extends AppCompatActivity {
 
         etEmail=(EditText) findViewById(R.id.etEmail);
         etPassword=(EditText) findViewById(R.id.etPassword);
+        chbRememberMe=(CheckBox) findViewById(R.id.chbRememberMe);
+        btnLogin=(Button) findViewById(R.id.btnLogIn);
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -46,7 +53,12 @@ public class LogInActivity extends AppCompatActivity {
         if(currentUser !=null){
             startActivity(new Intent(LogInActivity.this, MainActivity.class));
             finish();
-
+        }
+        sharedPreferences=getPreferences(0);
+        String storedEmail=sharedPreferences.getString(getString(R.string.prefEmailKey),null);
+        if(storedEmail != null){
+            etEmail.setText(storedEmail);
+            chbRememberMe.setChecked(true);
         }
     }
 
@@ -54,6 +66,7 @@ public class LogInActivity extends AppCompatActivity {
         email= etEmail.getText().toString().trim();
         password= etPassword.getText().toString().trim();
         if(validateLogInData()){
+            btnLogin.setEnabled(false);
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -61,9 +74,17 @@ public class LogInActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Debug Info", "signInWithEmail:success");
+                                if(chbRememberMe.isChecked()){
+                                    sharedPreferences=getPreferences(0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString(getString(R.string.prefEmailKey),etEmail.getText().toString());
+                                    editor.apply();
+                                }
+                                btnLogin.setEnabled(true);
                                 startActivity(new Intent(LogInActivity.this, MainActivity.class));
                                 finish();
                             } else {
+                                btnLogin.setEnabled(true);
                                 // If sign in fails, display a message to the user.
                                 Log.w("Debug Info", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LogInActivity.this, "Authentication failed.",
