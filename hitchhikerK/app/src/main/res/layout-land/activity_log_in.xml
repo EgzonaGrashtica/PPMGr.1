@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background2"
-    tools:context=".LogInActivity">
+    tools:context=".LogInActivity"
+    android:id="@+id/logInView">
 
     <EditText
         android:id="@+id/etEmail"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="327dp"
         android:layout_height="50dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="79dp"
-        android:layout_marginEnd="36dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
         android:cursorVisible="false"
@@ -24,7 +25,7 @@
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -44,8 +45,8 @@
         android:id="@+id/etPassword"
         android:layout_width="327dp"
         android:layout_height="50dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="36dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
@@ -55,7 +56,7 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
@@ -63,24 +64,35 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:background="@drawable/button"
         android:onClick="@string/btnLogInFunc"
         android:text="@string/btnLogInTxt"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/chbRememberMe" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:contentDescription="@string/loginPhotoCD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_photo" />
+
+    <CheckBox
+        android:id="@+id/chbRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:buttonTint="#000000"
+        android:text="@string/rememberMeCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

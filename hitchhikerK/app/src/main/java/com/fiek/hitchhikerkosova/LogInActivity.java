@@ -2,9 +2,11 @@ package com.fiek.hitchhikerkosova;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +34,8 @@ public class LogInActivity extends AppCompatActivity {
     CheckBox chbRememberMe;
     SharedPreferences sharedPreferences;
     Button btnLogin;
+    ConstraintLayout logInView;
+    Snackbar snackbar;
     private FirebaseAuth mAuth;
 
     @Override
@@ -42,7 +47,15 @@ public class LogInActivity extends AppCompatActivity {
         etPassword=(EditText) findViewById(R.id.etPassword);
         chbRememberMe=(CheckBox) findViewById(R.id.chbRememberMe);
         btnLogin=(Button) findViewById(R.id.btnLogIn);
+        logInView=(ConstraintLayout) findViewById(R.id.logInView);
         mAuth = FirebaseAuth.getInstance();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnLogInFunc(v);
+            }
+        });
 
     }
     @Override
@@ -67,6 +80,8 @@ public class LogInActivity extends AppCompatActivity {
         password= etPassword.getText().toString().trim();
         if(validateLogInData()){
             btnLogin.setEnabled(false);
+
+            showLogInSnackBar();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -81,15 +96,16 @@ public class LogInActivity extends AppCompatActivity {
                                     editor.apply();
                                 }
                                 btnLogin.setEnabled(true);
+                                snackbar.dismiss();
                                 startActivity(new Intent(LogInActivity.this, MainActivity.class));
                                 finish();
                             } else {
                                 btnLogin.setEnabled(true);
+                                snackbar.dismiss();
                                 // If sign in fails, display a message to the user.
                                 Log.w("Debug Info", "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LogInActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                etEmail.getText().clear();
                                 etPassword.getText().clear();
                             }
 
@@ -132,5 +148,16 @@ public class LogInActivity extends AppCompatActivity {
 
 
         return true;
+    }
+
+    private void showLogInSnackBar(){
+        snackbar=Snackbar.make(logInView,"",Snackbar.LENGTH_INDEFINITE);
+        View customSnackBarView=getLayoutInflater().inflate(R.layout.snackbar_login_custom,null);
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackbarLayout=(Snackbar.SnackbarLayout) snackbar.getView();
+        snackbarLayout.setPadding(0,0,0,0);
+        snackbarLayout.addView(customSnackBarView,0);
+        snackbar.show();
+
     }
 }
