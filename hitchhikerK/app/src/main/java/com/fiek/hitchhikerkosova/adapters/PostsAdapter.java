@@ -3,10 +3,12 @@ package com.fiek.hitchhikerkosova.adapters;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,6 +103,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
                 tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
                 tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+
+                tvDialogPhoneNumber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri= Uri.parse("tel:"+dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
+                        Intent dialerIntent=new Intent(Intent.ACTION_DIAL,uri);
+                        context.startActivity(dialerIntent);
+                    }
+                });
 
                 ImageButton btnClose=postDialog.findViewById(R.id.btnClose);
                 btnClose.setOnClickListener(new View.OnClickListener() {
