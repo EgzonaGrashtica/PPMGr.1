@@ -137,7 +137,7 @@ public class AddPostFragment extends Fragment {
                         etSelectTime.getText().toString(),
                         etSelectDate.getText().toString(),
                         Double.parseDouble(etPrice.getText().toString()),
-                        Integer.valueOf(spFreeSeats.getSelectedItem().toString()),
+                        Integer.parseInt(spFreeSeats.getSelectedItem().toString()),
                         etPhoneNumber.getText().toString(),
                         etExtraInfo.getText().toString(),
                         date.getTime());
