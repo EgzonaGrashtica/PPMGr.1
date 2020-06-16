@@ -113,14 +113,6 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("Toolbar title");
 
-        tvLogout=findViewById(R.id.tvLogout);
-        tvLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               tvLogOutFunc();
-            }
-        });
-
         View headerLayout=nvDrawer.getHeaderView(0);
 
         tvHeaderName=(TextView) headerLayout.findViewById(R.id.tvHeaderName);
@@ -171,25 +163,31 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_reserved_fragment:
                 fragmentClass = ReservedRidesFragment.class;
                 break;
+            case R.id.nav_logout:
+                tvLogOutFunc();
+                break;
 
             default:
                 fragmentClass = MainPostsFragment.class;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(menuItem.getItemId() !=R.id.nav_logout){
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
+
+
+            menuItem.setChecked(true);
+            setTitle(menuItem.getTitle());
+            // Mbyllja e menus
+            mDrawer.closeDrawers();
         }
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
-
-
-        menuItem.setChecked(true);
-         setTitle(menuItem.getTitle());
-        // Mbyllja e menus
-        mDrawer.closeDrawers();
     }
 
     // Funksioni i butonit per te shtuar Postime

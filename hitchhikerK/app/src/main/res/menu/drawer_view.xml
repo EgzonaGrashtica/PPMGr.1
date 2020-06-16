@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/mainGroup"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_rides_fragment"
             android:icon="@drawable/ic_direction_car_18pt_2x"
@@ -12,16 +13,13 @@
         <item
             android:id="@+id/nav_third_fragment"
             android:title="Third" />
-        <item android:title="Sub items">
-            <menu>
-                <group android:checkableBehavior="single">
-                    <item
-                        android:title="Sub item 1" />
-                    <item
-                        android:title="Sub item 2" />
-                </group>
-            </menu>
-        </item>
     </group>
+        <group android:id="@+id/secondaryGroup"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_logout"
+                android:title="@string/tvLogOut"
+                android:icon="@drawable/logout_icon"/>
+        </group>
 
 </menu>
