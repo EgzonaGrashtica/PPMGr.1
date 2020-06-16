@@ -20,7 +20,7 @@
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity" android:screenOrientation="sensor"></activity>
 
         <activity android:name=".LogInActivity" android:screenOrientation="sensor">
             <intent-filter>
