@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddPostFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_add_post"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="14dp">
+
+        <EditText
+            android:id="@+id/etExtraInfo"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="112dp"
+            android:background="@drawable/et_style2"
+            android:ems="10"
+            android:gravity="start|top"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExtraInfo" />
+
+        <TextView
+            android:id="@+id/tvTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="244dp"
+            android:text="@string/tvTo"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spTo"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="112dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayCities"
+            android:prompt="@string/spDefault"
+            android:theme="@style/tabletSpinnerText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTo" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="224dp"
+            android:text="@string/tvDate"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spTo" />
+
+        <EditText
+            android:id="@+id/etSelectDate"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="112dp"
+            android:background="@drawable/et_style2"
+            android:focusable="false"
+            android:hint="@string/phDate"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <TextView
+            android:id="@+id/tvFreeSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="180dp"
+            android:text="@string/tvFreeSeats"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSelectDate" />
+
+        <Spinner
+            android:id="@+id/spFreeSeats"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="112dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayFreeSeats"
+            android:prompt="@string/spDefault"
+            android:theme="@style/tabletSpinnerText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFreeSeats" />
+
+        <TextView
+            android:id="@+id/tvExtraInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="190dp"
+            android:text="@string/tvExtraInfo"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spFreeSeats" />
+
+        <Button
+            android:id="@+id/btnAddPost"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginEnd="350dp"
+            android:background="@drawable/button"
+            android:text="@string/btnAddPostTxt"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
+        <Spinner
+            android:id="@+id/spFrom"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayCities"
+            android:prompt="@string/spDefault"
+            android:theme="@style/tabletSpinnerText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
+
+        <TextView
+            android:id="@+id/tvFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/tvFrom"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSelectTime"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/et_style2"
+            android:focusable="false"
+            android:hint="@string/phSelectTime"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDepartureTime" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/tvPrice"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSelectTime" />
+
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/et_style2"
+            android:drawableRight="@drawable/euro_icon"
+            android:drawablePadding="5dp"
+            android:hint="@string/phPrice"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="139dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/tvPhoneNumber"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPrice" />
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/et_style2"
+            android:ems="10"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+
+        <TextView
+            android:id="@+id/tvDepartureTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="139dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/tvDepartureTime"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spFrom" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

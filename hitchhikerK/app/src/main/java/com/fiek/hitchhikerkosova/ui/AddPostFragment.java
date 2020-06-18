@@ -111,7 +111,7 @@ public class AddPostFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.tvAddPostTitle));
+        toolbar.setTitle(getResources().getString(R.string.AddPostTitle));
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 

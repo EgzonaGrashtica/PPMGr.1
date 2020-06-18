@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddPostFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_add_post">
+
+        <EditText
+            android:id="@+id/etExtraInfo"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/et_style2"
+            android:ems="10"
+            android:gravity="start|top"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExtraInfo" />
+
+        <TextView
+            android:id="@+id/tvExtraInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="88dp"
+            android:text="@string/tvExtraInfo"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spFreeSeats" />
+
+        <Button
+            android:id="@+id/btnAddPost"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="131dp"
+            android:background="@drawable/button"
+            android:text="@string/btnAddPostTxt"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
+        <TextView
+            android:id="@+id/tvFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/tvFrom"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="90dp"
+            android:text="@string/tvTo"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spFrom"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayCities"
+            android:prompt="@string/spDefault"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
+
+        <Spinner
+            android:id="@+id/spTo"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayCities"
+            android:prompt="@string/spDefault"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTo" />
+
+        <TextView
+            android:id="@+id/tvDepartureTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/tvDepartureTime"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spFrom" />
+
+        <EditText
+            android:id="@+id/etSelectTime"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/et_style2"
+            android:focusable="false"
+            android:hint="@string/phSelectTime"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDepartureTime" />
+
+        <Spinner
+            android:id="@+id/spFreeSeats"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/arrayFreeSeats"
+            android:prompt="@string/spDefault"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFreeSeats" />
+
+        <TextView
+            android:id="@+id/tvFreeSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="80dp"
+            android:text="@string/tvFreeSeats"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSelectDate" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/tvPrice"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSelectTime" />
+
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/tvPhoneNumber"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPrice" />
+
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/et_style2"
+            android:drawableRight="@drawable/euro_icon"
+            android:drawablePadding="5dp"
+            android:hint="@string/phPrice"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+        <EditText
+            android:id="@+id/etSelectDate"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/et_style2"
+            android:focusable="false"
+            android:hint="@string/phDate"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="88dp"
+            android:text="@string/tvDate"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spTo" />
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="159dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/et_style2"
+            android:ems="10"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

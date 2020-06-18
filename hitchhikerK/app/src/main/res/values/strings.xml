@@ -43,7 +43,6 @@
     <!--Signup-->
     <string name="tvRegister">Don\'t have an account?</string>
     <!-- AddPost / MainPostsFragment -->
-    <string name="tvAddPostTitle">Create a new trip.</string>
     <string name="tvFrom">From</string>
     <string name="tvTo">To</string>
     <string name="tvDepartureTime">Departure Time</string>
@@ -116,6 +115,13 @@
 
     <!--SnackBars-->
     <string name="snackBarCheckingCredentials">Checking credentials...</string>
+
+    <!--ToolBar Titles-->
+    <string name="AddPostTitle">Create a new trip</string>
+    <string name="MainPostTitle">Home</string>
+    <string name="ReservedRidesTitle">My reserved rides</string>
+    <string name="MapTitle">See the road</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
