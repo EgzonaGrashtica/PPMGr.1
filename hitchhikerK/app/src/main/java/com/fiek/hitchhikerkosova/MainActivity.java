@@ -11,6 +11,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -50,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-    Fragment fragment = null;
-    Class fragmentClass;
-    FragmentManager fragmentManager;
+    NavController navController;
     private FirebaseAuth mAuth;
     TextView tvLogout,tvHeaderName,tvHeaderEmail;
     ShapeableImageView profilePicImageView;
@@ -88,16 +88,6 @@ public class MainActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        //Ne create loadohet fragmenti 1
-        fragmentClass = MainPostsFragment.class;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
 
         //Listeneri per me u qel hamburger menu
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer  , toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -125,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         currentUser = mAuth.getCurrentUser();
+
+        navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
 
     }
     @Override
@@ -158,32 +150,18 @@ public class MainActivity extends AppCompatActivity {
 
         switch(menuItem.getItemId()) {
             case R.id.nav_rides_fragment:
-                fragmentClass = MainPostsFragment.class;
+                navController.navigate(R.id.mainPostsFragment);
                 break;
             case R.id.nav_reserved_fragment:
-                fragmentClass = ReservedRidesFragment.class;
+                navController.navigate(R.id.reservedRidesFragment);
                 break;
             case R.id.nav_logout:
                 tvLogOutFunc();
                 break;
-
-            default:
-                fragmentClass = MainPostsFragment.class;
         }
 
         if(menuItem.getItemId() !=R.id.nav_logout){
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
-
-
             menuItem.setChecked(true);
-            setTitle(menuItem.getTitle());
             // Mbyllja e menus
             mDrawer.closeDrawers();
         }
@@ -192,14 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Funksioni i butonit per te shtuar Postime
     public void btnNewPostFunc(View v){
-        fragmentClass = AddPostFragment.class;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
+        navController.navigate(R.id.addPostFragment);
         for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
             nvDrawer.getMenu().getItem(i).setChecked(false);
         }

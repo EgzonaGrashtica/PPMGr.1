@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainPostsFragment">
+
+    <fragment
+        android:id="@+id/mainPostsFragment"
+        android:name="com.fiek.hitchhikerkosova.ui.MainPostsFragment"
+        android:label="fragment_main_posts"
+        tools:layout="@layout/fragment_main_posts" >
+        <action
+            android:id="@+id/action_mainPostsFragment_to_roadMapFragment"
+            app:destination="@id/roadMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.fiek.hitchhikerkosova.ui.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/roadMapFragment"
+        android:name="com.fiek.hitchhikerkosova.RoadMapFragment"
+        android:label="fragment_road_map"
+        tools:layout="@layout/fragment_road_map" />
+    <fragment
+        android:id="@+id/reservedRidesFragment"
+        android:name="com.fiek.hitchhikerkosova.ui.ReservedRidesFragment"
+        android:label="ReservedRidesFragment" >
+        <action
+            android:id="@+id/action_reservedRidesFragment_to_roadMapFragment"
+            app:destination="@id/roadMapFragment" />
+    </fragment>
+</navigation>

@@ -152,14 +152,14 @@ public class MainPostsFragment extends Fragment {
         toolbar.setTitle(getResources().getString(R.string.MainPostTitle));
 
 
-        recyclerView=getActivity().findViewById(R.id.recyclerView);
+        recyclerView=view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(postsAdapter);
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        refreshLayout=getActivity().findViewById(R.id.refreshLayout);
+        refreshLayout=view.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

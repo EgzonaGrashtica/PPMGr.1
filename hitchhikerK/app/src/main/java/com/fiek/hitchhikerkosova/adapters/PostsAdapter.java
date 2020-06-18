@@ -1,5 +1,6 @@
 package com.fiek.hitchhikerkosova.adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,11 +29,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fiek.hitchhikerkosova.Db.Database;
 import com.fiek.hitchhikerkosova.Db.DatabaseHelper;
 import com.fiek.hitchhikerkosova.Db.RideModel;
+import com.fiek.hitchhikerkosova.MainActivity;
 import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.RoadMapFragment;
@@ -55,11 +60,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     Date currentDate;
     String timeAgo;
     String checkFragment;
-    Fragment fragment = null;
-    FragmentManager fragmentManager;
-
-
-
 
     public PostsAdapter(Context ct, String checkFragment) {
         context=ct;
@@ -177,14 +177,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    fragment = (Fragment) RoadMapFragment.newInstance(dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
-                            dataSource.get(postsViewHolder.getAdapterPosition()).getTo());
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                Bundle args=new Bundle();
+                args.putString("from", dataSource.get(postsViewHolder.getAdapterPosition()).getFrom());
+                args.putString("to", dataSource.get(postsViewHolder.getAdapterPosition()).getTo());
+                NavController navController= Navigation.findNavController((Activity) context,R.id.nav_host_fragment);
+                if(checkFragment.equals("MainPostsFragment")){
+                    navController.navigate(R.id.action_mainPostsFragment_to_roadMapFragment,args);
+                }else{
+                    navController.navigate(R.id.action_reservedRidesFragment_to_roadMapFragment,args);
                 }
-                fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                fragmentManager.beginTransaction().add(R.id.fContent, fragment).addToBackStack(null).commit();
+
+
                 postDialog.hide();
 
             }

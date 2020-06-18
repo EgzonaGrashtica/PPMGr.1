@@ -44,7 +44,7 @@ public class ReservedRidesFragment extends Fragment {
     private String mParam2;
 
     RecyclerView recyclerView;
-    PostsAdapter postsAdapter;
+    private PostsAdapter postsAdapter;
     SwipeRefreshLayout refreshLayout;
 
     public ReservedRidesFragment() {
@@ -76,8 +76,8 @@ public class ReservedRidesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        postsAdapter=new PostsAdapter(getContext(),"ReservedRidesFragment");
-        new LoadDataCls().execute();
+
+
     }
 
     @Override
@@ -93,14 +93,17 @@ public class ReservedRidesFragment extends Fragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.ReservedRidesTitle));
 
-        recyclerView=getActivity().findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(postsAdapter);
+        recyclerView=view.findViewById(R.id.recyclerView);
+
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        postsAdapter=new PostsAdapter(getContext(),"ReservedRidesFragment");
+        recyclerView.setAdapter(postsAdapter);
 
-        refreshLayout=getActivity().findViewById(R.id.refreshLayout);
+        refreshLayout=view.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -108,7 +111,6 @@ public class ReservedRidesFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // postsAdapter.notifyDataSetChanged();
                         new LoadDataCls().execute();
                     }
                 });
@@ -116,6 +118,7 @@ public class ReservedRidesFragment extends Fragment {
                 refreshLayout.setRefreshing(false);
             }
         });
+        new LoadDataCls().execute();
     }
 
     public class LoadDataCls extends AsyncTask<Void,Void,List<PostModel>>{

@@ -1,5 +1,6 @@
 package com.fiek.hitchhikerkosova.ui;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -115,15 +118,15 @@ public class AddPostFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        spFrom=getActivity().findViewById(R.id.spFrom);
-        spTo=getActivity().findViewById(R.id.spTo);
-        etSelectTime=getActivity().findViewById(R.id.etSelectTime);
-        etSelectDate=getActivity().findViewById(R.id.etSelectDate);
-        etPrice=getActivity().findViewById(R.id.etPrice);
-        spFreeSeats=getActivity().findViewById(R.id.spFreeSeats);
-        etPhoneNumber=getActivity().findViewById(R.id.etPhoneNumber);
-        etExtraInfo=getActivity().findViewById(R.id.etExtraInfo);
-        btnAddPostFunc=getActivity().findViewById(R.id.btnAddPost);
+        spFrom=view.findViewById(R.id.spFrom);
+        spTo=view.findViewById(R.id.spTo);
+        etSelectTime=view.findViewById(R.id.etSelectTime);
+        etSelectDate=view.findViewById(R.id.etSelectDate);
+        etPrice=view.findViewById(R.id.etPrice);
+        spFreeSeats=view.findViewById(R.id.spFreeSeats);
+        etPhoneNumber=view.findViewById(R.id.etPhoneNumber);
+        etExtraInfo=view.findViewById(R.id.etExtraInfo);
+        btnAddPostFunc=view.findViewById(R.id.btnAddPost);
 
         etSelectTime.setInputType(InputType.TYPE_NULL);
         etSelectDate.setInputType(InputType.TYPE_NULL);
@@ -213,14 +216,9 @@ public class AddPostFragment extends Fragment {
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
 
-                fragmentClass = MainPostsFragment.class;
-                try {
-                    fragment = (Fragment) fragmentClass.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fContent, fragment).commit();
+                NavController navController= Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+                navController.navigate(R.id.mainPostsFragment);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
