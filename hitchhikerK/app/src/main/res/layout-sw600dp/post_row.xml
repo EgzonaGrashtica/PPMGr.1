@@ -23,7 +23,7 @@
             android:id="@+id/postRow"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#E2E2E2">
+            android:background="#fe8104">
 
             <TextView
                 android:id="@+id/tvRowName"
@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:paddingLeft="5dp"
+                android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintStart_toStartOf="parent"

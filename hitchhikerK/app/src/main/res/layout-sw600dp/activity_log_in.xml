@@ -45,7 +45,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/phPassword"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:textSize="24sp"
@@ -107,10 +107,25 @@
         android:layout_marginTop="32dp"
         android:buttonTint="#000000"
         android:checked="false"
+        android:imeOptions="actionDone"
         android:text="@string/rememberMeCheckBox"
         android:textColorLink="@color/colorAccent"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="36dp"
+        android:clickable="true"
+        android:onClick="@string/tvForgotPasswordFunc"
+        android:text="@string/tvForgotPassword"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/chbRememberMe"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

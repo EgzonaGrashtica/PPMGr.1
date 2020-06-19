@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -116,6 +117,11 @@ public class LogInActivity extends AppCompatActivity {
 
 
     }
+
+    public void tvForgotPasswordFunc(View v){
+        startActivity(new Intent(LogInActivity.this,ResetPasswordActivity.class));
+    }
+
     public void tvRegisterFunc(View v){
         startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
 

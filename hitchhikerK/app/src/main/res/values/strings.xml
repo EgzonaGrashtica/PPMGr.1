@@ -19,6 +19,7 @@
     <string name="btnLogInTxt">Log In</string>
     <string name="btnSignUpTxt">Sign Up</string>
     <string name="btnAddPostTxt">Post</string>
+    <string name="btnForgotPasswordTxt">Send</string>
     <!--MainActivity-->
     <string name="btnCancel">Cancel</string>
     <!--MainPostsFragment-->
@@ -32,6 +33,7 @@
     <string name="btnLogInFunc">btnLogInFunc</string>
     <string name="tvRegisterFunc">tvRegisterFunc</string>
     <string name="btnSignUpFunc">btnSignUpFunc</string>
+    <string name="tvForgotPasswordFunc">tvForgotPasswordFunc</string>
     <!-- AddPost-->
     <string name="btnNewPostFunc">btnNewPostFunc</string>
     <string name="btnAddPostFunc">btnAddPostFunc</string>
@@ -42,6 +44,10 @@
     <!-- Text Views -->
     <!--Signup-->
     <string name="tvRegister">Don\'t have an account?</string>
+    <string name="tvForgotPassword">Forgot password?</string>
+    <!-- ResetPasswordActivity-->
+    <string name="tvTitleForgotPassword">Forgot Your Password?</string>
+    <string name="tvSubtitleForgotPassword">Enter your email address and we will send you an email with the link to reset your password.</string>
     <!-- AddPost / MainPostsFragment -->
     <string name="tvFrom">From</string>
     <string name="tvTo">To</string>
@@ -121,7 +127,6 @@
     <string name="MainPostTitle">Home</string>
     <string name="ReservedRidesTitle">My reserved rides</string>
     <string name="MapTitle">See the road</string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.app.Dialog;
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Funksioni i butonit per te shtuar Postime
     public void btnNewPostFunc(View v){
-        navController.navigate(R.id.addPostFragment);
+        navController.navigate(R.id.addPostFragment,null,getAddPostNavOptions());
         for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
             nvDrawer.getMenu().getItem(i).setChecked(false);
         }
@@ -210,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
                     upPic.handleUpload(bitmap);
             }
         }
+    }
+    protected NavOptions getAddPostNavOptions(){
+        NavOptions navOptions= new NavOptions.Builder().
+                setEnterAnim(R.anim.slide_from_right).
+                setExitAnim(R.anim.slide_from_left).build();
+        return navOptions;
     }
 
 
