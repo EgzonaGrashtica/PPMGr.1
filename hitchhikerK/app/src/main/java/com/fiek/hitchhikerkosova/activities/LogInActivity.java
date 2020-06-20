@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -16,9 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -119,7 +118,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void tvForgotPasswordFunc(View v){
-        startActivity(new Intent(LogInActivity.this,ResetPasswordActivity.class));
+        startActivity(new Intent(LogInActivity.this, ResetPasswordActivity.class));
     }
 
     public void tvRegisterFunc(View v){

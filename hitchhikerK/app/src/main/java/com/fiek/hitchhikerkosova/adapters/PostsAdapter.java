@@ -2,50 +2,32 @@ package com.fiek.hitchhikerkosova.adapters;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fiek.hitchhikerkosova.Db.Database;
-import com.fiek.hitchhikerkosova.Db.DatabaseHelper;
-import com.fiek.hitchhikerkosova.Db.RideModel;
-import com.fiek.hitchhikerkosova.MainActivity;
-import com.fiek.hitchhikerkosova.PostModel;
+import com.fiek.hitchhikerkosova.db.DatabaseHelper;
+import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
-import com.fiek.hitchhikerkosova.RoadMapFragment;
-import com.fiek.hitchhikerkosova.ui.AddPostFragment;
-import com.fiek.hitchhikerkosova.ui.ReservedRidesFragment;
-import com.google.android.gms.common.util.Predicate;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -123,10 +105,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             super(itemView);
             postRow=(ConstraintLayout) itemView.findViewById(R.id.postRow);
             tvRowName=itemView.findViewById(R.id.tvRowName);
-            tvRowFrom=itemView.findViewById(R.id.tvRowFrom);
-            tvRowTo=itemView.findViewById(R.id.tvRowTo);
-            tvRowDepartureTime=itemView.findViewById(R.id.tvRowDepartureTime);
-            tvRowDate=itemView.findViewById(R.id.tvRowDate);
+            tvRowFrom=itemView.findViewById(R.id.tvMyRowFrom);
+            tvRowTo=itemView.findViewById(R.id.tvMyRowTo);
+            tvRowDepartureTime=itemView.findViewById(R.id.tvMyRowDepartureTime);
+            tvRowDate=itemView.findViewById(R.id.tvMyRowDate);
             tvTimeOfPost=itemView.findViewById(R.id.tvTimeOfPost);
 
         }
@@ -211,7 +193,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                                 dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
                                 dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
                                 dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted());
+                                dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted(),
+                                dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations());
                         postDialog.cancel();
                     }else{
                         Toast.makeText(context,"Nuk ka freeseats",Toast.LENGTH_SHORT).show();
@@ -227,7 +210,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 public void onClick(View v) {
                     DatabaseHelper dbHelper=new DatabaseHelper(context);
                     if(dbHelper.deleteReservation(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
-                            dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats())){
+                                                  dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
+                                                  dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations())){
                         for(PostModel pm: dataSource){
                             if(pm.getId().equals(dataSource.get(postsViewHolder.getAdapterPosition()).getId())){
                                 dataSource.remove(pm);

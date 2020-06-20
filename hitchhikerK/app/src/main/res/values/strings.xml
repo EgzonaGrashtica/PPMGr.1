@@ -59,6 +59,8 @@
     <string name="tvExtraInfo">Extra Info</string>
     <!-- MainActivity-->
     <string name="tvLogOut">Log out</string>
+    <!--MyPosts-->
+    <string name="tvMyReservations">Reservations: </string>
 
     <!--Spinner Arrays-->
     <!-- AddPost-->
@@ -98,6 +100,8 @@
     <string name="confirmPassword">Password doesn\'t match</string>
     <!-- MainAcivity-->
     <string name="alertLogOut">Are you sure you want to logout?</string>
+    <!--MyPostsAdapter-->
+    <string name="alertDeletePost">Are you sure you want to delete this post?</string>
 
 
     <!-- Content Descriptions-->
@@ -112,6 +116,7 @@
     <!-- item -->
     <string name="rides">Rides</string>
     <string name="reserved">Reserved</string>
+    <string name="myPostedRides">My Posted Rides</string>
 
     <!--Checkboxes-->
     <string name="rememberMeCheckBox">Remember me</string>
@@ -127,6 +132,7 @@
     <string name="MainPostTitle">Home</string>
     <string name="ReservedRidesTitle">My reserved rides</string>
     <string name="MapTitle">See the road</string>
+    <string name="MyPostedRidesTitle">My Posted Rides</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

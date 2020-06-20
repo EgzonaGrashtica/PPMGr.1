@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova.Db;
+package com.fiek.hitchhikerkosova.db;
 
 public class RideModel {
     public static final String Id="id";
@@ -13,5 +13,6 @@ public class RideModel {
     public static final String PhoneNumber="phoneNumber";
     public static final String ExtraInfo="extraInfo";
     public static final String TimePosted="timePosted";
+    public static final String NumberOfReservations="numberOfReservations";
 }
 

@@ -1,9 +1,7 @@
-package com.fiek.hitchhikerkosova.ui;
+package com.fiek.hitchhikerkosova.fragments;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,13 +20,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.fiek.hitchhikerkosova.LogInActivity;
-import com.fiek.hitchhikerkosova.MainActivity;
-import com.fiek.hitchhikerkosova.PostModel;
+import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -209,8 +204,9 @@ public class AddPostFragment extends Fragment {
     }
     private void addNewPostToDatabase(String from,String to,String departureTime,String date,double price,
                                       int freeSeats,String phoneNumber,String extraInfo,long currentTime){
+        int numberOfReservations=0;
         PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,
-                departureTime,date,price,freeSeats,phoneNumber,extraInfo,currentTime);
+                departureTime,date,price,freeSeats,phoneNumber,extraInfo,currentTime,numberOfReservations);
         mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

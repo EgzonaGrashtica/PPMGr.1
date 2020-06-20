@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova.Db;
+package com.fiek.hitchhikerkosova.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,13 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.fiek.hitchhikerkosova.PostModel;
-
 public class Database extends SQLiteOpenHelper {
     public static final String reservedTable= "Reserved";
 
     public Database(@Nullable Context context) {
-        super(context, "hitchikerDb", null, 1);
+        super(context, "hitchikerDb", null, 2);
     }
 
     @Override
@@ -29,13 +27,14 @@ public class Database extends SQLiteOpenHelper {
                 RideModel.FreeSeats+" integer not null,"+
                 RideModel.PhoneNumber+" text not null,"+
                 RideModel.ExtraInfo+" text not null,"+
-                RideModel.TimePosted+" integer not null"+")";
+                RideModel.TimePosted+" integer not null,"+
+                RideModel.NumberOfReservations+" integer not null"+")";
         db.execSQL(strQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("ALTER TABLE "+reservedTable+" ADD COLUMN "+RideModel.NumberOfReservations+" integer default 0 not null");
     }
 }
 

@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.fragments;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,7 +20,8 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
-import com.fiek.hitchhikerkosova.Map.MyClusterItem;
+import com.fiek.hitchhikerkosova.map.MyClusterItem;
+import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;

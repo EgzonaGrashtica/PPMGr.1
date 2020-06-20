@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/colorPrimary"
-        tools:context=".SignUpActivity"
+        tools:context=".activities.SignUpActivity"
         tools:layout_editor_absoluteX="9dp"
         tools:layout_editor_absoluteY="54dp">
 

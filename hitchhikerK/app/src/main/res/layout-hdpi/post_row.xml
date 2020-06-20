@@ -57,7 +57,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/tvRowTo"
+                    android:id="@+id/tvMyRowTo"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvRowDate"
+                    android:id="@+id/tvMyRowDate"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,10 +76,10 @@
                     android:layout_marginTop="11dp"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRowTo" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyRowTo" />
 
                 <TextView
-                    android:id="@+id/tvRowDepartureTime"
+                    android:id="@+id/tvMyRowDepartureTime"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                     android:layout_marginTop="8dp"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRowFrom" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyRowFrom" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -103,7 +103,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
-                    android:id="@+id/tvRowFrom"
+                    android:id="@+id/tvMyRowFrom"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainPostsFragment"
-        android:name="com.fiek.hitchhikerkosova.ui.MainPostsFragment"
+        android:name="com.fiek.hitchhikerkosova.fragments.MainPostsFragment"
         android:label="fragment_main_posts"
         tools:layout="@layout/fragment_main_posts" >
         <action
@@ -16,20 +16,24 @@
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.fiek.hitchhikerkosova.ui.AddPostFragment"
+        android:name="com.fiek.hitchhikerkosova.fragments.AddPostFragment"
         android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
     <fragment
         android:id="@+id/roadMapFragment"
-        android:name="com.fiek.hitchhikerkosova.RoadMapFragment"
+        android:name="com.fiek.hitchhikerkosova.fragments.RoadMapFragment"
         android:label="fragment_road_map"
         tools:layout="@layout/fragment_road_map" />
     <fragment
         android:id="@+id/reservedRidesFragment"
-        android:name="com.fiek.hitchhikerkosova.ui.ReservedRidesFragment"
+        android:name="com.fiek.hitchhikerkosova.fragments.ReservedRidesFragment"
         android:label="ReservedRidesFragment" >
         <action
             android:id="@+id/action_reservedRidesFragment_to_roadMapFragment"
             app:destination="@id/roadMapFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myPostedRides"
+        android:name="com.fiek.hitchhikerkosova.fragments.MyPostedRidesFragment"
+        android:label="MyPostedRides" />
 </navigation>

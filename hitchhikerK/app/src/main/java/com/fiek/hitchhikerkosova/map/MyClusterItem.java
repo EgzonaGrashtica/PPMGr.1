@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova.Map;
+package com.fiek.hitchhikerkosova.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

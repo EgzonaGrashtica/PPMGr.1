@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
-import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -79,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             }
                                         });
 
-                                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("Debug Info", "createUserWithEmail:failure", task.getException());

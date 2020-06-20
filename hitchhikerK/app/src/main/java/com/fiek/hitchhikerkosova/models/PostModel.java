@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.models;
 
 public class PostModel {
     String id;
@@ -13,10 +13,12 @@ public class PostModel {
     String phoneNumber;
     String extraInfo;
     long timePosted;
+    int numberOfReservations;
 
-    public PostModel(String ownerId,String ownerName,String from, String to, String departureTime,
+
+    public PostModel(String ownerId, String ownerName, String from, String to, String departureTime,
                      String date, double price, int freeSeats, String phoneNumber, String extraInfo,
-                     long timePosted) {
+                     long timePosted, int numberOfReservations) {
         this.ownerId=ownerId;
         this.ownerName=ownerName;
         this.from = from;
@@ -28,6 +30,7 @@ public class PostModel {
         this.phoneNumber = phoneNumber;
         this.extraInfo = extraInfo;
         this.timePosted=timePosted;
+        this.numberOfReservations=numberOfReservations;
     }
 
     public PostModel() {
@@ -127,5 +130,13 @@ public class PostModel {
 
     public void setTimePosted(long timePosted) {
         this.timePosted = timePosted;
+    }
+
+    public int getNumberOfReservations() {
+        return numberOfReservations;
+    }
+
+    public void setNumberOfReservations(int numberOfReservations) {
+        this.numberOfReservations = numberOfReservations;
     }
 }

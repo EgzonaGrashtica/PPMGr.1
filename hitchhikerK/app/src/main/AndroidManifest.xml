@@ -13,7 +13,7 @@
         android:roundIcon="@drawable/hitchhiker_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".activities.ResetPasswordActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -22,9 +22,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".activities.SignUpActivity" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".activities.LogInActivity"
             android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
     </application>
 

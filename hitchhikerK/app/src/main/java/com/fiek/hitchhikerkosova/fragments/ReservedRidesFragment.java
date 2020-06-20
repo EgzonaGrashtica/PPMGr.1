@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova.ui;
+package com.fiek.hitchhikerkosova.fragments;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,17 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.fiek.hitchhikerkosova.Db.Database;
-import com.fiek.hitchhikerkosova.Db.RideModel;
-import com.fiek.hitchhikerkosova.PostModel;
+import com.fiek.hitchhikerkosova.db.Database;
+import com.fiek.hitchhikerkosova.db.DatabaseHelper;
+import com.fiek.hitchhikerkosova.db.RideModel;
+import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.adapters.PostsAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +48,12 @@ public class ReservedRidesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public List<PostModel> tempDataSource = new ArrayList<PostModel>();
     RecyclerView recyclerView;
     private PostsAdapter postsAdapter;
     SwipeRefreshLayout refreshLayout;
+    DatabaseHelper dbHelper;
+
 
     public ReservedRidesFragment() {
         // Required empty public constructor
@@ -76,6 +84,42 @@ public class ReservedRidesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        dbHelper=new DatabaseHelper(getContext());
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
+        mDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                PostModel postModel=dataSnapshot.getValue(PostModel.class);
+                postModel.setId(dataSnapshot.getKey());
+                tempDataSource.add(postModel);
+                dbHelper.checkIfRideIsReservedAndUpdate(postModel);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                PostModel postModelChanged=dataSnapshot.getValue(PostModel.class);
+                postModelChanged.setId(dataSnapshot.getKey());
+                dbHelper.checkIfRideIsReservedAndUpdate(postModelChanged);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                PostModel postModelRemoved=dataSnapshot.getValue(PostModel.class);
+                postModelRemoved.setId(dataSnapshot.getKey());
+                dbHelper.checkIfRideIsReservedAndDelete(postModelRemoved);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
     }
@@ -99,7 +143,6 @@ public class ReservedRidesFragment extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
         postsAdapter=new PostsAdapter(getContext(),"ReservedRidesFragment");
         recyclerView.setAdapter(postsAdapter);
 
@@ -118,7 +161,16 @@ public class ReservedRidesFragment extends Fragment {
                 refreshLayout.setRefreshing(false);
             }
         });
-        new LoadDataCls().execute();
+        refreshLayout.setRefreshing(true);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dbHelper.checkIfReservedExist(tempDataSource);
+                new LoadDataCls().execute();
+                refreshLayout.setRefreshing(false);
+            }
+        }, 3000);
     }
 
     public class LoadDataCls extends AsyncTask<Void,Void,List<PostModel>>{
@@ -130,7 +182,7 @@ public class ReservedRidesFragment extends Fragment {
             Cursor cursor = objDb.query(Database.reservedTable,new String[]{RideModel.Id,
                     RideModel.OwnerID,RideModel.OwnerName,RideModel.FromWhere,RideModel.ToWhere,
                     RideModel.DepartureTime,RideModel.Date,RideModel.Price,RideModel.FreeSeats,
-                    RideModel.PhoneNumber,RideModel.ExtraInfo,RideModel.TimePosted},"",
+                    RideModel.PhoneNumber,RideModel.ExtraInfo,RideModel.TimePosted,RideModel.NumberOfReservations},"",
                     new String[]{},"","","");
             cursor.moveToFirst();
 
@@ -138,7 +190,7 @@ public class ReservedRidesFragment extends Fragment {
                 PostModel tempModel=new PostModel(cursor.getString(1),cursor.getString(2),
                         cursor.getString(3),cursor.getString(4),cursor.getString(5),
                         cursor.getString(6),cursor.getDouble(7),cursor.getInt(8),
-                        cursor.getString(9),cursor.getString(10),cursor.getLong(11));
+                        cursor.getString(9),cursor.getString(10),cursor.getLong(11),cursor.getInt(12));
                 tempModel.setId(cursor.getString(0));
 
                 tempDataSource.add(tempModel);

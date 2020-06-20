@@ -1,8 +1,5 @@
-package com.fiek.hitchhikerkosova.ui;
+package com.fiek.hitchhikerkosova.fragments;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,20 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.fiek.hitchhikerkosova.Db.Database;
-import com.fiek.hitchhikerkosova.Db.DatabaseHelper;
-import com.fiek.hitchhikerkosova.Db.RideModel;
-import com.fiek.hitchhikerkosova.LogInActivity;
-import com.fiek.hitchhikerkosova.MainActivity;
-import com.fiek.hitchhikerkosova.PostModel;
 import com.fiek.hitchhikerkosova.R;
-import com.fiek.hitchhikerkosova.adapters.PostsAdapter;
+import com.fiek.hitchhikerkosova.adapters.MyPostsAdapter;
+import com.fiek.hitchhikerkosova.models.PostModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,10 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MainPostsFragment#newInstance} factory method to
+ * Use the {@link MyPostedRidesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainPostsFragment extends Fragment {
+public class MyPostedRidesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -49,14 +40,12 @@ public class MainPostsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
-    private DatabaseReference mDatabase;
-
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     RecyclerView recyclerView;
-    PostsAdapter postsAdapter;
+    MyPostsAdapter myPostsAdapter;
     SwipeRefreshLayout refreshLayout;
-    DatabaseHelper dbHelper;
-    public MainPostsFragment() {
+
+    public MyPostedRidesFragment() {
         // Required empty public constructor
     }
 
@@ -66,11 +55,11 @@ public class MainPostsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainPostsFragment.
+     * @return A new instance of fragment MyPostedRides.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainPostsFragment newInstance(String param1, String param2) {
-        MainPostsFragment fragment = new MainPostsFragment();
+    public static MyPostedRidesFragment newInstance(String param1, String param2) {
+        MyPostedRidesFragment fragment = new MyPostedRidesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,37 +75,41 @@ public class MainPostsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        dbHelper = new DatabaseHelper(getContext());
-        postsAdapter=new PostsAdapter(getContext(),"MainPostsFragment");
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Posts");
-
+        myPostsAdapter=new MyPostsAdapter(getContext());
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                PostModel postModel=dataSnapshot.getValue(PostModel.class);
-                postModel.setId(dataSnapshot.getKey());
-                postsAdapter.dataSource.add(postModel);
-                Log.i("xona","Erdh");
-                dbHelper.checkIfRideIsReserved(postModel);
-
+                PostModel tempPostModel=dataSnapshot.getValue(PostModel.class);
+                tempPostModel.setId(dataSnapshot.getKey());
+                if(mAuth.getCurrentUser().getUid().equals(tempPostModel.getOwnerId())){
+                    myPostsAdapter.dataSource.add(tempPostModel);
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 PostModel postModelChanged=dataSnapshot.getValue(PostModel.class);
                 postModelChanged.setId(dataSnapshot.getKey());
-                for(PostModel pm:postsAdapter.dataSource){
+                for(PostModel pm:myPostsAdapter.dataSource){
                     if(pm.getId().equals(postModelChanged.getId())){
                         pm.setFreeSeats(postModelChanged.getFreeSeats());
-                        postsAdapter.notifyDataSetChanged();
+                        pm.setNumberOfReservations(postModelChanged.getNumberOfReservations());
+                        myPostsAdapter.notifyDataSetChanged();
                     }
                 }
-                dbHelper.checkIfRideIsReserved(postModelChanged);
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                PostModel postModelRemoved=dataSnapshot.getValue(PostModel.class);
+                postModelRemoved.setId(dataSnapshot.getKey());
+                for(PostModel pm:myPostsAdapter.dataSource){
+                    if(pm.getId().equals(postModelRemoved.getId())){
+                        myPostsAdapter.dataSource.remove(pm);
+                        myPostsAdapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
@@ -128,32 +121,25 @@ public class MainPostsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
-
-
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_main_posts, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.MainPostTitle));
-
+        toolbar.setTitle(getResources().getString(R.string.MyPostedRidesTitle));
 
         recyclerView=view.findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(postsAdapter);
+        recyclerView.setAdapter(myPostsAdapter);
+
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
@@ -167,7 +153,7 @@ public class MainPostsFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        postsAdapter.notifyDataSetChanged();
+                        myPostsAdapter.notifyDataSetChanged();
                     }
                 });
 
@@ -180,12 +166,9 @@ public class MainPostsFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                postsAdapter.notifyDataSetChanged();
+                myPostsAdapter.notifyDataSetChanged();
                 refreshLayout.setRefreshing(false);
             }
         }, 3000);
-
-
     }
-
 }

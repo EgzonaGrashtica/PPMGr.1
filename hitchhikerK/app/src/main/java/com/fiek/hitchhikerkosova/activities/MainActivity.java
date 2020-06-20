@@ -1,6 +1,5 @@
-package com.fiek.hitchhikerkosova;
+package com.fiek.hitchhikerkosova.activities;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -9,43 +8,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
-import com.fiek.hitchhikerkosova.ui.AddPostFragment;
-import com.fiek.hitchhikerkosova.ui.MainPostsFragment;
-import com.fiek.hitchhikerkosova.ui.ReservedRidesFragment;
+import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.utils.UploadProfilePicture;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -156,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_reserved_fragment:
                 navController.navigate(R.id.reservedRidesFragment);
                 break;
+            case R.id.nav_myPostedRides_fragment:
+                navController.navigate(R.id.myPostedRides);
+                break;
             case R.id.nav_logout:
                 tvLogOutFunc();
                 break;
@@ -215,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
     protected NavOptions getAddPostNavOptions(){
         NavOptions navOptions= new NavOptions.Builder().
                 setEnterAnim(R.anim.slide_from_right).
-                setExitAnim(R.anim.slide_from_left).build();
+                setExitAnim(R.anim.slide_from_left).
+                setPopExitAnim(R.anim.slide_from_left).build();
         return navOptions;
     }
 

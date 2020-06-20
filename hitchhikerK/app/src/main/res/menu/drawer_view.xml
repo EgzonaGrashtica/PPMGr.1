@@ -11,8 +11,8 @@
             android:icon="@drawable/ic_bookmark_18pt_2x"
             android:title="@string/reserved" />
         <item
-            android:id="@+id/nav_third_fragment"
-            android:title="Third" />
+            android:id="@+id/nav_myPostedRides_fragment"
+            android:title="@string/myPostedRides" />
     </group>
         <group android:id="@+id/secondaryGroup"
             android:checkableBehavior="single">
