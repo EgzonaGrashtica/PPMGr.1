@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 
 import com.fiek.hitchhikerkosova.db.Database;
 import com.fiek.hitchhikerkosova.db.DatabaseHelper;
-import com.fiek.hitchhikerkosova.db.RideModel;
+import com.fiek.hitchhikerkosova.models.RideModel;
 import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.adapters.PostsAdapter;

@@ -1,4 +1,4 @@
-package com.fiek.hitchhikerkosova.db;
+package com.fiek.hitchhikerkosova.models;
 
 public class RideModel {
     public static final String Id="id";

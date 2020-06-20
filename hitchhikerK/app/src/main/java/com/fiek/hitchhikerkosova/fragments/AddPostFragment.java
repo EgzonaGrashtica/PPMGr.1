@@ -1,5 +1,6 @@
 package com.fiek.hitchhikerkosova.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.text.InputType;
+import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,6 +37,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -46,20 +53,20 @@ public class AddPostFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Class fragmentClass;
-    FragmentManager fragmentManager;
-    Fragment fragment = null;
 
-    TimePickerDialog picker;
-    EditText etSelectTime;
-    EditText etSelectDate;
-    Button btnAddPostFunc;
-    Spinner spFrom,spTo,spFreeSeats;
-    EditText etPrice, etPhoneNumber,etExtraInfo;
-    DatabaseReference mDatabase;
+    private TimePickerDialog picker;
+    private EditText etSelectTime;
+    private EditText etSelectDate;
+    private Button btnAddPostFunc;
+    private Spinner spFrom,spTo,spFreeSeats;
+    private EditText etPrice, etPhoneNumber,etExtraInfo;
+    String gExtraInfo;
+    private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+    private FirebaseUser currentUser;
     Date date=new Date();
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -130,15 +137,7 @@ public class AddPostFragment extends Fragment {
         btnAddPostFunc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewPostToDatabase(spFrom.getSelectedItem().toString(),
-                        spTo.getSelectedItem().toString(),
-                        etSelectTime.getText().toString(),
-                        etSelectDate.getText().toString(),
-                        Double.parseDouble(etPrice.getText().toString()),
-                        Integer.parseInt(spFreeSeats.getSelectedItem().toString()),
-                        etPhoneNumber.getText().toString(),
-                        etExtraInfo.getText().toString(),
-                        date.getTime());
+                btnAddPostFunc();
             }
         });
 
@@ -202,28 +201,103 @@ public class AddPostFragment extends Fragment {
 
 
     }
+    private void btnAddPostFunc(){
+        String from = spFrom.getSelectedItem().toString().trim();
+        String to=spTo.getSelectedItem().toString().trim();
+        String departureTime=etSelectTime.getText().toString().trim();
+        String postDate=etSelectDate.getText().toString().trim();
+        String price=etPrice.getText().toString().trim();
+        String freeSeats=spFreeSeats.getSelectedItem().toString().trim();
+        String phoneNumber=etPhoneNumber.getText().toString().trim();
+        gExtraInfo=etExtraInfo.getText().toString().trim();
+        if(validatePostData(from,to,departureTime,postDate,price,phoneNumber,gExtraInfo)){
+           addNewPostToDatabase(from,to,departureTime,postDate,Double.parseDouble(price),
+                   Integer.parseInt(freeSeats),phoneNumber,gExtraInfo,date.getTime());
+        }
+    }
+
     private void addNewPostToDatabase(String from,String to,String departureTime,String date,double price,
                                       int freeSeats,String phoneNumber,String extraInfo,long currentTime){
-        int numberOfReservations=0;
-        PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,
-                departureTime,date,price,freeSeats,phoneNumber,extraInfo,currentTime,numberOfReservations);
-        mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
 
-                NavController navController= Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
-                navController.navigate(R.id.mainPostsFragment);
+            int numberOfReservations=0;
+            PostModel postModel=new PostModel(currentUser.getUid(),currentUser.getDisplayName(),from,to,
+                    departureTime,date,price,freeSeats,phoneNumber,extraInfo,currentTime,numberOfReservations);
+            mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
+                    NavController navController= Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+                    navController.navigate(R.id.mainPostsFragment);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
 
     }
+
+    private boolean validatePostData(String from,String to,String departureTime,
+                                     String postDate,String price,
+                                     String phoneNumber,String extraInfo){
+        etSelectTime.setError(null);
+        etSelectDate.setError(null);
+        if(from.equals(to)){
+            ((TextView)spTo.getSelectedView()).setError("");
+            Toast.makeText(getContext(),"You cant add a post for the same city!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(departureTime.isEmpty()){
+            etSelectTime.setError("");
+            Toast.makeText(getContext(),"Please select the departure time!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(postDate.isEmpty()){
+            etSelectDate.setError("");
+            Toast.makeText(getContext(),"Please select the date!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        try{
+            if(new SimpleDateFormat("dd/MM/yyyy").parse(postDate).before(new Date())){
+                etSelectDate.setError("");
+                Toast.makeText(getContext(),"Time travel to the past is not possible... yet...",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }catch (Exception e){
+            Log.e("dateError",e.getMessage());
+        }
+
+        if(price.isEmpty()){
+            etPrice.setError("Please provide the price!");
+            etPrice.requestFocus();
+            return false;
+        }
+        try{
+            Double.parseDouble(price);
+        }catch (Exception e){
+            etPrice.setError("Please provide a valid price(only numbers)!");
+            return false;
+        }
+        if(phoneNumber.isEmpty()){
+            etPhoneNumber.setError("Please provide a phone number!");
+            etPhoneNumber.requestFocus();
+            return false;
+        }
+        if(!Patterns.PHONE.matcher(phoneNumber).matches()){
+            etPhoneNumber.setError("Please provide a valid phone number!");
+            etPhoneNumber.requestFocus();
+            return false;
+        }
+        if(extraInfo.isEmpty()){
+            gExtraInfo="None";
+        }
+        return true;
+
+
+    };
 
 
 

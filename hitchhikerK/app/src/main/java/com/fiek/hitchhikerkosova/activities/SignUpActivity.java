@@ -104,56 +104,36 @@ public class SignUpActivity extends AppCompatActivity {
             etName.requestFocus();
             return false;
         }
-
         if(TextUtils.isEmpty(surname)){
             etSurname.setError(getString(R.string.emptySurname));
             etSurname.requestFocus();
             return false;
         }
-
-        //Na duhet kur te bojna me postu
-       /* if(TextUtils.isEmpty(phoneNumber)){
-            etPhoneNumber.setError(getString(R.string.emptyPhoneNumber));
-            etPhoneNumber.requestFocus();
-            return false;
-        }
-
-        if(!Patterns.PHONE.matcher(phoneNumber).matches()){
-            etPhoneNumber.setError(getString(R.string.validPhoneNumber));
-            etPhoneNumber.requestFocus();
-            return false;
-        }*/
-
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError(getString(R.string.validEmail));
             etEmail.requestFocus();
             return false;
         }
-
         if (TextUtils.isEmpty(email)) {
             etEmail.setError(getString(R.string.emptyEmail));
             etEmail.requestFocus();
             return false;
         }
-
         if (TextUtils.isEmpty(password)) {
             etPassword.setError(getString(R.string.emptyPassword));
             etPassword.requestFocus();
             return false;
         }
-
         if (password.length() < 6) {
             etPassword.setError(getString(R.string.shortPassword));
             etPassword.requestFocus();
             return false;
         }
-
         if(!password.equals(confirmPassword)){
             etPassword.setError(getString(R.string.confirmPassword));
             etPassword.requestFocus();
             return false;
         }
-
         return true;
     }
 }

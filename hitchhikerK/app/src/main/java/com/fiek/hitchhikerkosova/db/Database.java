@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.fiek.hitchhikerkosova.models.RideModel;
+
 public class Database extends SQLiteOpenHelper {
     public static final String reservedTable= "Reserved";
 
