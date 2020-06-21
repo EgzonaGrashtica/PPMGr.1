@@ -134,13 +134,19 @@ public class MainActivity extends AppCompatActivity {
 
         switch(menuItem.getItemId()) {
             case R.id.nav_rides_fragment:
-                navController.navigate(R.id.mainPostsFragment);
+                if(!navController.getCurrentDestination().getLabel().equals("fragment_main_posts")) {
+                    navController.navigate(R.id.mainPostsFragment);
+                }
                 break;
             case R.id.nav_reserved_fragment:
-                navController.navigate(R.id.reservedRidesFragment);
+                if(!navController.getCurrentDestination().getLabel().equals("ReservedRidesFragment")) {
+                    navController.navigate(R.id.reservedRidesFragment);
+                }
                 break;
             case R.id.nav_myPostedRides_fragment:
-                navController.navigate(R.id.myPostedRides);
+                if(!navController.getCurrentDestination().getLabel().equals("MyPostedRides")) {
+                    navController.navigate(R.id.myPostedRides);
+                }
                 break;
             case R.id.nav_logout:
                 tvLogOutFunc();
@@ -157,9 +163,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Funksioni i butonit per te shtuar Postime
     public void btnNewPostFunc(View v){
-        navController.navigate(R.id.addPostFragment,null,getAddPostNavOptions());
-        for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
-            nvDrawer.getMenu().getItem(i).setChecked(false);
+        if(!navController.getCurrentDestination().getLabel().equals("fragment_add_post")){
+            navController.navigate(R.id.addPostFragment,null,getAddPostNavOptions());
+            for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
+                nvDrawer.getMenu().getItem(i).setChecked(false);
+            }
         }
     }
     //Funksioni i LogOut butonit

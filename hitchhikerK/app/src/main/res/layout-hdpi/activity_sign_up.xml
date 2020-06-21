@@ -26,11 +26,13 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phName"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +46,13 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phSurname"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
@@ -61,11 +65,13 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:contextClickable="true"
             android:ems="10"
             android:hint="@string/phEmail"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etSurname" />
@@ -78,11 +84,13 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:contextClickable="true"
             android:ems="10"
             android:hint="@string/phPassword"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmail" />
@@ -96,11 +104,13 @@
 
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phConfirmPassword"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -136,5 +146,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="33dp"
+        android:layout_height="29dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/colorAccent"
+        app:srcCompat="@drawable/ic_arrow_back_white_18pt_3x" />
 
 </RelativeLayout>

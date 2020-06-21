@@ -9,7 +9,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.fiek.hitchhikerkosova.R;
@@ -27,6 +29,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etEmail;
     EditText etPassword;
     EditText etConfirmPassword;
+
+    ImageButton btnBack;
 
     String name;
     String surname;
@@ -46,7 +50,16 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword=(EditText) findViewById(R.id.etPassword);
         etConfirmPassword=(EditText) findViewById(R.id.etConfirmPassword);
 
+        btnBack=(ImageButton) findViewById(R.id.btnBack);
+
         mAuth = FirebaseAuth.getInstance();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     public void btnSignUpFunc(View v){
 

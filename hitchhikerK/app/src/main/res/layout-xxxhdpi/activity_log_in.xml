@@ -19,17 +19,17 @@
         android:layout_marginEnd="42dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
-        android:cursorVisible="false"
+        android:cursorVisible="true"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/phEmail"
+        android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:imeOptions="actionNext"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -40,16 +40,17 @@
         android:layout_marginEnd="42dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
+        android:cursorVisible="true"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/phPassword"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        android:imeOptions="actionNext"/>
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
         android:id="@+id/btnLogIn"

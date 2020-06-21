@@ -4,7 +4,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_rides_fragment"
-            android:icon="@drawable/ic_direction_car_18pt_2x"
+            android:icon="@drawable/ic_home_18pt_2x"
             android:title="@string/rides" />
         <item
             android:id="@+id/nav_reserved_fragment"
@@ -12,6 +12,7 @@
             android:title="@string/reserved" />
         <item
             android:id="@+id/nav_myPostedRides_fragment"
+            android:icon="@drawable/ic_direction_car_18pt_2x"
             android:title="@string/myPostedRides" />
     </group>
         <group android:id="@+id/secondaryGroup"

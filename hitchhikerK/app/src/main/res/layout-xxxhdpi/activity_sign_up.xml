@@ -26,14 +26,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phName"
+            android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView9"
-            android:imeOptions="actionNext"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
         <EditText
             android:id="@+id/etSurname"
@@ -43,14 +45,16 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phSurname"
+            android:imeOptions="actionNext"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName"
-            android:imeOptions="actionNext"/>
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -60,14 +64,16 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phEmail"
+            android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etSurname"
-            android:imeOptions="actionNext"/>
+            app:layout_constraintTop_toBottomOf="@+id/etSurname" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -77,14 +83,16 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phPassword"
+            android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail"
-            android:imeOptions="actionNext"/>
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
@@ -95,14 +103,16 @@
 
             android:layout_marginEnd="17dp"
             android:background="@drawable/et_style"
+            android:cursorVisible="true"
             android:ems="10"
             android:hint="@string/phConfirmPassword"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword"
-            android:imeOptions="actionDone"/>
+            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
         <Button
             android:id="@+id/btnSingUp"
@@ -134,5 +144,13 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/colorAccent"
+        app:srcCompat="@drawable/ic_arrow_back_white_18pt_3x"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>
