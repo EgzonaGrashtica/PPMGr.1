@@ -105,10 +105,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             super(itemView);
             postRow=(ConstraintLayout) itemView.findViewById(R.id.postRow);
             tvRowName=itemView.findViewById(R.id.tvRowName);
-            tvRowFrom=itemView.findViewById(R.id.tvMyRowFrom);
-            tvRowTo=itemView.findViewById(R.id.tvMyRowTo);
-            tvRowDepartureTime=itemView.findViewById(R.id.tvMyRowDepartureTime);
-            tvRowDate=itemView.findViewById(R.id.tvMyRowDate);
+            tvRowFrom=itemView.findViewById(R.id.tvRowFrom);
+            tvRowTo=itemView.findViewById(R.id.tvRowTo);
+            tvRowDepartureTime=itemView.findViewById(R.id.tvRowDepartureTime);
+            tvRowDate=itemView.findViewById(R.id.tvRowDate);
             tvTimeOfPost=itemView.findViewById(R.id.tvTimeOfPost);
 
         }

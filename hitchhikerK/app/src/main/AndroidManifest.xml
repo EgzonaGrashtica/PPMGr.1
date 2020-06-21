@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/hitchhiker_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ResetPasswordActivity"></activity>
+        <activity android:name=".playground.JsonParserActivity"></activity>
+        <activity android:name=".activities.ResetPasswordActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

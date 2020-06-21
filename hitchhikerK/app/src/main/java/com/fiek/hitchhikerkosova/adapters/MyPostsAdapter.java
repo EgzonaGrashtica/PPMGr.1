@@ -97,10 +97,10 @@ public class MyPostsAdapter extends RecyclerView.Adapter<MyPostsAdapter.MyPostsV
             super(itemView);
             tvMyReservationNO=(TextView)itemView.findViewById(R.id.tvMyReservationsNO);
             tvTimeOfPost=(TextView)itemView.findViewById(R.id.tvTimeOfPost);
-            tvMyRowFrom=(TextView)itemView.findViewById(R.id.tvMyRowFrom);
-            tvMyRowTo=(TextView)itemView.findViewById(R.id.tvMyRowTo);
-            tvMyRowDepartureTime=(TextView)itemView.findViewById(R.id.tvMyRowDepartureTime);
-            tvMyRowDate=(TextView)itemView.findViewById(R.id.tvMyRowDate);
+            tvMyRowFrom=(TextView)itemView.findViewById(R.id.tvRowFrom);
+            tvMyRowTo=(TextView)itemView.findViewById(R.id.tvRowTo);
+            tvMyRowDepartureTime=(TextView)itemView.findViewById(R.id.tvRowDepartureTime);
+            tvMyRowDate=(TextView)itemView.findViewById(R.id.tvRowDate);
             btnMyPostRowDelete=(ImageButton)itemView.findViewById(R.id.btnMyPostRowDelete);
             myPostRow=(ConstraintLayout)itemView.findViewById(R.id.myPostRow);
         }

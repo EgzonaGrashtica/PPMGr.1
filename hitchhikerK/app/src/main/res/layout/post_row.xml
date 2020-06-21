@@ -56,7 +56,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/tvMyRowTo"
+                    android:id="@+id/tvRowTo"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,24 +66,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvMyRowDate"
+                    android:id="@+id/tvRowDate"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="11dp"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMyRowTo" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvRowTo" />
 
                 <TextView
-                    android:id="@+id/tvMyRowDepartureTime"
+                    android:id="@+id/tvRowDepartureTime"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="11dp"
                     app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMyRowFrom" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvRowFrom" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -98,7 +98,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
-                    android:id="@+id/tvMyRowFrom"
+                    android:id="@+id/tvRowFrom"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
