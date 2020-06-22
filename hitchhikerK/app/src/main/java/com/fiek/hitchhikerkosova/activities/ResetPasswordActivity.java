@@ -51,18 +51,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         onBackPressed();
-                        Toast.makeText(ResetPasswordActivity.this,"Email is send. Check your email.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ResetPasswordActivity.this,R.string.toastEmailSend,Toast.LENGTH_LONG).show();
 
                     }
                     else {
-                        Toast.makeText(ResetPasswordActivity.this,"An account with this email does not exist",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ResetPasswordActivity.this,R.string.toastEmailNotExist,Toast.LENGTH_LONG).show();
                     }
                     btnResetPassword.setEnabled(true);
                 }
             });
         }
         else {
-            Toast.makeText(ResetPasswordActivity.this,"Please enter your email!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResetPasswordActivity.this,R.string.toastEnterEmail,Toast.LENGTH_SHORT).show();
         }
     }
 }

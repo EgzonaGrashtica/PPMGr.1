@@ -212,7 +212,7 @@ public class EditProfileFragment extends Fragment {
             picChanged=true;
         }
         if(nameChanged || picChanged){
-            Toast.makeText(getContext(),"Profile updated!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.toastProfileChanged,Toast.LENGTH_LONG).show();
         }
         changedProfilePic=false;
         deletedProfilePic=false;

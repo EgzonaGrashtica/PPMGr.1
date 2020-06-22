@@ -13,6 +13,22 @@
         <action
             android:id="@+id/action_mainPostsFragment_to_roadMapFragment"
             app:destination="@id/roadMapFragment" />
+        <action
+            android:id="@+id/action_mainPostsFragment_to_addPostFragment"
+            app:destination="@id/addPostFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_from_left"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_from_left" />
+        <action
+            android:id="@+id/action_mainPostsFragment_to_myPostedRides"
+            app:destination="@id/myPostedRides" />
+        <action
+            android:id="@+id/action_mainPostsFragment_to_reservedRidesFragment"
+            app:destination="@id/reservedRidesFragment" />
+        <action
+            android:id="@+id/action_mainPostsFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"

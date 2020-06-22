@@ -157,7 +157,6 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_road_map, container, false);
-        requestPermision();
 
         SupportMapFragment supportMapFragment=(SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.roadMapFragment);
         supportMapFragment.getMapAsync(this);
@@ -177,75 +176,13 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         clusterManager=new ClusterManager<>(getActivity(),googleMap);
         Findroutes(fromLatLng,toLatLng);
     }
-    private void requestPermision()
-    {
-        if (ActivityCompat.checkSelfPermission(getContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getContext(),
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                            android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_REQUEST_CODE);
-        } else {
-            locationPermission=true;
-        }
 
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST_CODE: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //if permission granted.
-                    locationPermission=true;
-                    Findroutes(fromLatLng,toLatLng);
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-        }
-    }
-
-   /* private void getMyLocation(){
-        googleMap.setMyLocationEnabled(true);
-        googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-
-                myLocation=location;
-                LatLng ltlng=new LatLng(location.getLatitude(),location.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                        ltlng, 16f);
-                googleMap.animateCamera(cameraUpdate);
-            }
-        });
-
-        //get destination location when user click on map
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                to=latLng;
-
-                googleMap.clear();
-
-                from=new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
-                //start route finding
-                Findroutes(from,to);
-            }
-        });
-
-    }*/
 
     // function to find Routes.
     public void Findroutes(LatLng Start, LatLng End)
     {
         if(Start==null || End==null) {
-            Toast.makeText(getContext(),"Unable to get location",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.toastUnableGetLocation,Toast.LENGTH_LONG).show();
         }
         else
         {

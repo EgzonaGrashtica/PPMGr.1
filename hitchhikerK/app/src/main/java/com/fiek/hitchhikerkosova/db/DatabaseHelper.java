@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.models.RideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -128,7 +129,7 @@ public class DatabaseHelper {
                 saveToRealTimeDb(id, freeSeats,numberOfReservations,MAKING_RESERVATION);
             }
             else {
-                Toast.makeText(ct,"U rezevua njehere",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ct, R.string.toastReservedOnce,Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex){
             Log.e("Exception",ex.getMessage());
@@ -147,7 +148,7 @@ public class DatabaseHelper {
             mDatabase.child("Posts").child(id).updateChildren(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    //Toast.makeText(ct,"U rezervua",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ct,R.string.toastReserved,Toast.LENGTH_SHORT).show();
                 }
             });
         }else if(action.equals(DELETING_RESERVATION)){
@@ -157,7 +158,7 @@ public class DatabaseHelper {
             mDatabase.child("Posts").child(id).updateChildren(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(ct,"U fshi",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ct,R.string.toastReservationDeleted,Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -173,7 +174,6 @@ public class DatabaseHelper {
                 return true;
 
             }else{
-                Toast.makeText(ct,"No rows affected",Toast.LENGTH_SHORT).show();
                 return false;
             }
         }catch (Exception ex){
@@ -192,9 +192,9 @@ public class DatabaseHelper {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(ct,"Post Deleted!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ct,R.string.toastPostDeleted,Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(ct,"Post Wasnt Deleted. Something went wrong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ct,R.string.toastPostNotDeleted,Toast.LENGTH_SHORT).show();
                 }
             }
         });

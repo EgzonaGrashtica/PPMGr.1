@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.fiek.hitchhikerkosova.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -67,7 +68,7 @@ public class UploadProfilePicture {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context,"Profile image failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.toastUploadFailed,Toast.LENGTH_LONG).show();
             }
         });
     }

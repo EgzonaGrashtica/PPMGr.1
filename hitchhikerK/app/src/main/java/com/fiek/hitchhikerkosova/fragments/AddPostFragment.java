@@ -115,8 +115,7 @@ public class AddPostFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.AddPostTitle));
+
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -225,7 +224,7 @@ public class AddPostFragment extends Fragment {
             mDatabase.child("Posts").push().setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(getContext(),"U postu",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),R.string.toastPostUploaded,Toast.LENGTH_SHORT).show();
 
                     NavController navController= Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
                     navController.navigate(R.id.mainPostsFragment);
@@ -247,23 +246,23 @@ public class AddPostFragment extends Fragment {
         etSelectDate.setError(null);
         if(from.equals(to)){
             ((TextView)spTo.getSelectedView()).setError("");
-            Toast.makeText(getContext(),"You cant add a post for the same city!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.toastErrorSameCity,Toast.LENGTH_LONG).show();
             return false;
         }
         if(departureTime.isEmpty()){
             etSelectTime.setError("");
-            Toast.makeText(getContext(),"Please select the departure time!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.toastErrorNoDPTime,Toast.LENGTH_LONG).show();
             return false;
         }
         if(postDate.isEmpty()){
             etSelectDate.setError("");
-            Toast.makeText(getContext(),"Please select the date!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.toastErrorNoDate,Toast.LENGTH_LONG).show();
             return false;
         }
         try{
             if(new SimpleDateFormat("dd/MM/yyyy").parse(postDate).before(new Date())){
                 etSelectDate.setError("");
-                Toast.makeText(getContext(),"Time travel to the past is not possible... yet...",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),R.string.toastErrorPastDate,Toast.LENGTH_LONG).show();
                 return false;
             }
         }catch (Exception e){
@@ -271,23 +270,18 @@ public class AddPostFragment extends Fragment {
         }
 
         if(price.isEmpty()){
-            etPrice.setError("Please provide the price!");
+            etPrice.setError(getString(R.string.errorNoPrice));
             etPrice.requestFocus();
             return false;
         }
-        try{
-            Double.parseDouble(price);
-        }catch (Exception e){
-            etPrice.setError("Please provide a valid price(only numbers)!");
-            return false;
-        }
+
         if(phoneNumber.isEmpty()){
-            etPhoneNumber.setError("Please provide a phone number!");
+            etPhoneNumber.setError(getString(R.string.errorNoPhoneNumber));
             etPhoneNumber.requestFocus();
             return false;
         }
         if(!Patterns.PHONE.matcher(phoneNumber).matches()){
-            etPhoneNumber.setError("Please provide a valid phone number!");
+            etPhoneNumber.setError(getString(R.string.errorInvalidPhoneNumber));
             etPhoneNumber.requestFocus();
             return false;
         }

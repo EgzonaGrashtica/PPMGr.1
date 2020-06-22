@@ -134,8 +134,6 @@ public class MyPostedRidesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.MyPostedRidesTitle));
 
         recyclerView=view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(myPostsAdapter);

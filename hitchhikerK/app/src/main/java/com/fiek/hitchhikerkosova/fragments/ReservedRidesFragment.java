@@ -53,6 +53,7 @@ public class ReservedRidesFragment extends Fragment {
     private PostsAdapter postsAdapter;
     SwipeRefreshLayout refreshLayout;
     DatabaseHelper dbHelper;
+    AsyncTask loadDataCls;
 
 
     public ReservedRidesFragment() {
@@ -134,8 +135,7 @@ public class ReservedRidesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.ReservedRidesTitle));
+
 
         recyclerView=view.findViewById(R.id.recyclerView);
 
@@ -154,7 +154,7 @@ public class ReservedRidesFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        new LoadDataCls().execute();
+                       loadDataCls= new LoadDataCls().execute();
                     }
                 });
 
@@ -167,38 +167,51 @@ public class ReservedRidesFragment extends Fragment {
             @Override
             public void run() {
                 dbHelper.checkIfReservedExist(tempDataSource);
-                new LoadDataCls().execute();
+                loadDataCls=new LoadDataCls().execute();
                 refreshLayout.setRefreshing(false);
             }
         }, 3000);
+    }
+
+    @Override
+    public void onDestroy() {
+        if(loadDataCls !=null && loadDataCls.getStatus()!= AsyncTask.Status.FINISHED){
+            loadDataCls.cancel(true);
+        }
+        super.onDestroy();
     }
 
     public class LoadDataCls extends AsyncTask<Void,Void,List<PostModel>>{
 
         @Override
         protected List<PostModel> doInBackground(Void... voids) {
-            List<PostModel> tempDataSource = new ArrayList<PostModel>();
-            SQLiteDatabase objDb = new Database(getContext()).getReadableDatabase();
-            Cursor cursor = objDb.query(Database.reservedTable,new String[]{RideModel.Id,
-                    RideModel.OwnerID,RideModel.OwnerName,RideModel.FromWhere,RideModel.ToWhere,
-                    RideModel.DepartureTime,RideModel.Date,RideModel.Price,RideModel.FreeSeats,
-                    RideModel.PhoneNumber,RideModel.ExtraInfo,RideModel.TimePosted,RideModel.NumberOfReservations},"",
-                    new String[]{},"","","");
-            cursor.moveToFirst();
+            try{
+                List<PostModel> tempDataSource = new ArrayList<PostModel>();
+                SQLiteDatabase objDb = new Database(getContext()).getReadableDatabase();
+                Cursor cursor = objDb.query(Database.reservedTable, new String[]{RideModel.Id,
+                                RideModel.OwnerID, RideModel.OwnerName, RideModel.FromWhere, RideModel.ToWhere,
+                                RideModel.DepartureTime, RideModel.Date, RideModel.Price, RideModel.FreeSeats,
+                                RideModel.PhoneNumber, RideModel.ExtraInfo, RideModel.TimePosted, RideModel.NumberOfReservations}, "",
+                        new String[]{}, "", "", "");
+                cursor.moveToFirst();
 
-            while(!cursor.isAfterLast()){
-                PostModel tempModel=new PostModel(cursor.getString(1),cursor.getString(2),
-                        cursor.getString(3),cursor.getString(4),cursor.getString(5),
-                        cursor.getString(6),cursor.getDouble(7),cursor.getInt(8),
-                        cursor.getString(9),cursor.getString(10),cursor.getLong(11),cursor.getInt(12));
-                tempModel.setId(cursor.getString(0));
+                while (!cursor.isAfterLast() && !isCancelled()) {
+                    PostModel tempModel = new PostModel(cursor.getString(1), cursor.getString(2),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getDouble(7), cursor.getInt(8),
+                            cursor.getString(9), cursor.getString(10), cursor.getLong(11), cursor.getInt(12));
+                    tempModel.setId(cursor.getString(0));
 
-                tempDataSource.add(tempModel);
-                cursor.moveToNext();
+                    tempDataSource.add(tempModel);
+                    cursor.moveToNext();
+                }
+                cursor.close();
+                objDb.close();
+                return tempDataSource;
             }
-            cursor.close();
-            objDb.close();
-            return tempDataSource;
+            catch (Exception ex){
+            return new ArrayList<PostModel>();
+                }
         }
 
         @Override
@@ -207,5 +220,6 @@ public class ReservedRidesFragment extends Fragment {
             postsAdapter.dataSource=postModels;
             postsAdapter.notifyDataSetChanged();
         }
+
     }
 }

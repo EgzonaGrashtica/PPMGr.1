@@ -128,8 +128,6 @@ public class MainPostsFragment extends Fragment {
 
         });
 
-
-
     }
 
     @Override
@@ -147,7 +145,6 @@ public class MainPostsFragment extends Fragment {
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.MainPostTitle));
-
 
         recyclerView=view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(postsAdapter);

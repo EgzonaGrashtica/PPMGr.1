@@ -5,10 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavController.OnDestinationChangedListener;
+import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
@@ -19,6 +22,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -30,7 +35,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnDestinationChangedListener {
 
     private final int TAKE_IMAGE_CODE=10001;
     private DrawerLayout mDrawer;
@@ -43,11 +48,15 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
+    ImageButton btnNewPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnNewPost=(ImageButton) findViewById(R.id.btnNewPost);
+
         // Listeneri per me ndegju kur firebaseAuth e ndrron gjendjen(behet logout)
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -75,17 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Listeneri per me u qel hamburger menu
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer  , toolbar, R.string.drawer_open, R.string.drawer_close);
-        drawerToggle.setDrawerIndicatorEnabled(false);
-        drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawer.openDrawer(GravityCompat.START);
-            }
-        });
-        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_hamburger);
+        navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
+        navController.addOnDestinationChangedListener(this);
 
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle("Toolbar title");
 
         View headerLayout=nvDrawer.getHeaderView(0);
 
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         profilePicImageView=(ShapeableImageView) headerLayout.findViewById(R.id.profilePicImageView);
         currentUser = mAuth.getCurrentUser();
 
-        navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
+
 
     }
     @Override
@@ -128,19 +129,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch(menuItem.getItemId()) {
             case R.id.nav_rides_fragment:
-                if(!navController.getCurrentDestination().getLabel().equals("fragment_main_posts")) {
-                    navController.navigate(R.id.mainPostsFragment);
-                }
                 break;
             case R.id.nav_reserved_fragment:
-                if(!navController.getCurrentDestination().getLabel().equals("ReservedRidesFragment")) {
-                    navController.navigate(R.id.reservedRidesFragment);
-                }
+                navController.navigate(R.id.reservedRidesFragment);
+                toolbar.setTitle(getResources().getString(R.string.ReservedRidesTitle));
                 break;
             case R.id.nav_myPostedRides_fragment:
-                if(!navController.getCurrentDestination().getLabel().equals("MyPostedRides")) {
                     navController.navigate(R.id.myPostedRides);
-                }
+                toolbar.setTitle(getResources().getString(R.string.MyPostedRidesTitle));
                 break;
             case R.id.nav_profile:
                 navController.navigate(R.id.editProfileFragment);
@@ -152,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(menuItem.getItemId() !=R.id.nav_logout){
-            menuItem.setChecked(true);
             // Mbyllja e menus
             mDrawer.closeDrawers();
         }
@@ -161,12 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Funksioni i butonit per te shtuar Postime
     public void btnNewPostFunc(View v){
-        if(!navController.getCurrentDestination().getLabel().equals("fragment_add_post")){
-            navController.navigate(R.id.addPostFragment,null,getAddPostNavOptions());
-            for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
-                nvDrawer.getMenu().getItem(i).setChecked(false);
-            }
-        }
+        navController.navigate(R.id.action_mainPostsFragment_to_addPostFragment);
+        toolbar.setTitle(getResources().getString(R.string.AddPostTitle));
     }
     //Funksioni i LogOut butonit
     private void tvLogOutFunc() {
@@ -185,13 +176,39 @@ public class MainActivity extends AppCompatActivity {
         alert1.show();
     }
 
-    protected NavOptions getAddPostNavOptions(){
-        NavOptions navOptions= new NavOptions.Builder().
-                setEnterAnim(R.anim.slide_from_right).
-                setExitAnim(R.anim.slide_from_left).
-                setPopExitAnim(R.anim.slide_from_left).build();
-        return navOptions;
+    private void setUpToolbar() {
+
+        if (navController.getCurrentDestination().getLabel().equals("fragment_main_posts")) {
+            btnNewPost.setVisibility(View.VISIBLE);
+            drawerToggle.setDrawerIndicatorEnabled(false);
+            drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDrawer.openDrawer(GravityCompat.START);
+                }
+            });
+            drawerToggle.setHomeAsUpIndicator(R.drawable.ic_hamburger);
+            for (int i = 0; i < nvDrawer.getMenu().size(); i++) {
+                nvDrawer.getMenu().getItem(i).setChecked(false);
+            }
+
+            if (getSupportActionBar() != null)
+                getSupportActionBar().setTitle("");
+        } else {
+            btnNewPost.setVisibility(View.GONE);
+            drawerToggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_18pt_2x);
+            drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
     }
 
 
+    @Override
+    public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+        setUpToolbar();
+    }
 }

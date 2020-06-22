@@ -3,6 +3,7 @@ package com.fiek.hitchhikerkosova.adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,11 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fiek.hitchhikerkosova.activities.MainActivity;
 import com.fiek.hitchhikerkosova.db.DatabaseHelper;
 import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
@@ -197,7 +200,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                                 dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations());
                         postDialog.cancel();
                     }else{
-                        Toast.makeText(context,"Nuk ka freeseats",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,R.string.toastNoFreeSeats,Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -208,19 +211,30 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             btnReserve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DatabaseHelper dbHelper=new DatabaseHelper(context);
-                    if(dbHelper.deleteReservation(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
-                                                  dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
-                                                  dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations())){
-                        for(PostModel pm: dataSource){
-                            if(pm.getId().equals(dataSource.get(postsViewHolder.getAdapterPosition()).getId())){
-                                dataSource.remove(pm);
-                            }
-                        }
-                        notifyDataSetChanged();
-                    }
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setMessage(R.string.alertDeletePost)
+                            .setPositiveButton(R.string.btnConfrimDelete, new DialogInterface.OnClickListener()                 {
 
-                    postDialog.cancel();
+                                public void onClick(DialogInterface dialog, int which) {
+                                    DatabaseHelper dbHelper=new DatabaseHelper(context);
+                                    if(dbHelper.deleteReservation(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
+                                            dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
+                                            dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations())){
+                                        for(PostModel pm: dataSource){
+                                            if(pm.getId().equals(dataSource.get(postsViewHolder.getAdapterPosition()).getId())){
+                                                dataSource.remove(pm);
+                                            }
+                                        }
+                                        notifyDataSetChanged();
+                                    }
+                                    postDialog.cancel();
+
+                                }
+                            }).setNegativeButton(R.string.btnCancel, null);
+
+                    AlertDialog alert1 = alert.create();
+                    alert1.show();
+
                 }
             });
         }
