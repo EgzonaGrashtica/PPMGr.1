@@ -18,6 +18,7 @@
         android:layout_gravity="center"
         android:scaleType="centerCrop"/>
 
+
     <TextView
         android:id="@+id/tvHeaderName"
         android:layout_width="match_parent"

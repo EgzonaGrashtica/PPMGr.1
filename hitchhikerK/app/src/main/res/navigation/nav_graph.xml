@@ -36,4 +36,9 @@
         android:id="@+id/myPostedRides"
         android:name="com.fiek.hitchhikerkosova.fragments.MyPostedRidesFragment"
         android:label="MyPostedRides" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.fiek.hitchhikerkosova.fragments.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

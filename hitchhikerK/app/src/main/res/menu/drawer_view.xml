@@ -18,6 +18,10 @@
         <group android:id="@+id/secondaryGroup"
             android:checkableBehavior="single">
             <item
+                android:id="@+id/nav_profile"
+                android:title="@string/tvProfile"
+                />
+            <item
                 android:id="@+id/nav_logout"
                 android:title="@string/tvLogOut"
                 android:icon="@drawable/logout_icon"/>

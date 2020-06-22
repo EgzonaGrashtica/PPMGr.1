@@ -26,6 +26,9 @@
     <string name="btnReserve">Reserve</string>
     <!--ReservedRidesFragment-->
     <string name="btnDeleteReserved">Delete</string>
+    <!--EditProfileFragment-->
+    <string name="btnSaveChanges">Save Changes</string>
+    <string name="btnConfrimDelete">Yes</string>
 
 
     <!-- onClick function -->
@@ -59,8 +62,12 @@
     <string name="tvExtraInfo">Extra Info</string>
     <!-- MainActivity-->
     <string name="tvLogOut">Log out</string>
+    <string name="tvProfile">Profile</string>
     <!--MyPosts-->
     <string name="tvMyReservations">Reservations: </string>
+    <!-- EditProfileFragment-->
+    <string name="tvPersonalDetails">Personal Details</string>
+    <string name="tvEditProfileDeletePic"><u>Delete Profile Pic</u></string>
 
     <!--Spinner Arrays-->
     <!-- AddPost-->
@@ -102,6 +109,9 @@
     <string name="alertLogOut">Are you sure you want to logout?</string>
     <!--MyPostsAdapter-->
     <string name="alertDeletePost">Are you sure you want to delete this post?</string>
+    <!--EditProfileFragment-->
+    <string name="alertDeletePic">Do you really want to delete your picture?</string>
+
 
 
     <!-- Content Descriptions-->
@@ -133,6 +143,7 @@
     <string name="ReservedRidesTitle">My reserved rides</string>
     <string name="MapTitle">See the road</string>
     <string name="MyPostedRidesTitle">My Posted Rides</string>
+    <string name="EditProfileFragment">Edit Profile</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

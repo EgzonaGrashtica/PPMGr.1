@@ -92,12 +92,6 @@ public class MainActivity extends AppCompatActivity {
         tvHeaderName=(TextView) headerLayout.findViewById(R.id.tvHeaderName);
         tvHeaderEmail=(TextView) headerLayout.findViewById(R.id.tvHeaderEmail);
         profilePicImageView=(ShapeableImageView) headerLayout.findViewById(R.id.profilePicImageView);
-        profilePicImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addProfilePic(v);
-            }
-        });
         currentUser = mAuth.getCurrentUser();
 
         navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
@@ -148,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
                     navController.navigate(R.id.myPostedRides);
                 }
                 break;
+            case R.id.nav_profile:
+                navController.navigate(R.id.editProfileFragment);
+                toolbar.setTitle(R.string.EditProfileFragment);
+                break;
             case R.id.nav_logout:
                 tvLogOutFunc();
                 break;
@@ -187,25 +185,6 @@ public class MainActivity extends AppCompatActivity {
         alert1.show();
     }
 
-    private void addProfilePic(View view){
-        Intent cameraIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(cameraIntent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(cameraIntent, TAKE_IMAGE_CODE);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TAKE_IMAGE_CODE){
-            switch (resultCode){
-                case RESULT_OK:
-                    Bitmap bitmap=(Bitmap) data.getExtras().get("data");
-                    UploadProfilePicture upPic=new UploadProfilePicture(MainActivity.this,profilePicImageView,currentUser);
-                    upPic.handleUpload(bitmap);
-            }
-        }
-    }
     protected NavOptions getAddPostNavOptions(){
         NavOptions navOptions= new NavOptions.Builder().
                 setEnterAnim(R.anim.slide_from_right).

@@ -21,12 +21,11 @@ import java.io.ByteArrayOutputStream;
 
 public class UploadProfilePicture {
     Context context;
-    ShapeableImageView profilePicImageView;
+
     FirebaseUser currentUser;
 
-    public UploadProfilePicture(Context context, ShapeableImageView profilePicImageView, FirebaseUser currentUser) {
+    public UploadProfilePicture(Context context, FirebaseUser currentUser) {
         this.context = context;
-        this.profilePicImageView = profilePicImageView;
         this.currentUser = currentUser;
     }
 
@@ -38,7 +37,6 @@ public class UploadProfilePicture {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 getDownloadUrl(reference);
-                profilePicImageView.setImageBitmap(bitmap);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -64,7 +62,6 @@ public class UploadProfilePicture {
         currentUser.updateProfile(request).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(context,"Profile image updated",Toast.LENGTH_LONG).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
