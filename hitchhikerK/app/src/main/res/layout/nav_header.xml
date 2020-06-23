@@ -14,8 +14,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        android:src="@drawable/add_photo"
-        android:layout_gravity="center"
+        android:src="@drawable/default_profile_pic"
+        android:layout_gravity="start"
         android:scaleType="centerCrop"/>
 
 

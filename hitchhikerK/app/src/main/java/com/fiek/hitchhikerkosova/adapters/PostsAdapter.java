@@ -31,6 +31,9 @@ import com.fiek.hitchhikerkosova.activities.MainActivity;
 import com.fiek.hitchhikerkosova.db.DatabaseHelper;
 import com.fiek.hitchhikerkosova.models.PostModel;
 import com.fiek.hitchhikerkosova.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +48,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     Date currentDate;
     String timeAgo;
     String checkFragment;
+    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
 
     public PostsAdapter(Context ct, String checkFragment) {
         context=ct;
@@ -129,14 +133,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         TextView tvDialogPhoneNumber=postDialog.findViewById(R.id.tvDialogPhoneNumber);
         TextView tvDialogExtraInfo=postDialog.findViewById(R.id.tvDialogExtraInfo);
         Button btnReserve=postDialog.findViewById(R.id.btnReserve);
+        ImageButton btnClose=postDialog.findViewById(R.id.btnClose);
+        Button btnMap=postDialog.findViewById(R.id.btnMap);
 
         tvDialogName.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName());
         tvDialogFrom.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getFrom());
         tvDialogTo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getTo());
         tvDialogDepartureTime.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime());
         tvDialogDate.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getDate());
-        tvDialogPrice.setText(Double.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getPrice()));
-        tvDialogFreeSeats.setText(Integer.toString(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
+        tvDialogPrice.setText(String.valueOf(dataSource.get(postsViewHolder.getAdapterPosition()).getPrice()));
+        tvDialogFreeSeats.setText(String.valueOf(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
         tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
         tvDialogPhoneNumber.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
@@ -149,20 +155,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 context.startActivity(dialerIntent);
             }
         });
-
-        ImageButton btnClose=postDialog.findViewById(R.id.btnClose);
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 postDialog.cancel();
             }
         });
-
-        Button btnMap=postDialog.findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle args=new Bundle();
                 args.putString("from", dataSource.get(postsViewHolder.getAdapterPosition()).getFrom());
                 args.putString("to", dataSource.get(postsViewHolder.getAdapterPosition()).getTo());
@@ -172,10 +173,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 }else{
                     navController.navigate(R.id.action_reservedRidesFragment_to_roadMapFragment,args);
                 }
-
-
                 postDialog.hide();
-
             }
 
         });
@@ -183,26 +181,29 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             btnReserve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()>0){
-                        DatabaseHelper dbHelper=new DatabaseHelper(context);
-                        dbHelper.saveToDatabase(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerId(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getTo(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getDate(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getPrice(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted(),
-                                dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations());
-                        postDialog.cancel();
-                    }else{
-                        Toast.makeText(context,R.string.toastNoFreeSeats,Toast.LENGTH_SHORT).show();
+                    if(!currentUser.getDisplayName().equals(dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName())){
+                        if(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()>0){
+                            DatabaseHelper dbHelper=new DatabaseHelper(context);
+                            dbHelper.saveToDatabase(dataSource.get(postsViewHolder.getAdapterPosition()).getId(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerId(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getOwnerName(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFrom(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTo(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDepartureTime(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getDate(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPrice(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getTimePosted(),
+                                    dataSource.get(postsViewHolder.getAdapterPosition()).getNumberOfReservations());
+                            postDialog.cancel();
+                        }else{
+                            Toast.makeText(context,R.string.toastNoFreeSeats,Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(context,R.string.toastErrorReservingMyPost,Toast.LENGTH_SHORT).show();
                     }
-
                 }
             });
         }else if(checkFragment.equals("ReservedRidesFragment")){
@@ -228,17 +229,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                                         notifyDataSetChanged();
                                     }
                                     postDialog.cancel();
-
                                 }
                             }).setNegativeButton(R.string.btnCancel, null);
-
                     AlertDialog alert1 = alert.create();
                     alert1.show();
-
                 }
             });
         }
         postDialog.show();
     }
-
 }

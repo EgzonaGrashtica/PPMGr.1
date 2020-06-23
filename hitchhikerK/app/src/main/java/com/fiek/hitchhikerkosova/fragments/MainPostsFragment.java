@@ -26,6 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainPostsFragment#newInstance} factory method to
@@ -108,12 +111,15 @@ public class MainPostsFragment extends Fragment {
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 PostModel postModelRemoved=dataSnapshot.getValue(PostModel.class);
                 postModelRemoved.setId(dataSnapshot.getKey());
+                List<PostModel> dataToBeRemoved=new ArrayList<PostModel>();
                 for(PostModel pm:postsAdapter.dataSource){
                     if(pm.getId().equals(postModelRemoved.getId())){
-                        postsAdapter.dataSource.remove(pm);
-                        postsAdapter.notifyDataSetChanged();
+                        dataToBeRemoved.add(pm);
                     }
                 }
+                postsAdapter.dataSource.removeAll(dataToBeRemoved);
+                postsAdapter.notifyDataSetChanged();
+
             }
 
             @Override

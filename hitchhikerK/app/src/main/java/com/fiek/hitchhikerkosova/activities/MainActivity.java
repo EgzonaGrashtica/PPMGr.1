@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
         mAuth = FirebaseAuth.getInstance();
         mAuth.addAuthStateListener(authStateListener);
 
+
         //E nderrojm ActionBar me ToolBar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,19 +85,18 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
 
         //Listeneri per me u qel hamburger menu
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer  , toolbar, R.string.drawer_open, R.string.drawer_close);
-        navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
-        navController.addOnDestinationChangedListener(this);
-
-
         View headerLayout=nvDrawer.getHeaderView(0);
-
         tvHeaderName=(TextView) headerLayout.findViewById(R.id.tvHeaderName);
         tvHeaderEmail=(TextView) headerLayout.findViewById(R.id.tvHeaderEmail);
         profilePicImageView=(ShapeableImageView) headerLayout.findViewById(R.id.profilePicImageView);
         currentUser = mAuth.getCurrentUser();
-
-
-
+        navController=Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);
+        navController.addOnDestinationChangedListener(this);
+        tvHeaderName.setText(currentUser.getDisplayName());
+        tvHeaderEmail.setText(currentUser.getEmail());
+        if(currentUser.getPhotoUrl() !=null){
+            Glide.with(MainActivity.this).load(currentUser.getPhotoUrl()).into(profilePicImageView);
+        }
     }
     @Override
     public void onStart() {
@@ -106,11 +106,7 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
             startActivity(new Intent(MainActivity.this, LogInActivity.class));
             finish();
         }
-        tvHeaderName.setText(currentUser.getDisplayName());
-        tvHeaderEmail.setText(currentUser.getEmail());
-        if(currentUser.getPhotoUrl() !=null){
-            Glide.with(MainActivity.this).load(currentUser.getPhotoUrl()).into(profilePicImageView);
-        }
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -194,6 +190,13 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
 
             if (getSupportActionBar() != null)
                 getSupportActionBar().setTitle("");
+            tvHeaderName.setText(currentUser.getDisplayName());
+            tvHeaderEmail.setText(currentUser.getEmail());
+            if(currentUser.getPhotoUrl() !=null){
+                Glide.with(MainActivity.this).load(currentUser.getPhotoUrl()).into(profilePicImageView);
+            }else{
+                profilePicImageView.setImageResource(R.drawable.default_profile_pic);
+            }
         } else {
             btnNewPost.setVisibility(View.GONE);
             drawerToggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_18pt_2x);

@@ -130,7 +130,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <!-- item -->
-    <string name="rides">Rides</string>
+    <string name="home">Home</string>
     <string name="reserved">Reserved</string>
     <string name="myPostedRides">My Posted Rides</string>
 
@@ -170,6 +170,8 @@
     <string name="toastErrorNoDPTime">Please select the departure time!</string>
     <string name="toastErrorNoDate">Please select the date!</string>
     <string name="toastErrorPastDate">Time travel to the past is not possible... yet...</string>
+    <!--PostsAdapter-->
+    <string name="toastErrorReservingMyPost">You can\`t reserve your own post!</string>
 
 
     <!--ToolBar Titles-->

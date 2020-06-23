@@ -18,6 +18,15 @@
         tools:layout_editor_absoluteY="54dp">
 
 
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_18pt_2x" />
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="220dp"
@@ -146,14 +155,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="33dp"
-        android:layout_height="29dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:backgroundTint="@color/colorAccent"
-        app:srcCompat="@drawable/ic_arrow_back_white_18pt_3x" />
 
 </RelativeLayout>

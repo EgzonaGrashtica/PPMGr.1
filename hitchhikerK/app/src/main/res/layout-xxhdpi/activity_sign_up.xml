@@ -18,6 +18,15 @@
         tools:layout_editor_absoluteY="54dp">
 
 
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_18pt_2x" />
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="317dp"
