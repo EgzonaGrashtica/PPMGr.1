@@ -30,6 +30,7 @@
         android:layout_marginEnd="151dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:focusable="true"
         android:text="@string/tvEditProfileDeletePic"
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorLink="@color/colorPrimary"

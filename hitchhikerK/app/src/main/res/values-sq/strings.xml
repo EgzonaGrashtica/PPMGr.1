@@ -9,17 +9,17 @@
 
     <!-- buttons text-->
     <!-- Signup/Login-->
-    <string name="btnAddPostTxt">Post</string>
-    <string name="btnForgotPasswordTxt">Send</string>
+    <string name="btnAddPostTxt">Posto</string>
+    <string name="btnForgotPasswordTxt">Dërgo</string>
     <!--MainActivity-->
-    <string name="btnCancel">Cancel</string>
+    <string name="btnCancel">Anulo</string>
     <!--MainPostsFragment-->
-    <string name="btnReserve">Reserve</string>
+    <string name="btnReserve">Rezervo</string>
     <!--ReservedRidesFragment-->
-    <string name="btnDeleteReserved">Delete</string>
+    <string name="btnDeleteReserved">Fshij</string>
     <!--EditProfileFragment-->
-    <string name="btnSaveChanges">Save Changes</string>
-    <string name="btnConfrimDelete">Yes</string>
+    <string name="btnSaveChanges">Ruaj Ndryshimet</string>
+    <string name="btnConfrimDelete">Po</string>
 
 
     <!-- onClick function -->
@@ -37,28 +37,26 @@
 
     <!-- Text Views -->
     <!--Signup-->
-    <string name="tvRegister">Don\'t have an account?</string>
-    <string name="tvForgotPassword">Forgot password?</string>
+    <string name="tvRegister">Nuk jeni regjistruar?</string>
+    <string name="tvForgotPassword">Keni harruar fjalëkalimin?</string>
     <!-- ResetPasswordActivity-->
-    <string name="tvTitleForgotPassword">Forgot Your Password?</string>
-    <string name="tvSubtitleForgotPassword">Enter your email address and we will send you an email with the link to reset your password.</string>
+    <string name="tvTitleForgotPassword">Keni harruar fjalëkalimin?</string>
+    <string name="tvSubtitleForgotPassword">Jepni email adresen tuaj dhe ne do të ju dërgojm një email me linkun për ta ndryshuar fjalëkalimin.</string>
     <!-- AddPost / MainPostsFragment -->
-    <string name="tvFrom">From</string>
-    <string name="tvTo">To</string>
-    <string name="tvDepartureTime">Departure Time</string>
-    <string name="tvFreeSeats">Free Seats</string>
-    <string name="tvPrice">Price</string>
-    <string name="tvDate">Date</string>
-    <string name="tvPhoneNumber">Phone Number</string>
-    <string name="tvExtraInfo">Extra Info</string>
+    <string name="tvFrom">Nga</string>
+    <string name="tvDepartureTime">Koha e Nisjes</string>
+    <string name="tvFreeSeats">Vende të Lira</string>
+    <string name="tvDate">Data</string>
+    <string name="tvPhoneNumber">Numri i Telefonit</string>
+    <string name="tvExtraInfo">Info Shtesë</string>
     <!-- MainActivity-->
-    <string name="tvLogOut">Log out</string>
-    <string name="tvProfile">Profile</string>
+    <string name="tvLogOut">Shkyquni</string>
+    <string name="tvProfile">Profili</string>
     <!--MyPosts-->
-    <string name="tvMyReservations">Reservations: </string>
+    <string name="tvMyReservations">Rezervimet:</string>
     <!-- EditProfileFragment-->
-    <string name="tvPersonalDetails">Personal Details</string>
-    <string name="tvEditProfileDeletePic"><u>Delete Profile Pic</u></string>
+    <string name="tvPersonalDetails">Info Personale</string>
+    <string name="tvEditProfileDeletePic"><u>Fshij Foton e Profilit</u></string>
 
     <!--Spinner Arrays-->
     <!-- AddPost-->
@@ -83,7 +81,7 @@
         <item>9</item>
     </string-array>
     <!-- Spinner Default-->
-    <string name="spDefault">Choose..</string>
+    <string name="spDefault">Zgjedh..</string>
     <!-- LogIn -->
     <string-array name="language">
         <item>En</item>
@@ -92,25 +90,24 @@
 
     <!-- Text -->
     <!-- Validation for signup/login -->
-    <string name="emptyName">Please enter name</string>
-    <string name="emptySurname">Please enter surname</string>
-    <string name="emptyPhoneNumber">Please enter phone number</string>
-    <string name="validPhoneNumber">Please enter valid phone number</string>
-    <string name="validEmail">Please enter valid email</string>
-    <string name="emptyEmail">Please enter email</string>
-    <string name="shortPassword">Password must contain at least 6 characters</string>
-    <string name="emptyPassword">Please enter password</string>
-    <string name="confirmPassword">Password doesn\'t match</string>
+    <string name="emptyName">Ju lutem jepni emrin</string>
+    <string name="emptySurname">Ju lutem jepni mbiemrin</string>
+    <string name="emptyPhoneNumber">Ju lutem jepni numrin e telefonit</string>
+    <string name="validPhoneNumber">Ju lutem jepni një numer të telefonit valid</string>
+    <string name="validEmail">Ju lutem jepni një email valid</string>
+    <string name="emptyEmail">Ju lutem jepni emailin</string>
+    <string name="shortPassword">Fjalëkalimi duhet të ketë së paku 6 karaktere</string>
+    <string name="emptyPassword">Ju lutem jepni fjalëkalimin</string>
+    <string name="confirmPassword">Fjalëkalimi nuk përputhet</string>
     <!-- MainActivity-->
-    <string name="alertLogOut">Are you sure you want to logout?</string>
+    <string name="alertLogOut">A jeni i sigurt që dëshironi të shkyqeni?</string>
     <!--MyPostsAdapter-->
-    <string name="alertDeletePost">Are you sure you want to delete this post?</string>
+    <string name="alertDeletePost">A jeni i sigurt që dëshironi ta fshini postimin?</string>
     <!--EditProfileFragment-->
-    <string name="alertDeletePic">Are you sure you want to delete your picture?</string>
+    <string name="alertDeletePic">A jeni i sigurt që dëshironi ta fshini foton e profilit?</string>
     <!--AddPostFragment-->
-    <string name="errorNoPrice">Please provide the price!</string>
-    <string name="errorNoPhoneNumber">Please provide \na phone number!</string>
-    <string name="errorInvalidPhoneNumber">Please provide a valid phone number!</string>
+    <string name="errorNoPrice">Ju lutem jepni çmimin!</string>
+    <string name="errorInvalidPhoneNumber">Ju lutem jepni një numër valid!</string>
 
 
 
@@ -126,38 +123,37 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <!-- item -->
-    <string name="home">Home</string>
-    <string name="reserved">Reserved</string>
-    <string name="myPostedRides">My Posted Rides</string>
+    <string name="home">Kryefaqja</string>
+    <string name="reserved">Rezervimet</string>
+    <string name="myPostedRides">Postimet e mia</string>
 
     <!--Checkboxes-->
-    <string name="rememberMeCheckBox">Remember me</string>
 
     <!-- Constants-->
     <string name="prefEmailKey">email</string>
 
     <!--SnackBars-->
     <!--LogIn-->
-    <string name="snackBarCheckingCredentials">Checking credentials...</string>
+    <string name="snackBarCheckingCredentials">Duke kontrolluar të dhënat...</string>
 
     <!--Toast-->
     <!--LogIn/SignUp-->
-    <string name="toastAuthFailed">Authentication failed.</string>
+    <string name="toastAuthFailed">Authentikimi dështoi.</string>
     <!--ResetPasswordActivity-->
-    <string name="toastEmailSend">Email is send. Check your email.</string>
-    <string name="toastEmailNotExist">An account with this email does not exist.</string>
-    <string name="toastEnterEmail">Please enter your email!</string>
+    <string name="toastEmailSend">Emaili u dërgua. Kontrolloni emailin tuaj.</string>
+    <string name="toastEmailNotExist">Nuk ekziston një llogari me këtë email.</string>
+    <string name="toastEnterEmail">Ju lutem jepni emailin!</string>
     <!--EditProfileFragment-->
-    <string name="toastProfileChanged">Profile updated!</string>
+    <string name="toastProfileChanged">Profili u përditësua!</string>
     <!--RoadMapFragment-->
-    <string name="toastUnableGetLocation">Unable to get location.</string>
-    <string name="toastNoFreeSeats">No free seats available.</string>
+    <string name="toastUnableGetLocation">Marrja e vendndodhjes dështoi.</string>
+    <string name="toastNoFreeSeats">Nuk ka vende të lira.</string>
     <!--DatabaseHelper-->
-    <string name="toastReservedOnce">You already reserved this ride.</string>
-    <string name="toastReserved">The ride is reserved.</string>
-    <string name="toastReservationDeleted">Reservation deleted!</string>
-    <string name="toastPostDeleted">Post deleted!</string>
-    <string name="toastPostNotDeleted">Post Wasn\'t Deleted. Something went wrong</string>
+    <string name="toastReservedOnce">Ju e keni rezervuar këtë postim tashmë.</string>
+    <string name="toastReserved">Postimi u rezervua.</string>
+    <string name="toastReservationDeleted">Rezervimi u fshi!</string>
+    <string name="toastPostDeleted">Postimi u fshi!</string>
+    <string name="toastPostNotDeleted">Postimi nuk u fshi. Ndodhi një gabim.</string>
     <!--UploadProfilePicture-->
     <string name="toastUploadFailed">Uploading profile picture failed!</string>
     <!--AddPostFragment-->
@@ -193,5 +189,11 @@
     <string name="phPrice">Qmimi për person</string>
     <string name="phDate">Zgjedh datën</string>
     <string name="btnSignUpTxt">Regjistrohu</string>
+    <string name="toastErrorRoutingFailed">Kërkimi i rrugës dështoi...</string>
+    <string name="toastFindingRoute">Duke kërkuar rrugën...</string>
+    <string name="tvTo">Në</string>
+    <string name="tvPrice">Çmimi</string>
+    <string name="errorNoPhoneNumber">Ju lutem jepni numrin e telefonit!</string>
+    <string name="rememberMeCheckBox">Mbaj në mend</string>
 
 </resources>

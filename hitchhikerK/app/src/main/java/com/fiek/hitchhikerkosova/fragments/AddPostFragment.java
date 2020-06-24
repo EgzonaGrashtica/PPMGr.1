@@ -260,7 +260,7 @@ public class AddPostFragment extends Fragment {
             return false;
         }
         try{
-            if(new SimpleDateFormat("dd/MM/yyyy").parse(postDate).before(new Date())){
+            if(new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(postDate+" "+departureTime).before(new Date())){
                 etSelectDate.setError("");
                 Toast.makeText(getContext(),R.string.toastErrorPastDate,Toast.LENGTH_LONG).show();
                 return false;

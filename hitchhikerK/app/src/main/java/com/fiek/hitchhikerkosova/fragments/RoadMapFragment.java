@@ -22,6 +22,7 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.fiek.hitchhikerkosova.map.MyClusterItem;
 import com.fiek.hitchhikerkosova.R;
+import com.fiek.hitchhikerkosova.map.MyClusterRenderer;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -55,6 +56,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     private String from;
     private String to;
 
+    List<MyClusterItem> myClusterItemList=new ArrayList<MyClusterItem>();
     GoogleMap googleMap;
     ClusterManager clusterManager;
     Location myLocation=null;
@@ -171,9 +173,26 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         toolbar.setTitle(getResources().getString(R.string.MapTitle));
     }
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         this.googleMap=googleMap;
+        this.googleMap.getUiSettings().setZoomControlsEnabled(true);
         clusterManager=new ClusterManager<>(getActivity(),googleMap);
+        MyClusterRenderer myClusterRenderer=new MyClusterRenderer(getContext(),this.googleMap,clusterManager);
+        clusterManager.setRenderer(myClusterRenderer);
+        this.googleMap.setOnCameraIdleListener(clusterManager);
+        this.googleMap.setOnMarkerClickListener(clusterManager);
+        this.googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                if(googleMap.getCameraPosition().zoom <8f){
+                    polylines.get(0).setVisible(false);
+                }else{
+                    polylines.get(0).setVisible(true);
+                }
+            }
+        });
+
+
         Findroutes(fromLatLng,toLatLng);
     }
 
@@ -199,13 +218,13 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onRoutingFailure(RouteException e) {
-        Toast.makeText(getContext(),"Finding Route Failed...",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),getString(R.string.toastErrorRoutingFailed),Toast.LENGTH_LONG).show();
         Findroutes(fromLatLng,toLatLng);
     }
 
     @Override
     public void onRoutingStart() {
-        Toast.makeText(getContext(),"Finding Route...",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),getString(R.string.toastFindingRoute),Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -236,10 +255,11 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
 
         }
         //Add Marker on route starting position
-        clusterManager.addItem(new MyClusterItem(polylineStartLatLng,from,""));
+        myClusterItemList.add(new MyClusterItem(polylineStartLatLng,getString(R.string.tvFrom),""));
 
         //Add Marker on route ending position
-        clusterManager.addItem(new MyClusterItem(polylineEndLatLng,to,""));
+        myClusterItemList.add(new MyClusterItem(polylineEndLatLng,getString(R.string.tvTo),""));
+        clusterManager.addItems(myClusterItemList);
 
         clusterManager.cluster();
     }
@@ -254,8 +274,4 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
         Findroutes(fromLatLng,toLatLng);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 }

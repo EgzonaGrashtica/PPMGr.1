@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.fiek.hitchhikerkosova.R;
@@ -66,6 +67,7 @@ public class EditProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -92,6 +94,7 @@ public class EditProfileFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         user = FirebaseAuth.getInstance().getCurrentUser();
+
     }
 
     @Override
@@ -150,7 +153,6 @@ public class EditProfileFragment extends Fragment {
         }
         etEditProfileName.setText(user.getDisplayName());
         etEditProfileEmail.setText(user.getEmail());
-
     }
 
     private void addProfilePic(View view){
@@ -236,4 +238,6 @@ public class EditProfileFragment extends Fragment {
         AlertDialog alert1 = alert.create();
         alert1.show();
     }
+
+
 }

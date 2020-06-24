@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fiek.hitchhikerkosova.R;
+import com.fiek.hitchhikerkosova.fragments.EditProfileFragment;
 import com.fiek.hitchhikerkosova.utils.UploadProfilePicture;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
@@ -213,5 +214,10 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
     @Override
     public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
         setUpToolbar();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

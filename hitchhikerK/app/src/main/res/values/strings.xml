@@ -33,16 +33,16 @@
 
     <!-- onClick function -->
     <!-- Signup/Login-->
-    <string name="btnLogInFunc">btnLogInFunc</string>
-    <string name="tvRegisterFunc">tvRegisterFunc</string>
-    <string name="btnSignUpFunc">btnSignUpFunc</string>
-    <string name="tvForgotPasswordFunc">tvForgotPasswordFunc</string>
+    <string name="btnLogInFunc" translatable="false">btnLogInFunc</string>
+    <string name="tvRegisterFunc" translatable="false">tvRegisterFunc</string>
+    <string name="btnSignUpFunc" translatable="false">btnSignUpFunc</string>
+    <string name="tvForgotPasswordFunc" translatable="false">tvForgotPasswordFunc</string>
     <!-- AddPost-->
-    <string name="btnNewPostFunc">btnNewPostFunc</string>
-    <string name="btnAddPostFunc">btnAddPostFunc</string>
-    <string name="etSelectTimeFunc">etSelectTimeFunc</string>
+    <string name="btnNewPostFunc" translatable="false">btnNewPostFunc</string>
+    <string name="btnAddPostFunc" translatable="false">btnAddPostFunc</string>
+    <string name="etSelectTimeFunc" translatable="false">etSelectTimeFunc</string>
     <!-- MainActivity-->
-    <string name="tvLogOutFunc">tvLogOutFunc</string>
+    <string name="tvLogOutFunc" translatable="false">tvLogOutFunc</string>
 
     <!-- Text Views -->
     <!--Signup-->
@@ -127,13 +127,13 @@
 
     <!-- Content Descriptions-->
     <!--Login-->
-    <string name="loginPhotoCD">"Hitchhiker Kosova" Logo</string>
+    <string name="loginPhotoCD" translatable="false">"Hitchhiker Kosova" Logo</string>
     <!-- AddPost-->
-    <string name="newPostCD">Button for adding a post</string>
+    <string name="newPostCD" translatable="false">Button for adding a post</string>
 
     <!-- Hamburger Menu-->
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+    <string name="drawer_open" translatable="false">Open</string>
+    <string name="drawer_close" translatable="false">Close</string>
     <!-- item -->
     <string name="home">Home</string>
     <string name="reserved">Reserved</string>
@@ -143,7 +143,7 @@
     <string name="rememberMeCheckBox">Remember me</string>
 
     <!-- Constants-->
-    <string name="prefEmailKey">email</string>
+    <string name="prefEmailKey" translatable="false">email</string>
 
     <!--SnackBars-->
     <!--LogIn-->
@@ -161,9 +161,11 @@
     <!--RoadMapFragment-->
     <string name="toastUnableGetLocation">Unable to get location.</string>
     <string name="toastNoFreeSeats">No free seats available.</string>
+    <string name="toastErrorRoutingFailed">Finding Route Failed...</string>
+    <string name="toastFindingRoute">Finding Route...</string>
     <!--DatabaseHelper-->
     <string name="toastReservedOnce">You already reserved this ride.</string>
-    <string name="toastReserved">The ride is reserved.</string>
+    <string name="toastReserved">Reservation made.</string>
     <string name="toastReservationDeleted">Reservation deleted!</string>
     <string name="toastPostDeleted">Post deleted!</string>
     <string name="toastPostNotDeleted">Post Wasn\'t Deleted. Something went wrong</string>
@@ -171,10 +173,10 @@
     <string name="toastUploadFailed">Uploading profile picture failed!</string>
     <!--AddPostFragment-->
     <string name="toastPostUploaded">Posted!</string>
-    <string name="toastErrorSameCity">You cant add a post for the same city!</string>
+    <string name="toastErrorSameCity">You can\'t add a post for the same city!</string>
     <string name="toastErrorNoDPTime">Please select the departure time!</string>
     <string name="toastErrorNoDate">Please select the date!</string>
-    <string name="toastErrorPastDate">Time travel to the past is not possible... yet...</string>
+    <string name="toastErrorPastDate">Time travel to the past is not possible… yet…</string>
     <!--PostsAdapter-->
     <string name="toastErrorReservingMyPost">You can\`t reserve your own post!</string>
 
