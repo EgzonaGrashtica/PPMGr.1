@@ -14,7 +14,7 @@
         android:layout_width="327dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
         android:cursorVisible="true"
@@ -26,13 +26,13 @@
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="108dp"
         android:clickable="true"
         android:onClick="@string/tvRegisterFunc"
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:contentDescription="@string/loginPhotoCD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -108,6 +108,36 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/chbRememberMe"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbAl"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:drawableLeft="@drawable/al_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbEn"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:checked="true"
+            android:drawableStart="@drawable/en_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

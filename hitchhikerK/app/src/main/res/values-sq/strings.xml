@@ -1,23 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Hitchhiker Kosova</string>
 
     <!-- placeholders -->
     <!-- PH for signup/login-->
     <string name="phEmail">Email</string>
-    <string name="phPassword">Password</string>
-    <string name="phName">Name</string>
-    <string name="phSurname">Surname</string>
-    <string name="phPhoneNumber">Phone Number</string>
-    <string name="phConfirmPassword">Confirm Password</string>
     <!-- AddPost-->
-    <string name="phSelectTime">Select Time</string>
-    <string name="phPrice">Price for person</string>
-    <string name="phDate">Select Date </string>
 
     <!-- buttons text-->
     <!-- Signup/Login-->
-    <string name="btnLogInTxt">Log In</string>
-    <string name="btnSignUpTxt">Sign Up</string>
     <string name="btnAddPostTxt">Post</string>
     <string name="btnForgotPasswordTxt">Send</string>
     <!--MainActivity-->
@@ -95,8 +86,8 @@
     <string name="spDefault">Choose..</string>
     <!-- LogIn -->
     <string-array name="language">
-    <item>En</item>
-    <item>Al</item>
+        <item>En</item>
+        <item>Al</item>
     </string-array>
 
     <!-- Text -->
@@ -192,5 +183,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="google_map_key" translatable="false">AIzaSyBVCASVbYp7sEJwU4aXXKHiS0DaDt_xmO4</string>
+    <string name="phPassword">Fjalëkalimi</string>
+    <string name="btnLogInTxt">Kyqu</string>
+    <string name="phName">Emri</string>
+    <string name="phSurname">Mbiemri</string>
+    <string name="phPhoneNumber">Numri i telefonit</string>
+    <string name="phConfirmPassword">Konfirmo fjalëkalimin</string>
+    <string name="phSelectTime">Zgjedh kohën</string>
+    <string name="phPrice">Qmimi për person</string>
+    <string name="phDate">Zgjedh datën</string>
+    <string name="btnSignUpTxt">Regjistrohu</string>
 
 </resources>

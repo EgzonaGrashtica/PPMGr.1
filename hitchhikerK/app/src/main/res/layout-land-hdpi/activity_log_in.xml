@@ -14,7 +14,6 @@
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="270dp"
         android:layout_height="45dp"
-        android:layout_marginTop="69dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
@@ -28,7 +27,7 @@
         android:paddingLeft="10dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -67,7 +66,7 @@
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="85dp"
         android:clickable="true"
         android:onClick="@string/tvRegisterFunc"
@@ -101,5 +100,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
         android:imeOptions="actionDone"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbAl"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:drawableLeft="@drawable/al_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbEn"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:checked="true"
+            android:drawableStart="@drawable/en_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

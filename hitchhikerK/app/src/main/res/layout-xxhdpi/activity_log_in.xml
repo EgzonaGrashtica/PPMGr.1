@@ -9,6 +9,18 @@
     android:id="@+id/logInView"
     >
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="285dp"
+        android:layout_height="227dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:contentDescription="@string/loginPhotoCD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:srcCompat="@drawable/login_photo" />
+
     <EditText
         android:id="@+id/etEmail"
         style="@style/Widget.AppCompat.EditText"
@@ -28,6 +40,7 @@
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -36,7 +49,7 @@
         android:layout_width="327dp"
         android:layout_height="50dp"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="42dp"
         android:background="@drawable/et_style"
         android:backgroundTint="@color/cardview_light_background"
@@ -45,12 +58,25 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/phPassword"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:clickable="true"
+        android:onClick="@string/tvForgotPasswordFunc"
+        android:text="@string/tvForgotPassword"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/chbRememberMe"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/btnLogIn"
@@ -58,7 +84,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="106dp"
         android:background="@drawable/button_state"
         android:text="@string/btnLogInTxt"
@@ -73,7 +99,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="114dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="114dp"
         android:clickable="true"
         android:onClick="@string/tvRegisterFunc"
@@ -84,45 +109,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="56dp"
-        android:contentDescription="@string/loginPhotoCD"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login_photo" />
-
     <CheckBox
         android:id="@+id/chbRememberMe"
         style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginStart="40dp"
         android:buttonTint="#000000"
         android:checked="false"
         android:text="@string/rememberMeCheckBox"
         android:textColorLink="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        android:imeOptions="actionDone"/>
-
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="12dp"
-        android:clickable="true"
-        android:onClick="@string/tvForgotPasswordFunc"
-        android:text="@string/tvForgotPassword"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/chbRememberMe"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbAl"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:drawableLeft="@drawable/al_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbEn"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:checked="true"
+            android:drawableStart="@drawable/en_flag"
+            android:onClick="onRadioButtonClicked"
+            android:paddingTop="10dp" />
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
