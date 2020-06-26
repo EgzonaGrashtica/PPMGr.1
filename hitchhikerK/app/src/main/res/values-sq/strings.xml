@@ -8,6 +8,8 @@
     <!-- AddPost-->
 
     <!-- buttons text-->
+    <!--Welcome-->
+    <string name="btnGoogleSignInTxt">Kyçu me Google</string>
     <!-- Signup/Login-->
     <string name="btnAddPostTxt">Posto</string>
     <string name="btnForgotPasswordTxt">Dërgo</string>
@@ -38,7 +40,7 @@
     <!-- Text Views -->
     <!--Signup-->
     <string name="tvRegister">Nuk jeni regjistruar?</string>
-    <string name="tvForgotPassword">Keni harruar fjalëkalimin?</string>
+    <string name="tvForgotPassword">Harruat fjalëkalimin?</string>
     <!-- ResetPasswordActivity-->
     <string name="tvTitleForgotPassword">Keni harruar fjalëkalimin?</string>
     <string name="tvSubtitleForgotPassword">Jepni email adresen tuaj dhe ne do të ju dërgojm një email me linkun për ta ndryshuar fjalëkalimin.</string>
@@ -155,24 +157,11 @@
     <string name="toastPostDeleted">Postimi u fshi!</string>
     <string name="toastPostNotDeleted">Postimi nuk u fshi. Ndodhi një gabim.</string>
     <!--UploadProfilePicture-->
-    <string name="toastUploadFailed">Uploading profile picture failed!</string>
     <!--AddPostFragment-->
-    <string name="toastPostUploaded">Posted!</string>
-    <string name="toastErrorSameCity">You cant add a post for the same city!</string>
-    <string name="toastErrorNoDPTime">Please select the departure time!</string>
-    <string name="toastErrorNoDate">Please select the date!</string>
-    <string name="toastErrorPastDate">Time travel to the past is not possible... yet...</string>
     <!--PostsAdapter-->
-    <string name="toastErrorReservingMyPost">You can\`t reserve your own post!</string>
 
 
     <!--ToolBar Titles-->
-    <string name="AddPostTitle">Create a new trip</string>
-    <string name="MainPostTitle">Home</string>
-    <string name="ReservedRidesTitle">My reserved rides</string>
-    <string name="MapTitle">See the road</string>
-    <string name="MyPostedRidesTitle">My Posted Rides</string>
-    <string name="EditProfileFragment">Edit Profile</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -195,5 +184,20 @@
     <string name="tvPrice">Çmimi</string>
     <string name="errorNoPhoneNumber">Ju lutem jepni numrin e telefonit!</string>
     <string name="rememberMeCheckBox">Mbaj në mend</string>
+    <string name="toastUploadFailed">Ngarkimi i fotos s profilit dështoj</string>
+    <string name="toastPostUploaded">U postua!</string>
+    <string name="toastErrorSameCity">Nga dhe Në nuk mund të kenë vlerën e njejt!</string>
+    <string name="toastErrorNoDPTime">Ju lutem zgjedhni kohën e nisjes!</string>
+    <string name="toastErrorNoDate">Ju lutem zgjedhni daten!</string>
+    <string name="toastErrorPastDate">Udhtimi në të kaluaren nuk është i mundur... ende...</string>
+    <string name="toastErrorReservingMyPost">Nuk mund të rezervoni postimit tuaj!</string>
+    <string name="AddPostTitle">Krijoni një postim të ri</string>
+    <string name="MainPostTitle">Kryefaqja</string>
+    <string name="ReservedRidesTitle">Rezervimet e mia</string>
+    <string name="MapTitle">Shiko rrugën</string>
+    <string name="MyPostedRidesTitle">Postimet e mia</string>
+    <string name="EditProfileFragment">Ndrysho profilin</string>
+    <string name="tvAlreadyRegistered"><u>Jeni të regjistruar? Kyçu </u></string>
+    <string name="tvWelcome">Mirë se vini në Hitchhiker Kosova</string>
 
 </resources>

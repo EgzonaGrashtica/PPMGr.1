@@ -54,6 +54,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="53dp"
         android:background="@drawable/button_state"
         android:text="@string/btnLogInTxt"
@@ -91,15 +92,29 @@
         style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="164dp"
         android:buttonTint="#000000"
         android:checked="false"
+        android:imeOptions="actionDone"
         android:text="@string/rememberMeCheckBox"
         android:textColorLink="@color/colorAccent"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:onClick="@string/tvForgotPasswordFunc"
+        android:text="@string/tvForgotPassword"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        android:imeOptions="actionDone"/>
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <RadioGroup
         android:id="@+id/radioGroup"

@@ -85,86 +85,86 @@
                 android:id="@+id/tvDialogTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="271dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="16dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogFrom" />
 
             <TextView
                 android:id="@+id/tvDialogPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="101dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="16dp"
                 android:clickable="true"
                 android:linksClickable="false"
                 android:singleLine="false"
                 android:textColor="#4169E1"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogFreeSeats" />
 
             <TextView
                 android:id="@+id/tvDialogFreeSeats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="160dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="16dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogPrice" />
 
             <TextView
                 android:id="@+id/tvDialogPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="228dp"
+                android:layout_marginStart="322dp"
                 android:layout_marginTop="16dp"
                 android:drawableRight="@drawable/euro_icon"
                 android:drawablePadding="5dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogDate" />
 
             <TextView
                 android:id="@+id/tvDialogDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="242dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="16dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogDepartureTime" />
 
             <TextView
                 android:id="@+id/tvDialogDepartureTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="95dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="16dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogTo" />
 
             <TextView
                 android:id="@+id/tvDialogFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="237dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="25dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogName" />
 
             <TextView
                 android:id="@+id/tvDialogExtraInfo"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="173dp"
+                android:layout_marginStart="324dp"
                 android:layout_marginTop="16dp"
                 android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDialogPhoneNumber" />
 
             <TextView

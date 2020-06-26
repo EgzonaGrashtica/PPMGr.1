@@ -129,10 +129,9 @@
 
         <ImageButton
             android:id="@+id/btnEditName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="22dp"
             android:backgroundTint="@color/colorPrimary"
             android:src="@drawable/ic_mode_edit_18pt"
             app:layout_constraintStart_toEndOf="@+id/etEditProfileName"

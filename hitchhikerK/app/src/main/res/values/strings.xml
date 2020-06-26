@@ -15,6 +15,8 @@
     <string name="phDate">Select Date </string>
 
     <!-- buttons text-->
+    <!-- Welcome-->
+    <string name="btnGoogleSignInTxt">Sign in with Google</string>
     <!-- Signup/Login-->
     <string name="btnLogInTxt">Log In</string>
     <string name="btnSignUpTxt">Sign Up</string>
@@ -95,8 +97,8 @@
     <string name="spDefault">Choose..</string>
     <!-- LogIn -->
     <string-array name="language">
-    <item>En</item>
-    <item>Al</item>
+        <item>En</item>
+        <item>Al</item>
     </string-array>
 
     <!-- Text -->
@@ -120,9 +122,6 @@
     <string name="errorNoPrice">Please provide the price!</string>
     <string name="errorNoPhoneNumber">Please provide \na phone number!</string>
     <string name="errorInvalidPhoneNumber">Please provide a valid phone number!</string>
-
-
-
 
 
     <!-- Content Descriptions-->
@@ -173,7 +172,6 @@
     <string name="toastUploadFailed">Uploading profile picture failed!</string>
     <!--AddPostFragment-->
     <string name="toastPostUploaded">Posted!</string>
-    <string name="toastErrorSameCity">You can\'t add a post for the same city!</string>
     <string name="toastErrorNoDPTime">Please select the departure time!</string>
     <string name="toastErrorNoDate">Please select the date!</string>
     <string name="toastErrorPastDate">Time travel to the past is not possible… yet…</string>
@@ -194,5 +192,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="google_map_key" translatable="false">AIzaSyBVCASVbYp7sEJwU4aXXKHiS0DaDt_xmO4</string>
+    <string name="toastErrorSameCity">From and To can\\\'t have the same value!</string>
+    <string name="tvAlreadyRegistered"><u>Already regirstered? Log In</u></string>
+    <string name="tvWelcome">Welcome to Hitchhicker Kosova</string>
 
 </resources>
