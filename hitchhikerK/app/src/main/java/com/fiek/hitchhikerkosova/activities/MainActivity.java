@@ -40,7 +40,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements OnDestinationChangedListener {
+public class MainActivity extends AppCompatActivity implements OnDestinationChangedListener,EditProfileFragment.changesListener {
 
     private final int TAKE_IMAGE_CODE=10001;
     private DrawerLayout mDrawer;
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
     ImageButton btnNewPost;
+    Boolean nameChanged = false;
+    Boolean picChanged=false;
+    Boolean deletedPic=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,6 +236,32 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(navController.getCurrentDestination().getLabel().equals("fragment_edit_profile")){
+            if(picChanged || nameChanged || deletedPic){
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setMessage(R.string.alertUnsavedChanges)
+                        .setPositiveButton(R.string.btnExit, new DialogInterface.OnClickListener()                 {
+                            public void onClick(DialogInterface dialog, int which) {
+                                MainActivity.super.onBackPressed();
+                            }
+                        }).setNegativeButton(R.string.btnCancel, null);
+
+                AlertDialog alert1 = alert.create();
+                alert1.show();
+            }else {
+                super.onBackPressed();
+            }
+        }else{
+            super.onBackPressed();
+        }
+
     }
+
+    @Override
+    public void onChanged(boolean picChanged,boolean deletedPic, boolean nameChanged) {
+        this.picChanged=picChanged;
+        this.nameChanged=nameChanged;
+        this.deletedPic=deletedPic;
+    }
+
 }

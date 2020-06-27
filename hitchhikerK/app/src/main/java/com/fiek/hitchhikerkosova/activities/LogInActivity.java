@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.language.LocaleHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +40,7 @@ public class LogInActivity extends AppCompatActivity {
     Button btnLogin;
     ConstraintLayout logInView;
     Snackbar snackbar;
+    ImageButton btnBack;
     private FirebaseAuth mAuth;
 
 
@@ -52,7 +55,14 @@ public class LogInActivity extends AppCompatActivity {
         chbRememberMe=(CheckBox) findViewById(R.id.chbRememberMe);
         btnLogin=(Button) findViewById(R.id.btnLogIn);
         logInView=(ConstraintLayout) findViewById(R.id.logInView);
+        btnBack=(ImageButton) findViewById(R.id.btnBack);
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 

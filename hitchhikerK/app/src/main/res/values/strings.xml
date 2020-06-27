@@ -197,5 +197,7 @@
     <string name="tvWelcome">Welcome to Hitchhicker Kosova</string>
     <string name="google_sign_in_token" translatable="false">251127894246-87iv50sqo74m03shfsnlqsr98go8t4br.apps.googleusercontent.com</string>
     <string name="google_sign_in_failed">Google Sign In Failed!</string>
+    <string name="alertUnsavedChanges">You have unsaved changes! If you exit, your changes will be lost.</string>
+    <string name="btnExit">Exit</string>
 
 </resources>

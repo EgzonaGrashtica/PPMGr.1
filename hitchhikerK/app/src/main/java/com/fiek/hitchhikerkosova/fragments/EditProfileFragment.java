@@ -1,5 +1,6 @@
 package com.fiek.hitchhikerkosova.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +64,10 @@ public class EditProfileFragment extends Fragment {
     private Button btnSaveChanges;
     private Boolean changedProfilePic=false;
     private Boolean deletedProfilePic=false;
-    private FirebaseUser user ;
+    private FirebaseUser user;
+    changesListener callback;
+    Context mContext;
+    Boolean nameChangedForActivity=false;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -153,6 +159,26 @@ public class EditProfileFragment extends Fragment {
         }
         etEditProfileName.setText(user.getDisplayName());
         etEditProfileEmail.setText(user.getEmail());
+        etEditProfileName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().equals(user.getDisplayName())){
+                    nameChangedForActivity=false;
+                }else{
+                    nameChangedForActivity=true;
+                }
+                callback.onChanged(changedProfilePic,deletedProfilePic,nameChangedForActivity);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     private void addProfilePic(View view){
@@ -172,15 +198,11 @@ public class EditProfileFragment extends Fragment {
                     profilePic.setImageBitmap(bitmap);
                     deletedProfilePic=false;
                     changedProfilePic=true;
+                    callback.onChanged(true, false,nameChangedForActivity);
             }
         }
     }
 
-    private void deleteProfilePic(){
-        profilePic.setImageResource(R.drawable.add_photo);
-        changedProfilePic=false;
-        deletedProfilePic=true;
-    }
 
     Boolean nameChanged = false;
     Boolean picChanged=false;
@@ -205,7 +227,11 @@ public class EditProfileFragment extends Fragment {
             user.updateProfile(request);
              StorageReference reference= FirebaseStorage.getInstance().getReference()
                     .child("profileImages").child(user.getUid()+".jpeg");
-             reference.delete();
+             try{
+                 reference.delete();
+             }catch (Exception e){
+                 Log.e("EditProfile",e.getMessage());
+             }
              picChanged=true;
         }else if(changedProfilePic){
              UploadProfilePicture upPic=new UploadProfilePicture(getContext(),user);
@@ -220,6 +246,7 @@ public class EditProfileFragment extends Fragment {
         deletedProfilePic=false;
         nameChanged=false;
         picChanged=false;
+        callback.onChanged(false, false, false);
     }
 
     private void deletePicFunc(){
@@ -237,6 +264,17 @@ public class EditProfileFragment extends Fragment {
 
         AlertDialog alert1 = alert.create();
         alert1.show();
+    }
+
+    public interface changesListener{
+        void onChanged(boolean changedProfilePic,boolean deletedProfilePic,boolean nameChangedForActivity);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        mContext=context;
+        super.onAttach(context);
+        callback=(changesListener)mContext;
     }
 
 

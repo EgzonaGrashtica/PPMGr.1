@@ -42,9 +42,8 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
     public List<PostModel> dataSource = new ArrayList<PostModel>();
-    Context context;
+    private Context context;
     public Dialog postDialog;
-    DateUtils dateUtils=new DateUtils();
     Date currentDate;
     String timeAgo;
     String checkFragment;
@@ -97,7 +96,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     private String getTimeAgo(int position){
         currentDate=new Date();
-        timeAgo=String.valueOf(dateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
+        timeAgo=String.valueOf(DateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
                 currentDate.getTime(),DateUtils.MINUTE_IN_MILLIS,DateUtils.FORMAT_ABBREV_RELATIVE));
         return timeAgo;
     }
