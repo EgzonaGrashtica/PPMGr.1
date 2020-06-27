@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth mAuth) {
                 if (mAuth.getCurrentUser() == null){
-                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
+                    startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
                     finish();
                 }
                 else {

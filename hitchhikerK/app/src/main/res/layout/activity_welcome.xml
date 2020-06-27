@@ -8,7 +8,7 @@
     tools:context=".activities.WelcomeActivity">
 
     <Button
-        android:id="@+id/btnGoogleSignUp"
+        android:id="@+id/btnGoogleSignIn"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -16,6 +16,7 @@
         android:layout_marginEnd="126dp"
         android:background="@drawable/button_google"
         android:drawableStart="@drawable/googleg_standard_color_18"
+        android:onClick="btnGoogleSignIn"
         android:text="@string/btnGoogleSignInTxt"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,12 +32,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="126dp"
         android:background="@drawable/button_signup"
+        android:onClick="btnWelcomeSignUp"
         android:text="@string/btnSignUpTxt"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGoogleSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGoogleSignIn" />
 
     <TextView
         android:id="@+id/tvAlreadyRegistered"
@@ -46,6 +48,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="173dp"
         android:capitalize="characters"
+        android:onClick="tvAlreadyRegistered"
         android:text="@string/tvAlreadyRegistered"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -195,5 +195,7 @@
     <string name="toastErrorSameCity">From and To can\\\'t have the same value!</string>
     <string name="tvAlreadyRegistered"><u>Already regirstered? Log In</u></string>
     <string name="tvWelcome">Welcome to Hitchhicker Kosova</string>
+    <string name="google_sign_in_token" translatable="false">251127894246-87iv50sqo74m03shfsnlqsr98go8t4br.apps.googleusercontent.com</string>
+    <string name="google_sign_in_failed">Google Sign In Failed!</string>
 
 </resources>

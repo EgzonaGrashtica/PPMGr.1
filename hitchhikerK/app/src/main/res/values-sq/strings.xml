@@ -199,5 +199,6 @@
     <string name="EditProfileFragment">Ndrysho profilin</string>
     <string name="tvAlreadyRegistered"><u>Jeni të regjistruar? Kyçu </u></string>
     <string name="tvWelcome">Mirë se vini në Hitchhiker Kosova</string>
+    <string name="google_sign_in_failed">Kyçja me google dështoi!</string>
 
 </resources>
