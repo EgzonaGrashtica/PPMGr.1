@@ -31,7 +31,6 @@ public class LogInActivity extends AppCompatActivity {
 
     EditText etEmail;
     EditText etPassword;
-    RadioButton rbAl,rbEn;
     String email;
     String password;
     CheckBox chbRememberMe;
@@ -44,15 +43,7 @@ public class LogInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String prefLang=LocaleHelper.getLanguage(LogInActivity.this);
-        switch (prefLang){
-            case "en":
-                LocaleHelper.setLocale(LogInActivity.this, "en");
-                break;
-            case "sq":
-                LocaleHelper.setLocale(LogInActivity.this, "sq");
-                break;
-        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
@@ -61,8 +52,7 @@ public class LogInActivity extends AppCompatActivity {
         chbRememberMe=(CheckBox) findViewById(R.id.chbRememberMe);
         btnLogin=(Button) findViewById(R.id.btnLogIn);
         logInView=(ConstraintLayout) findViewById(R.id.logInView);
-        rbAl=(RadioButton) findViewById(R.id.rbAl);
-        rbEn=(RadioButton) findViewById(R.id.rbEn);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -73,14 +63,6 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
-        switch (prefLang){
-            case "en":
-                rbEn.setChecked(true);
-                break;
-            case "sq":
-                rbAl.setChecked(true);
-                break;
-        }
 
     }
     @Override
@@ -191,26 +173,5 @@ public class LogInActivity extends AppCompatActivity {
         snackbarLayout.addView(customSnackBarView,0);
         snackbar.show();
 
-    }
-    public void onRadioButtonClicked(View view) {
-
-        boolean checked = ((RadioButton) view).isChecked();
-
-        String languagePref=null;
-
-        switch(view.getId()) {
-
-            case R.id.rbEn:
-                if (checked)
-                    languagePref = "en";
-                break;
-            case R.id.rbAl:
-                if (checked)
-                    languagePref = "sq";
-                break;
-        }
-            LocaleHelper.setLocale(LogInActivity.this, languagePref);
-
-            recreate();
     }
 }

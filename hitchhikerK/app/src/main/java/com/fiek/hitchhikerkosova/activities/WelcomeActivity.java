@@ -7,9 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fiek.hitchhikerkosova.R;
+import com.fiek.hitchhikerkosova.adapters.LanguageAdapter;
+import com.fiek.hitchhikerkosova.language.LocaleHelper;
+import com.fiek.hitchhikerkosova.models.LanguageModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,16 +30,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.ArrayList;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN=10002;
+    Spinner langSpinner;
+    private ArrayList<LanguageModel> languageModels;
+    private LanguageAdapter languageAdapter;
+    TextView tvTitle,tvAlreadyRegistered;
+    Button btnWelcomeSignUp,btnGoogleSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        String prefLang=LocaleHelper.getLanguage(WelcomeActivity.this);
+        tvTitle=(TextView) findViewById(R.id.tvWelcomeTitle);
+        tvAlreadyRegistered=(TextView) findViewById(R.id.tvAlreadyRegistered);
+        btnGoogleSignIn=(Button) findViewById(R.id.btnGoogleSignIn);
+        btnWelcomeSignUp=(Button) findViewById(R.id.btnWelcomeSignUp);
+
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -41,6 +61,54 @@ public class WelcomeActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        languageModels=new ArrayList<>();
+        LanguageModel enModel=new LanguageModel("En",R.drawable.en_flag);
+        LanguageModel alModel=new LanguageModel("Al",R.drawable.al_flag);
+        languageModels.add(enModel);
+        languageModels.add(alModel);
+
+        langSpinner=(Spinner) findViewById(R.id.langSpinner);
+        languageAdapter=new LanguageAdapter(this, languageModels);
+        langSpinner.setAdapter(languageAdapter);
+
+
+        langSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                LanguageModel langClicked = (LanguageModel) parent.getItemAtPosition(position);
+                String clickedLanguageTxt = langClicked.getLanguageTxt();
+                String localeLanguage;
+                switch(clickedLanguageTxt) {
+                    case "En":
+                        localeLanguage="en";
+                        break;
+                    case "Al":
+                        localeLanguage="sq";
+                        break;
+                    default:
+                        localeLanguage="en";
+                        break;
+                }
+                LocaleHelper.setLocale(WelcomeActivity.this, localeLanguage);
+                refreshLayout();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        switch (prefLang){
+            case "en":
+                langSpinner.setSelection(languageAdapter.getPosition(enModel));
+                break;
+            case "sq":
+                langSpinner.setSelection(languageAdapter.getPosition(alModel));
+                break;
+        }
+
+
     }
 
     @Override
@@ -101,5 +169,11 @@ public class WelcomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    private void refreshLayout(){
+        tvTitle.setText(R.string.tvWelcome);
+        tvAlreadyRegistered.setText(R.string.tvAlreadyRegistered);
+        btnWelcomeSignUp.setText(R.string.btnSignUpTxt);
+        btnGoogleSignIn.setText(R.string.btnGoogleSignInTxt);
     }
 }

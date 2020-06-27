@@ -12,7 +12,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="126dp"
         android:background="@drawable/button_google"
         android:drawableStart="@drawable/googleg_standard_color_18"
@@ -22,14 +22,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/langSpinner" />
 
     <Button
         android:id="@+id/btnWelcomeSignUp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="126dp"
         android:background="@drawable/button_signup"
         android:onClick="btnWelcomeSignUp"
@@ -56,11 +56,11 @@
         app:layout_constraintTop_toBottomOf="@+id/btnWelcomeSignUp" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvWelcomeTitle"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="59dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="3dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/tvWelcome"
@@ -70,4 +70,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/langSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcomeTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
