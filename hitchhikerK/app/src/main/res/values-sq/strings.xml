@@ -202,5 +202,6 @@
     <string name="google_sign_in_failed">Kyçja me google dështoi!</string>
     <string name="alertUnsavedChanges">Nuk i keni ruajtuar ndryshimet! Nëse dilni , ndryshimet do të humbin.</string>
     <string name="btnExit">Dilni</string>
+    <string name="extraInfoNone">Nuk ka</string>
 
 </resources>

@@ -56,13 +56,12 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     private String from;
     private String to;
 
-    List<MyClusterItem> myClusterItemList=new ArrayList<MyClusterItem>();
-    GoogleMap googleMap;
-    ClusterManager clusterManager;
-    Location myLocation=null;
-    Location destinationLocation=null;
+    private List<MyClusterItem> myClusterItemList=new ArrayList<MyClusterItem>();
+    private GoogleMap googleMap;
+    private ClusterManager clusterManager;
     private LatLng fromLatLng;
     private LatLng toLatLng;
+    private List<Polyline> polylines=null;
 
     final static LatLng PRISHTINA_LATLNG=new LatLng(42.6629, 21.1655);
     final static LatLng MITROVICA_LATLNG=new LatLng(42.8914, 20.8660);
@@ -72,10 +71,7 @@ public class RoadMapFragment extends Fragment implements OnMapReadyCallback,
     final static LatLng PRIZRENI_LATLNG=new LatLng(42.2171, 20.7436);
     final static LatLng GJILANI_LATLNG=new LatLng(42.4635, 21.4694);
 
-    private final static int LOCATION_REQUEST_CODE = 23;
-    boolean locationPermission=false;
 
-    private List<Polyline> polylines=null;
 
     public RoadMapFragment() {
         // Required empty public constructor

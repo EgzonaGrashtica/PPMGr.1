@@ -2,8 +2,10 @@ package com.fiek.hitchhikerkosova.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,10 +41,10 @@ public class WelcomeActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     private final int RC_SIGN_IN=10002;
     Spinner langSpinner;
-    private ArrayList<LanguageModel> languageModels;
-    private LanguageAdapter languageAdapter;
     TextView tvTitle,tvAlreadyRegistered;
     Button btnWelcomeSignUp,btnGoogleSignIn;
+    Snackbar snackbar;
+    ConstraintLayout welcomeLayoutView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
         tvAlreadyRegistered=(TextView) findViewById(R.id.tvAlreadyRegistered);
         btnGoogleSignIn=(Button) findViewById(R.id.btnGoogleSignIn);
         btnWelcomeSignUp=(Button) findViewById(R.id.btnWelcomeSignUp);
+        welcomeLayoutView=(ConstraintLayout) findViewById(R.id.welcomeLayoutView);
 
 
         mAuth=FirebaseAuth.getInstance();
@@ -62,14 +66,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        languageModels=new ArrayList<>();
+        ArrayList<LanguageModel> languageModels = new ArrayList<>();
         LanguageModel enModel=new LanguageModel("En",R.drawable.en_flag);
         LanguageModel alModel=new LanguageModel("Al",R.drawable.al_flag);
         languageModels.add(enModel);
         languageModels.add(alModel);
 
         langSpinner=(Spinner) findViewById(R.id.langSpinner);
-        languageAdapter=new LanguageAdapter(this, languageModels);
+        LanguageAdapter languageAdapter = new LanguageAdapter(this, languageModels);
         langSpinner.setAdapter(languageAdapter);
 
 
@@ -136,6 +140,11 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
+            showLogInSnackBar();
+            btnGoogleSignIn.setEnabled(false);
+            btnWelcomeSignUp.setEnabled(false);
+            tvAlreadyRegistered.setClickable(false);
+            langSpinner.setEnabled(false);
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful
@@ -159,12 +168,22 @@ public class WelcomeActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success
                             Log.d("Welcome Activity", "signInWithCredential:success");
+                            snackbar.dismiss();
+                            btnGoogleSignIn.setEnabled(true);
+                            btnWelcomeSignUp.setEnabled(true);
+                            tvAlreadyRegistered.setClickable(true);
+                            langSpinner.setEnabled(true);
                             startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
                             finish();
                         } else {
                             //Sign in fails
                             Log.w("Welcome Activity", "signInWithCredential:failure", task.getException());
                             Toast.makeText(WelcomeActivity.this,R.string.google_sign_in_failed,Toast.LENGTH_LONG).show();
+                            btnGoogleSignIn.setEnabled(true);
+                            btnWelcomeSignUp.setEnabled(true);
+                            tvAlreadyRegistered.setClickable(true);
+                            langSpinner.setEnabled(true);
+                            snackbar.dismiss();
 
                         }
                     }
@@ -175,5 +194,14 @@ public class WelcomeActivity extends AppCompatActivity {
         tvAlreadyRegistered.setText(R.string.tvAlreadyRegistered);
         btnWelcomeSignUp.setText(R.string.btnSignUpTxt);
         btnGoogleSignIn.setText(R.string.btnGoogleSignInTxt);
+    }
+    private void showLogInSnackBar(){
+        snackbar= Snackbar.make(welcomeLayoutView,"",Snackbar.LENGTH_INDEFINITE);
+        View customSnackBarView=getLayoutInflater().inflate(R.layout.snackbar_login_custom,null);
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackbarLayout=(Snackbar.SnackbarLayout) snackbar.getView();
+        snackbarLayout.setPadding(0,0,0,0);
+        snackbarLayout.addView(customSnackBarView,0);
+        snackbar.show();
     }
 }

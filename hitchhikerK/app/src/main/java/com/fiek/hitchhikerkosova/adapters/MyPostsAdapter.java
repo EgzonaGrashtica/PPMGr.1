@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MyPostsAdapter extends RecyclerView.Adapter<MyPostsAdapter.MyPostsViewHolder> {
     public List<PostModel> dataSource = new ArrayList<PostModel>();
-    Context context;
+    private Context context;
 
     public MyPostsAdapter(Context context) {
         this.context = context;

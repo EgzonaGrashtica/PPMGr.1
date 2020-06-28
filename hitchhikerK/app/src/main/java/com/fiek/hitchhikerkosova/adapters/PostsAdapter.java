@@ -44,10 +44,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     public List<PostModel> dataSource = new ArrayList<PostModel>();
     private Context context;
     public Dialog postDialog;
-    Date currentDate;
-    String timeAgo;
-    String checkFragment;
-    FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+    private String checkFragment;
+    private FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
 
     public PostsAdapter(Context ct, String checkFragment) {
         context=ct;
@@ -95,10 +93,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
 
     private String getTimeAgo(int position){
-        currentDate=new Date();
-        timeAgo=String.valueOf(DateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
-                currentDate.getTime(),DateUtils.MINUTE_IN_MILLIS,DateUtils.FORMAT_ABBREV_RELATIVE));
-        return timeAgo;
+        Date currentDate = new Date();
+        return String.valueOf(DateUtils.getRelativeTimeSpanString(dataSource.get(position).getTimePosted(),
+                currentDate.getTime(), DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE));
     }
 
 
@@ -144,7 +141,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         tvDialogFreeSeats.setText(String.valueOf(dataSource.get(postsViewHolder.getAdapterPosition()).getFreeSeats()));
         tvDialogPhoneNumber.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getPhoneNumber());
         tvDialogPhoneNumber.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+        if(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo().equals("None")){
+            tvDialogExtraInfo.setText(R.string.extraInfoNone);
+        }else{
+            tvDialogExtraInfo.setText(dataSource.get(postsViewHolder.getAdapterPosition()).getExtraInfo());
+        }
+
 
         tvDialogPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override

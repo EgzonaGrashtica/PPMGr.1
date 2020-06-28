@@ -45,12 +45,10 @@ public class MainPostsFragment extends Fragment {
     private String mParam2;
 
 
-    private DatabaseReference mDatabase;
+    private RecyclerView recyclerView;
+    private PostsAdapter postsAdapter;
+    private SwipeRefreshLayout refreshLayout;
 
-    RecyclerView recyclerView;
-    PostsAdapter postsAdapter;
-    SwipeRefreshLayout refreshLayout;
-    DatabaseHelper dbHelper;
     public MainPostsFragment() {
         // Required empty public constructor
     }
@@ -81,9 +79,8 @@ public class MainPostsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        dbHelper = new DatabaseHelper(getContext());
         postsAdapter=new PostsAdapter(getContext(),"MainPostsFragment");
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Posts");
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
 
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
@@ -91,7 +88,6 @@ public class MainPostsFragment extends Fragment {
                 PostModel postModel=dataSnapshot.getValue(PostModel.class);
                 postModel.setId(dataSnapshot.getKey());
                 postsAdapter.dataSource.add(postModel);
-                Log.i("xona","Erdh");
             }
 
             @Override
@@ -119,7 +115,6 @@ public class MainPostsFragment extends Fragment {
                 }
                 postsAdapter.dataSource.removeAll(dataToBeRemoved);
                 postsAdapter.notifyDataSetChanged();
-
             }
 
             @Override

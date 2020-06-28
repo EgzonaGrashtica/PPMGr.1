@@ -44,9 +44,9 @@ public class MyPostedRidesFragment extends Fragment {
     private String mParam2;
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    RecyclerView recyclerView;
-    MyPostsAdapter myPostsAdapter;
-    SwipeRefreshLayout refreshLayout;
+    private RecyclerView recyclerView;
+    private MyPostsAdapter myPostsAdapter;
+    private SwipeRefreshLayout refreshLayout;
 
     public MyPostedRidesFragment() {
         // Required empty public constructor

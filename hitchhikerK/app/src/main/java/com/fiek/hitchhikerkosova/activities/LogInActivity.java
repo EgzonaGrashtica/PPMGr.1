@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fiek.hitchhikerkosova.R;
@@ -33,6 +34,7 @@ public class LogInActivity extends AppCompatActivity {
 
     EditText etEmail;
     EditText etPassword;
+    TextView tvForgotPassword,tvRegister;
     String email;
     String password;
     CheckBox chbRememberMe;
@@ -56,7 +58,8 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin=(Button) findViewById(R.id.btnLogIn);
         logInView=(ConstraintLayout) findViewById(R.id.logInView);
         btnBack=(ImageButton) findViewById(R.id.btnBack);
-
+        tvForgotPassword=(TextView) findViewById(R.id.tvForgotPassword);
+        tvRegister=(TextView) findViewById(R.id.tvRegister);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +102,11 @@ public class LogInActivity extends AppCompatActivity {
         password= etPassword.getText().toString().trim();
         if(validateLogInData()){
             btnLogin.setEnabled(false);
-
+            tvRegister.setClickable(false);
+            tvForgotPassword.setClickable(false);
+            chbRememberMe.setEnabled(false);
+            etEmail.setEnabled(false);
+            etPassword.setEnabled(false);
             showLogInSnackBar();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -115,11 +122,21 @@ public class LogInActivity extends AppCompatActivity {
                                     editor.apply();
                                 }
                                 btnLogin.setEnabled(true);
+                                tvRegister.setClickable(true);
+                                tvForgotPassword.setClickable(true);
+                                chbRememberMe.setEnabled(true);
+                                etEmail.setEnabled(true);
+                                etPassword.setEnabled(true);
                                 snackbar.dismiss();
                                 startActivity(new Intent(LogInActivity.this, MainActivity.class));
                                 finish();
                             } else {
                                 btnLogin.setEnabled(true);
+                                tvRegister.setClickable(true);
+                                tvForgotPassword.setClickable(true);
+                                chbRememberMe.setEnabled(true);
+                                etEmail.setEnabled(true);
+                                etPassword.setEnabled(true);
                                 snackbar.dismiss();
                                 // If sign in fails, display a message to the user.
                                 Log.w("Debug Info", "signInWithEmail:failure", task.getException());
@@ -182,6 +199,5 @@ public class LogInActivity extends AppCompatActivity {
         snackbarLayout.setPadding(0,0,0,0);
         snackbarLayout.addView(customSnackBarView,0);
         snackbar.show();
-
     }
 }

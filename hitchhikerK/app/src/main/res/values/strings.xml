@@ -199,5 +199,6 @@
     <string name="google_sign_in_failed">Google Sign In Failed!</string>
     <string name="alertUnsavedChanges">You have unsaved changes! If you exit, your changes will be lost.</string>
     <string name="btnExit">Exit</string>
+    <string name="extraInfoNone">None</string>
 
 </resources>

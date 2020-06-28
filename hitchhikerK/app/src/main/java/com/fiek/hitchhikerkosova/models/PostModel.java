@@ -1,19 +1,19 @@
 package com.fiek.hitchhikerkosova.models;
 
 public class PostModel {
-    String id;
-    String ownerId;
-    String ownerName;
-    String from;
-    String to;
-    String departureTime;
-    String date;
-    double price;
-    int freeSeats;
-    String phoneNumber;
-    String extraInfo;
-    long timePosted;
-    int numberOfReservations;
+    private String id;
+    private String ownerId;
+    private String ownerName;
+    private String from;
+    private String to;
+    private String departureTime;
+    private String date;
+    private double price;
+    private int freeSeats;
+    private String phoneNumber;
+    private String extraInfo;
+    private long timePosted;
+    private int numberOfReservations;
 
 
     public PostModel(String ownerId, String ownerName, String from, String to, String departureTime,

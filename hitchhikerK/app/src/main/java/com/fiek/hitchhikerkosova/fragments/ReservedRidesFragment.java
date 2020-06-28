@@ -49,11 +49,11 @@ public class ReservedRidesFragment extends Fragment {
     private String mParam2;
 
     public List<PostModel> tempDataSource = new ArrayList<PostModel>();
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private PostsAdapter postsAdapter;
-    SwipeRefreshLayout refreshLayout;
-    DatabaseHelper dbHelper;
-    AsyncTask loadDataCls;
+    private SwipeRefreshLayout refreshLayout;
+    private DatabaseHelper dbHelper;
+    private AsyncTask loadDataCls;
 
 
     public ReservedRidesFragment() {

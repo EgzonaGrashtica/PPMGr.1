@@ -65,9 +65,9 @@ public class EditProfileFragment extends Fragment {
     private Boolean changedProfilePic=false;
     private Boolean deletedProfilePic=false;
     private FirebaseUser user;
-    changesListener callback;
-    Context mContext;
-    Boolean nameChangedForActivity=false;
+    private changesListener callback;
+    private Context mContext;
+    private Boolean nameChangedForActivity=false;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -204,8 +204,8 @@ public class EditProfileFragment extends Fragment {
     }
 
 
-    Boolean nameChanged = false;
-    Boolean picChanged=false;
+    private Boolean nameChanged = false;
+    private Boolean picChanged=false;
     private void saveProfileChanges(){
         String name = etEditProfileName.getText().toString().trim();
 
@@ -257,6 +257,7 @@ public class EditProfileFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         changedProfilePic=false;
                         deletedProfilePic=true;
+                        callback.onChanged(false,true,nameChangedForActivity);
                         profilePic.setImageResource(R.drawable.add_photo);
 
                     }

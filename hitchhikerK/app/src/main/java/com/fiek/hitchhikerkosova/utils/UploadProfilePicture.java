@@ -21,9 +21,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 
 public class UploadProfilePicture {
-    Context context;
+    private Context context;
 
-    FirebaseUser currentUser;
+    private FirebaseUser currentUser;
 
     public UploadProfilePicture(Context context, FirebaseUser currentUser) {
         this.context = context;

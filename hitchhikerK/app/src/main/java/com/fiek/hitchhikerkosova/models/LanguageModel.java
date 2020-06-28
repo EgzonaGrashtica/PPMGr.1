@@ -1,8 +1,8 @@
 package com.fiek.hitchhikerkosova.models;
 
 public class LanguageModel {
-    public String languageTxt;
-    public int flagImg;
+    private String languageTxt;
+    private int flagImg;
 
     public LanguageModel(String languageTxt, int flagImg) {
         this.languageTxt = languageTxt;

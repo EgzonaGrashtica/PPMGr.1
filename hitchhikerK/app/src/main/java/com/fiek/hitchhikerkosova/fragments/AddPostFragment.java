@@ -60,11 +60,10 @@ public class AddPostFragment extends Fragment {
     private Button btnAddPostFunc;
     private Spinner spFrom,spTo,spFreeSeats;
     private EditText etPrice, etPhoneNumber,etExtraInfo;
-    String gExtraInfo;
+    private String gExtraInfo;
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    Date date=new Date();
+    private Date date=new Date();
 
 
 
@@ -116,7 +115,7 @@ public class AddPostFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
         spFrom=view.findViewById(R.id.spFrom);
