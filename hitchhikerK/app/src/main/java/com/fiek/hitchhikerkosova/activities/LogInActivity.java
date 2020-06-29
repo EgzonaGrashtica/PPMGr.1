@@ -128,7 +128,9 @@ public class LogInActivity extends AppCompatActivity {
                                 etEmail.setEnabled(true);
                                 etPassword.setEnabled(true);
                                 snackbar.dismiss();
-                                startActivity(new Intent(LogInActivity.this, MainActivity.class));
+                                Intent intent=new Intent(LogInActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                                 finish();
                             } else {
                                 btnLogin.setEnabled(true);

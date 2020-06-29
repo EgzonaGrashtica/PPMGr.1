@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fiek.hitchhikerkosova.R;
 import com.fiek.hitchhikerkosova.fragments.EditProfileFragment;
+import com.fiek.hitchhikerkosova.language.LocaleHelper;
 import com.fiek.hitchhikerkosova.utils.UploadProfilePicture;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String prefLang=LocaleHelper.getLanguage(MainActivity.this);
+        LocaleHelper.setLocale(MainActivity.this,prefLang);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -122,10 +125,9 @@ public class MainActivity extends AppCompatActivity implements OnDestinationChan
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         if(currentUser ==null){
-            startActivity(new Intent(MainActivity.this, LogInActivity.class));
+            startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
             finish();
         }
-
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
