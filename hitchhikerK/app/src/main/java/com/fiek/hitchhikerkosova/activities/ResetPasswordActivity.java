@@ -44,7 +44,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
     private void sendEmailForReset(String email){
-        if(email != null){
+        if(!email.isEmpty()){
             FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
             firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -63,6 +63,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(ResetPasswordActivity.this,R.string.toastEnterEmail,Toast.LENGTH_SHORT).show();
+            btnResetPassword.setEnabled(true);
         }
     }
 }

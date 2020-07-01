@@ -192,7 +192,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="google_map_key" translatable="false">AIzaSyBVCASVbYp7sEJwU4aXXKHiS0DaDt_xmO4</string>
-    <string name="toastErrorSameCity">From and To can\\\'t have the same value!</string>
+    <string name="toastErrorSameCity">\"From\" and \"To\" can\'t have the same value!</string>
     <string name="tvAlreadyRegistered"><u>Already registered? Log In</u></string>
     <string name="tvWelcome">Welcome to Hitchhicker Kosova</string>
     <string name="google_sign_in_token" translatable="false">251127894246-87iv50sqo74m03shfsnlqsr98go8t4br.apps.googleusercontent.com</string>

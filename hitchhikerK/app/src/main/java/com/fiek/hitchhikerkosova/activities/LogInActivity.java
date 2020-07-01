@@ -177,13 +177,13 @@ public class LogInActivity extends AppCompatActivity {
             return false;
         }
 
-        if (password.length() < 6) {
-            etPassword.setError(getString(R.string.shortPassword));
+        if (TextUtils.isEmpty(password)) {
+            etPassword.setError(getString(R.string.emptyPassword));
             etPassword.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(password)) {
-            etPassword.setError(getString(R.string.emptyPassword));
+        if (password.length() < 6) {
+            etPassword.setError(getString(R.string.shortPassword));
             etPassword.requestFocus();
             return false;
         }

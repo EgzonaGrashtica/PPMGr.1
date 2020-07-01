@@ -186,7 +186,7 @@
     <string name="rememberMeCheckBox">Mbaj në mend</string>
     <string name="toastUploadFailed">Ngarkimi i fotos s profilit dështoj</string>
     <string name="toastPostUploaded">U postua!</string>
-    <string name="toastErrorSameCity">Nga dhe Në nuk mund të kenë vlerën e njejt!</string>
+    <string name="toastErrorSameCity">\"Nga\" dhe \"Në\" nuk mund të kenë vlerën e njejt!</string>
     <string name="toastErrorNoDPTime">Ju lutem zgjedhni kohën e nisjes!</string>
     <string name="toastErrorNoDate">Ju lutem zgjedhni daten!</string>
     <string name="toastErrorPastDate">Udhtimi në të kaluaren nuk është i mundur... ende...</string>

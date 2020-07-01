@@ -132,6 +132,10 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(new Intent(WelcomeActivity.this, LogInActivity.class));
     }
     public void btnGoogleSignIn(View v){
+        btnGoogleSignIn.setEnabled(false);
+        btnWelcomeSignUp.setEnabled(false);
+        tvAlreadyRegistered.setClickable(false);
+        langSpinner.setEnabled(false);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -141,10 +145,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         if (requestCode == RC_SIGN_IN) {
             showLogInSnackBar();
-            btnGoogleSignIn.setEnabled(false);
-            btnWelcomeSignUp.setEnabled(false);
-            tvAlreadyRegistered.setClickable(false);
-            langSpinner.setEnabled(false);
+
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful
@@ -153,6 +154,11 @@ public class WelcomeActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed
+                snackbar.dismiss();
+                btnGoogleSignIn.setEnabled(true);
+                btnWelcomeSignUp.setEnabled(true);
+                tvAlreadyRegistered.setClickable(true);
+                langSpinner.setEnabled(true);
                 Log.w("Welcome Activity", "Google sign in failed", e);
                 Toast.makeText(WelcomeActivity.this,R.string.google_sign_in_failed,Toast.LENGTH_LONG).show();
                 // ...
